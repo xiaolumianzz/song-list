@@ -42,6 +42,12 @@
     "grid": "Grid",
     "list": "List"
   },
+  "list": {
+    "title": "Title",
+    "artist": "Artist",
+    "language": "Lang",
+    "tags": "Tags"
+  },
   "gate": {
     "title": "Admin",
     "subtitle": "Please enter the passphrase",

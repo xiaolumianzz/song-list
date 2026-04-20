@@ -42,6 +42,12 @@
     "grid": "カード",
     "list": "行表示"
   },
+  "list": {
+    "title": "曲名",
+    "artist": "アーティスト",
+    "language": "言語",
+    "tags": "タグ"
+  },
   "gate": {
     "title": "管理画面",
     "subtitle": "合言葉を入力してね",

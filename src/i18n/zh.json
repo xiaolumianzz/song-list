@@ -42,6 +42,12 @@
     "grid": "卡片",
     "list": "列表"
   },
+  "list": {
+    "title": "歌名",
+    "artist": "歌手",
+    "language": "语言",
+    "tags": "标签"
+  },
   "gate": {
     "title": "管理面板",
     "subtitle": "请输入暗号",
