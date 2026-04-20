@@ -64,6 +64,15 @@ async function pushToGithub() {
   busy.value = true
   status.value = ''
   try {
+    // 既存ファイルを更新するには sha が必要。未取得なら先に取得
+    if (sha.value === undefined) {
+      try {
+        const { sha: gotSha } = await gh.fetchSongs()
+        sha.value = gotSha
+      } catch {
+        // ファイルが存在しない新規作成ケース → sha は不要
+      }
+    }
     songsStore.data.meta.updatedAt = new Date().toISOString()
     await gh.pushSongs(songsStore.data, `chore(songs): update via admin ui`, sha.value)
     status.value = t('admin.status.pushed')
@@ -211,6 +220,15 @@ async function pushProfileToGithub() {
   profileBusy.value = true
   profileStatus.value = ''
   try {
+    // 既存ファイルを更新するには sha が必要。未取得なら先に取得
+    if (profileSha.value === undefined) {
+      try {
+        const { sha: gotSha } = await gh.fetchProfile()
+        profileSha.value = gotSha
+      } catch {
+        // ファイルが存在しない新規作成ケース → sha は不要
+      }
+    }
     profile.value.meta.updatedAt = new Date().toISOString()
     await gh.pushProfile(profile.value, 'chore(profile): update via admin ui', profileSha.value)
     profileStatus.value = t('admin.status.pushed')
