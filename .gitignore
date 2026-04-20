@@ -4,6 +4,7 @@ dist
 .vscode
 .idea
 .claude
+docs/ops.md
 *.log
 .env
 .env.local
