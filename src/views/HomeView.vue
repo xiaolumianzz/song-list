@@ -34,7 +34,6 @@ function onPicked(song: Song) {
   <main class="mx-auto max-w-7xl px-4 py-10 sm:px-8">
     <header class="mb-6 flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <span class="text-3xl" aria-hidden="true">🎀</span>
         <h1 class="font-display text-3xl font-bold text-ink">
           {{ t('app.title') }}
         </h1>
