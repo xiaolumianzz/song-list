@@ -11,15 +11,20 @@ const { t } = useI18n()
 <template>
   <button
     type="button"
-    class="group flex w-full items-center gap-3 rounded-2xl border border-white/80 bg-gradient-to-br from-white/35 via-white/12 to-white/5 px-4 py-2.5 text-left shadow-glass backdrop-blur-[2px] transition hover:-translate-x-0.5 hover:from-white/50 hover:to-white/15 hover:shadow-pop"
+    class="group relative flex w-full items-center gap-3 rounded-2xl border border-white/80 bg-gradient-to-br from-white/35 via-white/12 to-white/5 px-4 py-2.5 text-left shadow-glass backdrop-blur-[2px] transition hover:-translate-x-0.5 hover:from-white/50 hover:to-white/15 hover:shadow-pop"
     @click="$emit('open', song)"
   >
+    <!-- SC バッジ：カードと同じく右上にフローティング -->
+    <ScBadge
+      v-if="song.sc && song.sc > 0"
+      :amount="song.sc"
+      size="sm"
+      class="absolute -top-2 right-3"
+    />
+
     <span class="shrink-0 rounded-full bg-blush/80 px-2 py-0.5 text-[10px] font-bold text-ink">
       {{ t('language.' + song.language) }}
     </span>
-
-    <!-- SC バッジ：言語バッジのすぐ右、タイトルより前に置いて視線優先度を上げる -->
-    <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="sm" />
 
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-baseline gap-x-2">
