@@ -9,6 +9,8 @@ export interface Song {
   conditions: string[]
   remark: string
   addedAt: string
+  /** BiliBili Super Chat 金額。0 or 未設定なら非表示 */
+  sc?: number
 }
 
 export interface SongData {

@@ -101,6 +101,7 @@ function emptySong(): Song {
     conditions: [],
     remark: '',
     addedAt: new Date().toISOString().slice(0, 10),
+    sc: 0,
   }
 }
 
@@ -124,6 +125,9 @@ function commitDraft() {
     .map((s) => s.trim())
     .filter(Boolean)
   draft.value.tags = tags
+  // sc を数値化 + 0 以下や NaN は undefined に正規化（= バッジ非表示）
+  const scNum = Number(draft.value.sc)
+  draft.value.sc = Number.isFinite(scNum) && scNum > 0 ? scNum : undefined
   if (!draft.value.id) draft.value.id = crypto.randomUUID()
   songsStore.upsertSong({ ...draft.value })
   songsStore.saveLocal()
@@ -534,6 +538,18 @@ function snsLabel(k: SnsKey): string {
         <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.addedAt') }}</span>
           <input v-model="draft.addedAt" type="date" class="rounded-xl border border-blush bg-milk px-3 py-2" />
+        </label>
+        <label class="flex flex-col gap-1 text-sm sm:col-span-2">
+          <span class="text-ink/70">{{ t('admin.field.sc') }}</span>
+          <input
+            v-model.number="draft.sc"
+            type="number"
+            min="0"
+            step="10"
+            class="rounded-xl border border-blush bg-milk px-3 py-2"
+            :placeholder="t('admin.field.scPh')"
+          />
+          <span class="text-[10px] text-ink/50">{{ t('admin.field.scHelp') }}</span>
         </label>
         <label class="flex flex-col gap-1 text-sm sm:col-span-2">
           <span class="text-ink/70">{{ t('admin.field.tags') }}</span>

@@ -101,7 +101,10 @@
       "tagsPh": "Comma separated (e.g. J-POP, Ballad)",
       "conditions": "Request conditions",
       "remark": "Note",
-      "addedAt": "Added on"
+      "addedAt": "Added on",
+      "sc": "SC (Super Chat amount)",
+      "scPh": "e.g. 50, 100, 500 (leave empty for none)",
+      "scHelp": "Tier color auto-assigned by amount (tiers at 50, 100, 150, 300, 500)"
     },
     "status": {
       "savedLocal": "Saved locally",

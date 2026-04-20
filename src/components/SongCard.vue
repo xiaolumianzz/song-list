@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Song } from '@/types/song'
+import ScBadge from './ScBadge.vue'
 
 defineProps<{ song: Song }>()
 defineEmits<{ (e: 'open', song: Song): void }>()
@@ -14,6 +15,13 @@ const { t } = useI18n()
     class="group relative flex h-full flex-col gap-2 rounded-3xl border border-white/80 bg-gradient-to-br from-white/35 via-white/15 to-white/5 p-4 text-left shadow-glass backdrop-blur-[2px] transition hover:-translate-y-1 hover:from-white/50 hover:to-white/15 hover:shadow-pop"
     @click="$emit('open', song)"
   >
+    <!-- SC バッジ：カード右上にフローティング、通常タグとは明確に別エリア -->
+    <ScBadge
+      v-if="song.sc && song.sc > 0"
+      :amount="song.sc"
+      class="absolute -top-2 right-3"
+      size="sm"
+    />
     <div class="flex items-start justify-between gap-2">
       <h3 class="font-display text-lg leading-snug text-ink">{{ song.title }}</h3>
       <span class="shrink-0 rounded-full bg-blush/80 px-2 py-0.5 text-[10px] font-bold text-ink">

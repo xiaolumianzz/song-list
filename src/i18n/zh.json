@@ -101,7 +101,10 @@
       "tagsPh": "逗号分隔（如 J-POP, 抒情）",
       "conditions": "点歌条件",
       "remark": "备注",
-      "addedAt": "登记日"
+      "addedAt": "登记日",
+      "sc": "SC（Super Chat 金额）",
+      "scPh": "例：50、100、500（留空则不设置）",
+      "scHelp": "根据金额自动分配等级颜色（50、100、150、300、500 为分界）"
     },
     "status": {
       "savedLocal": "已保存到本地",

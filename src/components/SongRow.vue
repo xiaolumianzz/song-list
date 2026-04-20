@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { Song } from '@/types/song'
+import ScBadge from './ScBadge.vue'
 
 defineProps<{ song: Song }>()
 defineEmits<{ (e: 'open', song: Song): void }>()
@@ -16,6 +17,9 @@ const { t } = useI18n()
     <span class="shrink-0 rounded-full bg-blush/80 px-2 py-0.5 text-[10px] font-bold text-ink">
       {{ t('language.' + song.language) }}
     </span>
+
+    <!-- SC バッジ：言語バッジのすぐ右、タイトルより前に置いて視線優先度を上げる -->
+    <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="sm" />
 
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-baseline gap-x-2">

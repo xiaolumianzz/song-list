@@ -2,6 +2,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { Song } from '@/types/song'
+import ScBadge from './ScBadge.vue'
 
 defineProps<{ song: Song | null }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
@@ -61,10 +62,11 @@ onBeforeUnmount(() => {
             ✕
           </button>
 
-          <div class="mb-2 flex items-center gap-2">
+          <div class="mb-2 flex flex-wrap items-center gap-2">
             <span class="rounded-full bg-sakura px-2 py-0.5 text-[10px] font-bold text-white">
               {{ t('language.' + song.language) }}
             </span>
+            <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="md" />
             <span class="text-[11px] text-ash">{{ song.addedAt }}</span>
           </div>
 
