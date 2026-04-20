@@ -17,7 +17,6 @@ function onChange(e: Event) {
 
 <template>
   <label class="inline-flex items-center gap-2 text-sm text-ink/80">
-    <span aria-hidden="true">🌸</span>
     <span class="font-display font-medium">Language</span>
     <select
       :value="locale"
