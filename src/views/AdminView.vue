@@ -10,6 +10,7 @@ import { CONDITION_KEYS, LANGUAGE_ORDER, type Language, type Song } from '@/type
 import { SNS_KEYS, type SnsKey } from '@/types/profile'
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import PasswordGate from '@/components/PasswordGate.vue'
+import ScBadge from '@/components/ScBadge.vue'
 
 const { t } = useI18n()
 const songsStore = useSongsStore()
@@ -594,6 +595,7 @@ function snsLabel(k: SnsKey): string {
               <th class="px-2 py-2">{{ t('admin.field.title') }}</th>
               <th class="px-2 py-2">{{ t('admin.field.artist') }}</th>
               <th class="px-2 py-2">{{ t('admin.field.language') }}</th>
+              <th class="px-2 py-2">SC</th>
               <th class="px-2 py-2">{{ t('admin.field.tags') }}</th>
               <th class="px-2 py-2"></th>
             </tr>
@@ -603,6 +605,10 @@ function snsLabel(k: SnsKey): string {
               <td class="px-2 py-2 font-display">{{ s.title }}</td>
               <td class="px-2 py-2 text-ink/80">{{ s.artist }}</td>
               <td class="px-2 py-2 text-xs">{{ t('language.' + s.language) }}</td>
+              <td class="px-2 py-2">
+                <ScBadge v-if="s.sc && s.sc > 0" :amount="s.sc" size="sm" />
+                <span v-else class="text-xs text-ink/30">—</span>
+              </td>
               <td class="px-2 py-2 text-xs text-ink/70">{{ s.tags.join(', ') }}</td>
               <td class="px-2 py-2 text-right">
                 <button class="rounded-full bg-blush px-2 py-0.5 text-xs hover:bg-sakura hover:text-white" @click="edit(s)">✎</button>
