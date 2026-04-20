@@ -12,7 +12,6 @@ import FilterChips from '@/components/FilterChips.vue'
 import SongGrid from '@/components/SongGrid.vue'
 import SongDetailModal from '@/components/SongDetailModal.vue'
 import RandomPicker from '@/components/RandomPicker.vue'
-import TagCloud from '@/components/TagCloud.vue'
 import SongCount from '@/components/SongCount.vue'
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import ViewToggle from '@/components/ViewToggle.vue'
@@ -20,7 +19,7 @@ import ProfileCard from '@/components/ProfileCard.vue'
 
 const { t } = useI18n()
 const store = useSongsStore()
-const { songs, allTags, allLanguages, loading, error } = storeToRefs(store)
+const { songs, tagStats, allLanguages, loading, error } = storeToRefs(store)
 
 const { state, filtered, toggleTag, reset } = useFilter(() => songs.value)
 const viewMode = useViewMode()
@@ -71,7 +70,7 @@ function onPicked(song: Song) {
         <FilterChips
           :languages="allLanguages"
           :language="state.language"
-          :tags="allTags"
+          :tag-stats="tagStats"
           :selected-tags="state.tags"
           @update:language="(v) => (state.language = v)"
           @toggle-tag="toggleTag"
@@ -79,14 +78,6 @@ function onPicked(song: Song) {
         />
       </section>
     </div>
-
-    <!-- 下段：タグクラウド -->
-    <section v-if="allTags.length" class="mb-8">
-      <h2 class="mb-3 font-display text-sm text-ink/70">
-        ✦ {{ t('home.popularTags') }}
-      </h2>
-      <TagCloud :songs="songs" :selected="state.tags" @toggle="toggleTag" />
-    </section>
 
     <!-- 下段：曲リスト（全幅） -->
     <section>

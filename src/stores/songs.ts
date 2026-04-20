@@ -28,6 +28,19 @@ export const useSongsStore = defineStore('songs', {
       for (const s of state.data.songs) s.tags.forEach((t) => set.add(t))
       return Array.from(set).sort()
     },
+    tagStats: (state): { tag: string; count: number; scale: number }[] => {
+      const map = new Map<string, number>()
+      for (const s of state.data.songs) for (const t of s.tags) map.set(t, (map.get(t) ?? 0) + 1)
+      const entries = Array.from(map.entries()).sort((a, b) => b[1] - a[1])
+      const max = Math.max(1, ...entries.map(([, c]) => c))
+      const min = Math.min(...entries.map(([, c]) => c), max)
+      const range = Math.max(1, max - min)
+      return entries.map(([tag, count]) => ({
+        tag,
+        count,
+        scale: (count - min) / range, // 0 (least popular) .. 1 (most popular)
+      }))
+    },
     allLanguages: (state): string[] => {
       const set = new Set<string>()
       for (const s of state.data.songs) set.add(s.language)

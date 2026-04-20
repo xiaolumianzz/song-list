@@ -3,10 +3,16 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LANGUAGE_ORDER } from '@/types/song'
 
+interface TagStat {
+  tag: string
+  count: number
+  scale: number
+}
+
 const props = defineProps<{
   languages: string[]
   language: string
-  tags: string[]
+  tagStats: TagStat[]
   selectedTags: string[]
 }>()
 const emit = defineEmits<{
@@ -23,6 +29,17 @@ const orderedLangs = computed(() =>
 
 function pickLang(v: string) {
   emit('update:language', v)
+}
+
+// scale 0..1 を RandomPicker ボタン並みの大きさ ~ 現行の小チップの大きさに線形補間
+function tagStyle(scale: number) {
+  const fontSize = 0.72 + scale * 0.36 // 0.72rem ~ 1.08rem
+  const paddingX = 0.75 + scale * 0.65 // 0.75rem ~ 1.4rem
+  const paddingY = 0.22 + scale * 0.45 // 0.22rem ~ 0.67rem
+  return {
+    fontSize: `${fontSize}rem`,
+    padding: `${paddingY}rem ${paddingX}rem`,
+  }
 }
 </script>
 
@@ -48,20 +65,21 @@ function pickLang(v: string) {
       </button>
     </div>
 
-    <div v-if="tags.length" class="flex flex-wrap items-center gap-2">
+    <div v-if="tagStats.length" class="flex flex-wrap items-center gap-2">
       <span class="font-display text-sm text-ink/70">{{ t('filter.tags') }}</span>
       <button
-        v-for="tag in tags"
-        :key="tag"
-        class="rounded-full px-3 py-1 text-xs font-medium transition"
+        v-for="t in tagStats"
+        :key="t.tag"
+        class="animate-sway rounded-full font-display font-medium transition"
         :class="
-          selectedTags.includes(tag)
+          selectedTags.includes(t.tag)
             ? 'bg-rose text-white shadow-pop'
             : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25'
         "
-        @click="emit('toggle-tag', tag)"
+        :style="{ ...tagStyle(t.scale), animationDelay: `${t.count * 0.3}s` }"
+        @click="emit('toggle-tag', t.tag)"
       >
-        #{{ tag }}
+        #{{ t.tag }}
       </button>
       <button
         v-if="selectedTags.length || language !== 'all'"
