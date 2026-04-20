@@ -9,12 +9,26 @@ interface TagStat {
   scale: number
 }
 
-const props = defineProps<{
-  languages: string[]
-  language: string
-  tagStats: TagStat[]
-  selectedTags: string[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    languages: string[]
+    language: string
+    tagStats: TagStat[]
+    selectedTags: string[]
+    tagLimit?: number
+  }>(),
+  { tagLimit: 6 },
+)
+
+const visibleTagStats = computed(() => {
+  // 選択中のタグは上位に無くても必ず表示
+  const top = props.tagStats.slice(0, props.tagLimit)
+  const topSet = new Set(top.map((t) => t.tag))
+  const extraSelected = props.tagStats.filter(
+    (t) => props.selectedTags.includes(t.tag) && !topSet.has(t.tag),
+  )
+  return [...top, ...extraSelected]
+})
 const emit = defineEmits<{
   (e: 'update:language', v: string): void
   (e: 'toggle-tag', v: string): void
@@ -65,10 +79,10 @@ function tagStyle(scale: number) {
       </button>
     </div>
 
-    <div v-if="tagStats.length" class="flex flex-wrap items-center gap-2">
+    <div v-if="visibleTagStats.length" class="flex flex-wrap items-center gap-2">
       <span class="font-display text-sm text-ink/70">{{ t('filter.tags') }}</span>
       <button
-        v-for="t in tagStats"
+        v-for="t in visibleTagStats"
         :key="t.tag"
         class="animate-sway rounded-full font-display font-medium transition"
         :class="
