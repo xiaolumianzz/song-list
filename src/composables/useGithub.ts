@@ -46,6 +46,39 @@ export function useGithub() {
     })
   }
 
+  // バイナリ（画像等）を push する。`base64Content` は既に base64 エンコード済みの文字列
+  async function pushBinary(
+    path: string,
+    base64Content: string,
+    message: string,
+    sha?: string,
+  ) {
+    const oct = client()
+    await oct.repos.createOrUpdateFileContents({
+      owner: auth.repo.owner,
+      repo: auth.repo.repo,
+      path,
+      branch: auth.repo.branch,
+      message,
+      content: base64Content,
+      sha,
+    })
+  }
+
+  async function fetchFileSha(path: string): Promise<string> {
+    const oct = client()
+    const { data: res } = await oct.repos.getContent({
+      owner: auth.repo.owner,
+      repo: auth.repo.repo,
+      path,
+      ref: auth.repo.branch,
+    })
+    if (Array.isArray(res) || res.type !== 'file')
+      throw new Error('Target path is not a file')
+    const file = res as unknown as GithubFileResponse
+    return file.sha
+  }
+
   // 既存API（互換のため残す・内部で汎用関数を呼ぶ）
   function fetchSongs() {
     return fetchJson<SongData>(auth.repo.path)
@@ -62,7 +95,14 @@ export function useGithub() {
     return pushJson(auth.repo.profilePath, data, message, sha)
   }
 
-  return { fetchSongs, pushSongs, fetchProfile, pushProfile }
+  return {
+    fetchSongs,
+    pushSongs,
+    fetchProfile,
+    pushProfile,
+    pushBinary,
+    fetchFileSha,
+  }
 }
 
 function encodeBase64Utf8(input: string): string {

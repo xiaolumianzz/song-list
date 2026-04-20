@@ -231,6 +231,13 @@ async function pushProfileToGithub() {
     }
     profile.value.meta.updatedAt = new Date().toISOString()
     await gh.pushProfile(profile.value, 'chore(profile): update via admin ui', profileSha.value)
+
+    // OGP のサムネに使うため、アイコンを別ファイル public/profile-icon.png として push
+    await pushIconBinaryIfDataUri().catch((e) => {
+      // アイコン push に失敗しても本体更新は成功しているので warn 扱い
+      console.warn('icon binary push failed:', e)
+    })
+
     profileStatus.value = t('admin.status.pushed')
     profileStore.clearLocal()
     const { sha: gotSha } = await gh.fetchProfile()
@@ -240,6 +247,21 @@ async function pushProfileToGithub() {
   } finally {
     profileBusy.value = false
   }
+}
+
+async function pushIconBinaryIfDataUri() {
+  const iconUrl = profile.value.iconUrl
+  if (!iconUrl || !iconUrl.startsWith('data:image/')) return
+  const base64 = iconUrl.split(',')[1]
+  if (!base64) return
+  const iconPath = 'public/profile-icon.png'
+  let iconSha: string | undefined
+  try {
+    iconSha = await gh.fetchFileSha(iconPath)
+  } catch {
+    // 初回 push の場合はファイル未存在で OK
+  }
+  await gh.pushBinary(iconPath, base64, 'chore(profile): update icon', iconSha)
 }
 
 // File → 中央クロップして 256×256 PNG の data URI を返す
