@@ -90,4 +90,4 @@ src/
 
 ---
 
-Made with ♡ & sparkles ✦
+Made by Riru's little brother
