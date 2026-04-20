@@ -53,7 +53,10 @@
   },
   "detail": {
     "conditions": "条件",
-    "remark": "メモ"
+    "remark": "メモ",
+    "copy": "コピー",
+    "copyTitle": "曲名をコピー",
+    "copied": "コピーした！"
   },
   "admin": {
     "title": "管理画面",

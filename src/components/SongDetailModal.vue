@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { Song } from '@/types/song'
 
@@ -7,11 +7,39 @@ defineProps<{ song: Song | null }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 const { t } = useI18n()
 
+const copied = ref(false)
+let copyTimer: number | null = null
+
+async function copyTitle(title: string) {
+  try {
+    await navigator.clipboard.writeText(title)
+    copied.value = true
+    if (copyTimer !== null) clearTimeout(copyTimer)
+    copyTimer = window.setTimeout(() => {
+      copied.value = false
+    }, 1500)
+  } catch {
+    // クリップボード API が使えない環境（古いブラウザ等）はフォールバック
+    const ta = document.createElement('textarea')
+    ta.value = title
+    document.body.appendChild(ta)
+    ta.select()
+    document.execCommand('copy')
+    document.body.removeChild(ta)
+    copied.value = true
+    if (copyTimer !== null) clearTimeout(copyTimer)
+    copyTimer = window.setTimeout(() => (copied.value = false), 1500)
+  }
+}
+
 function onKey(e: KeyboardEvent) {
   if (e.key === 'Escape') emit('close')
 }
 onMounted(() => window.addEventListener('keydown', onKey))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKey)
+  if (copyTimer !== null) clearTimeout(copyTimer)
+})
 </script>
 
 <template>
@@ -39,7 +67,21 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
             </span>
             <span class="text-[11px] text-ash">{{ song.addedAt }}</span>
           </div>
-          <h2 class="font-display text-2xl text-ink">{{ song.title }}</h2>
+
+          <div class="flex items-start gap-2 pr-10">
+            <h2 class="font-display text-2xl text-ink">{{ song.title }}</h2>
+            <button
+              type="button"
+              class="mt-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-sakura/60 bg-white px-2 py-1 text-[11px] text-rose shadow-soft transition hover:bg-sakura hover:text-white"
+              :aria-label="t('detail.copyTitle')"
+              :title="t('detail.copyTitle')"
+              @click="copyTitle(song.title)"
+            >
+              <span v-if="copied" aria-hidden="true">✓</span>
+              <span v-else aria-hidden="true">📋</span>
+              <span>{{ copied ? t('detail.copied') : t('detail.copy') }}</span>
+            </button>
+          </div>
           <p class="mt-1 text-base text-ink/80">{{ song.artist }}</p>
 
           <div v-if="song.tags.length" class="mt-4 flex flex-wrap gap-1.5">

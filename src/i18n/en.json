@@ -53,7 +53,10 @@
   },
   "detail": {
     "conditions": "Conditions",
-    "remark": "Note"
+    "remark": "Note",
+    "copy": "Copy",
+    "copyTitle": "Copy title",
+    "copied": "Copied!"
   },
   "admin": {
     "title": "Admin",

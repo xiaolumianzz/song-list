@@ -53,7 +53,10 @@
   },
   "detail": {
     "conditions": "点歌条件",
-    "remark": "备注"
+    "remark": "备注",
+    "copy": "复制",
+    "copyTitle": "复制歌名",
+    "copied": "已复制！"
   },
   "admin": {
     "title": "管理面板",
