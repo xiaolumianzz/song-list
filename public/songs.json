@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-04-20T13:13:51.003Z"
+    "updatedAt": "2026-04-20T13:15:42.396Z"
   },
   "songs": [
     {
@@ -150,6 +150,19 @@
       "conditions": [
         "practice-needed",
         "paid-only"
+      ],
+      "remark": "",
+      "addedAt": "2026-04-20"
+    },
+    {
+      "id": "36e2a294-5b4e-4445-b9f9-a658e086f7fe",
+      "title": "tesuto2",
+      "artist": "tesuto2a-thisuto",
+      "language": "ja",
+      "tags": [],
+      "conditions": [
+        "with-guitar",
+        "short-version"
       ],
       "remark": "",
       "addedAt": "2026-04-20"
