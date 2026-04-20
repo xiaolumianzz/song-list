@@ -111,8 +111,9 @@ function onPicked(song: Song) {
       <SongGrid v-else :songs="filtered" :mode="viewMode" @open="selected = $event" />
     </section>
 
-    <footer class="mt-10 text-center font-handwritten text-xs text-ink/60">
-      {{ t('home.footer') }}
+    <footer class="mt-10 text-center">
+      <p class="font-handwritten text-xs text-ink/60">{{ t('home.footer') }}</p>
+      <p class="mt-1 text-[10px] text-ink/40">© 2026 Riru</p>
     </footer>
   </main>
 
