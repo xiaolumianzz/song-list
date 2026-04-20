@@ -5,6 +5,9 @@ dist
 .idea
 .claude
 docs/ops.md
+public/character/raw/
+public/character/parts/
+public/character/manifest.bak.json
 *.log
 .env
 .env.local
