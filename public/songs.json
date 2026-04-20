@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-04-20T00:00:00.000Z"
+    "updatedAt": "2026-04-20T13:13:51.003Z"
   },
   "songs": [
     {
@@ -9,7 +9,10 @@
       "title": "ドライフラワー",
       "artist": "優里",
       "language": "ja",
-      "tags": ["J-POP", "バラード"],
+      "tags": [
+        "J-POP",
+        "バラード"
+      ],
       "conditions": [],
       "remark": "しっとり歌いたいときに。",
       "addedAt": "2026-01-10"
@@ -19,8 +22,13 @@
       "title": "夜に駆ける",
       "artist": "YOASOBI",
       "language": "ja",
-      "tags": ["J-POP", "アップテンポ"],
-      "conditions": ["practice-needed"],
+      "tags": [
+        "J-POP",
+        "アップテンポ"
+      ],
+      "conditions": [
+        "practice-needed"
+      ],
       "remark": "音域高め、たまに練習してから。",
       "addedAt": "2026-01-12"
     },
@@ -29,7 +37,9 @@
       "title": "残酷な天使のテーゼ",
       "artist": "高橋洋子",
       "language": "ja",
-      "tags": ["アニメ"],
+      "tags": [
+        "アニメ"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-01-15"
@@ -39,7 +49,10 @@
       "title": "Lemon",
       "artist": "米津玄師",
       "language": "ja",
-      "tags": ["J-POP", "バラード"],
+      "tags": [
+        "J-POP",
+        "バラード"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-02-01"
@@ -49,8 +62,13 @@
       "title": "Let It Go",
       "artist": "Idina Menzel",
       "language": "en",
-      "tags": ["ディズニー", "バラード"],
-      "conditions": ["practice-needed"],
+      "tags": [
+        "ディズニー",
+        "バラード"
+      ],
+      "conditions": [
+        "practice-needed"
+      ],
       "remark": "英語版のみ。",
       "addedAt": "2026-02-05"
     },
@@ -59,8 +77,13 @@
       "title": "Photograph",
       "artist": "Ed Sheeran",
       "language": "en",
-      "tags": ["洋楽", "バラード"],
-      "conditions": ["with-guitar"],
+      "tags": [
+        "洋楽",
+        "バラード"
+      ],
+      "conditions": [
+        "with-guitar"
+      ],
       "remark": "弾き語り向け。",
       "addedAt": "2026-02-10"
     },
@@ -69,7 +92,9 @@
       "title": "起风了",
       "artist": "買辣椒也用券",
       "language": "zh",
-      "tags": ["华语"],
+      "tags": [
+        "华语"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-02-14"
@@ -79,7 +104,10 @@
       "title": "告白気球",
       "artist": "周杰倫 (Jay Chou)",
       "language": "zh",
-      "tags": ["华语", "バラード"],
+      "tags": [
+        "华语",
+        "バラード"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-02-20"
@@ -89,7 +117,9 @@
       "title": "Pretender",
       "artist": "Official髭男dism",
       "language": "ja",
-      "tags": ["J-POP"],
+      "tags": [
+        "J-POP"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-03-01"
@@ -99,10 +129,30 @@
       "title": "紅蓮華",
       "artist": "LiSA",
       "language": "ja",
-      "tags": ["アニメ", "アップテンポ"],
-      "conditions": ["practice-needed"],
+      "tags": [
+        "アニメ",
+        "アップテンポ"
+      ],
+      "conditions": [
+        "practice-needed"
+      ],
       "remark": "鬼滅の刃OP。",
       "addedAt": "2026-03-12"
+    },
+    {
+      "id": "2707b9f4-9dbd-4bf1-8372-0c8cdf058346",
+      "title": "テスト曲",
+      "artist": "テストアーティスト",
+      "language": "ja",
+      "tags": [
+        "バラード"
+      ],
+      "conditions": [
+        "practice-needed",
+        "paid-only"
+      ],
+      "remark": "",
+      "addedAt": "2026-04-20"
     }
   ]
 }
