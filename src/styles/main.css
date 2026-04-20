@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #3a3330;
+  font-family: 'Noto Sans JP', system-ui, sans-serif;
+  background: #fffaf5;
+}
+
+.scrollbar-soft::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-soft::-webkit-scrollbar-thumb {
+  background: rgba(255, 186, 195, 0.55);
+  border-radius: 999px;
+}
+.scrollbar-soft::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wavy-divider {
+  background-image: radial-gradient(circle at 10px 8px, #ffd9dd 3px, transparent 3.5px);
+  background-size: 20px 16px;
+  background-repeat: repeat-x;
+  height: 16px;
+}

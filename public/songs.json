@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "version": 1,
+    "updatedAt": "2026-04-20T00:00:00.000Z"
+  },
+  "songs": [
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000001",
+      "title": "ドライフラワー",
+      "artist": "優里",
+      "language": "ja",
+      "tags": ["J-POP", "バラード"],
+      "conditions": [],
+      "remark": "しっとり歌いたいときに。",
+      "addedAt": "2026-01-10"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000002",
+      "title": "夜に駆ける",
+      "artist": "YOASOBI",
+      "language": "ja",
+      "tags": ["J-POP", "アップテンポ"],
+      "conditions": ["practice-needed"],
+      "remark": "音域高め、たまに練習してから。",
+      "addedAt": "2026-01-12"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000003",
+      "title": "残酷な天使のテーゼ",
+      "artist": "高橋洋子",
+      "language": "ja",
+      "tags": ["アニメ"],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-01-15"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000004",
+      "title": "Lemon",
+      "artist": "米津玄師",
+      "language": "ja",
+      "tags": ["J-POP", "バラード"],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-02-01"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000005",
+      "title": "Let It Go",
+      "artist": "Idina Menzel",
+      "language": "en",
+      "tags": ["ディズニー", "バラード"],
+      "conditions": ["practice-needed"],
+      "remark": "英語版のみ。",
+      "addedAt": "2026-02-05"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000006",
+      "title": "Photograph",
+      "artist": "Ed Sheeran",
+      "language": "en",
+      "tags": ["洋楽", "バラード"],
+      "conditions": ["with-guitar"],
+      "remark": "弾き語り向け。",
+      "addedAt": "2026-02-10"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000007",
+      "title": "起风了",
+      "artist": "買辣椒也用券",
+      "language": "zh",
+      "tags": ["华语"],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-02-14"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000008",
+      "title": "告白気球",
+      "artist": "周杰倫 (Jay Chou)",
+      "language": "zh",
+      "tags": ["华语", "バラード"],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-02-20"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000009",
+      "title": "Pretender",
+      "artist": "Official髭男dism",
+      "language": "ja",
+      "tags": ["J-POP"],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-03-01"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000010",
+      "title": "紅蓮華",
+      "artist": "LiSA",
+      "language": "ja",
+      "tags": ["アニメ", "アップテンポ"],
+      "conditions": ["practice-needed"],
+      "remark": "鬼滅の刃OP。",
+      "addedAt": "2026-03-12"
+    }
+  ]
+}

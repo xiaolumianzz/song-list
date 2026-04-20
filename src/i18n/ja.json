@@ -1,0 +1,111 @@
+{
+  "app": { "title": "🍫Riru璃露の歌える曲リスト" },
+  "nav": { "admin": "管理", "home": "ホーム" },
+  "home": {
+    "tagline": "いつでもリクエストしてね ♡",
+    "searchPlaceholder": "曲名やアーティストで検索…",
+    "popularTags": "人気のタグ",
+    "loading": "読み込み中…",
+    "empty": "条件に合う曲が見つかりません",
+    "footer": "Made with ♡"
+  },
+  "filter": {
+    "language": "言語",
+    "tags": "タグ",
+    "all": "ぜんぶ",
+    "reset": "リセット"
+  },
+  "language": {
+    "ja": "日本語",
+    "en": "英語",
+    "zh": "中国語",
+    "ko": "韓国語",
+    "other": "その他"
+  },
+  "condition": {
+    "karaoke-only": "カラオケのみ",
+    "practice-needed": "要練習",
+    "paid-only": "有料枠のみ",
+    "members-only": "メンバー限定",
+    "with-guitar": "弾き語りあり",
+    "short-version": "ショートver"
+  },
+  "count": {
+    "total": "全 {n} 曲",
+    "filtered": "{shown} / {n} 曲"
+  },
+  "random": {
+    "pick": "ランダムで選ぶ",
+    "spinning": "選んでるよ…"
+  },
+  "view": {
+    "grid": "カード",
+    "list": "行表示"
+  },
+  "gate": {
+    "title": "管理画面",
+    "subtitle": "合言葉を入力してね",
+    "placeholder": "合言葉",
+    "unlock": "開く",
+    "lock": "ロック",
+    "wrong": "合言葉が違います",
+    "hint": "※このページは管理者専用です"
+  },
+  "detail": {
+    "conditions": "条件",
+    "remark": "メモ"
+  },
+  "admin": {
+    "title": "管理画面",
+    "credentials": "GitHub 接続設定",
+    "credentialsHelp": "fine-grained PAT を使ってください（対象リポジトリのみ、Contents: Read and write 権限）。トークンはブラウザのローカルに保存され、外部には送信されません。",
+    "save": "保存",
+    "fetch": "GitHubから取得",
+    "push": "GitHubへ保存",
+    "export": "JSON書き出し",
+    "resetLocal": "ローカル変更を破棄",
+    "addSong": "曲を追加",
+    "editSong": "曲を編集",
+    "update": "更新",
+    "add": "追加",
+    "cancel": "キャンセル",
+    "list": "曲リスト",
+    "localOverrideNotice": "ローカルに未保存の変更があります（GitHubへは未反映）",
+    "confirmDelete": "「{title}」を削除しますか？",
+    "confirmResetLocal": "ローカルの変更を破棄して初期データに戻します。よろしいですか？",
+    "profile": {
+      "title": "プロフィール",
+      "help": "トップページの左側に表示されるプロフィールカードの内容。アイコンは画像ファイルから選んで、自動で256×256の正方形にトリミングされます。",
+      "chooseImage": "画像を選ぶ",
+      "removeImage": "削除",
+      "imageHint": "JPG/PNG/WEBP OK（中央を正方形にクロップして保存）",
+      "displayName": "表示名",
+      "tagline": "ひとこと",
+      "taglinePh": "例: 歌ってる人 ♡",
+      "urlPh": "https://..."
+    },
+    "field": {
+      "owner": "GitHubユーザー名",
+      "repo": "リポジトリ名",
+      "branch": "ブランチ",
+      "path": "曲データのパス",
+      "profilePath": "プロフィールのパス",
+      "token": "Personal Access Token",
+      "title": "曲名",
+      "artist": "アーティスト",
+      "language": "言語",
+      "tags": "タグ",
+      "tagsPh": "カンマ区切り（例: J-POP, バラード）",
+      "conditions": "リクエスト条件",
+      "remark": "メモ・備考",
+      "addedAt": "登録日"
+    },
+    "status": {
+      "savedLocal": "ローカルに保存しました",
+      "fetched": "GitHubから取得しました",
+      "pushed": "GitHubへ保存しました ✦",
+      "required": "曲名とアーティストは必須です",
+      "resetLocal": "ローカル変更をリセットしました"
+    }
+  }
+}

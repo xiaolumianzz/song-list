@@ -1,0 +1,111 @@
+{
+  "app": { "title": "🍫Riru璃露's Song List" },
+  "nav": { "admin": "Admin", "home": "Home" },
+  "home": {
+    "tagline": "Feel free to request any time ♡",
+    "searchPlaceholder": "Search by title or artist…",
+    "popularTags": "Popular tags",
+    "loading": "Loading…",
+    "empty": "No songs match your filter",
+    "footer": "Made with ♡"
+  },
+  "filter": {
+    "language": "Language",
+    "tags": "Tags",
+    "all": "All",
+    "reset": "Reset"
+  },
+  "language": {
+    "ja": "Japanese",
+    "en": "English",
+    "zh": "Chinese",
+    "ko": "Korean",
+    "other": "Other"
+  },
+  "condition": {
+    "karaoke-only": "Karaoke only",
+    "practice-needed": "Needs practice",
+    "paid-only": "Paid only",
+    "members-only": "Members only",
+    "with-guitar": "With guitar",
+    "short-version": "Short version"
+  },
+  "count": {
+    "total": "{n} songs",
+    "filtered": "{shown} / {n} songs"
+  },
+  "random": {
+    "pick": "Pick random",
+    "spinning": "Picking…"
+  },
+  "view": {
+    "grid": "Grid",
+    "list": "List"
+  },
+  "gate": {
+    "title": "Admin",
+    "subtitle": "Please enter the passphrase",
+    "placeholder": "Passphrase",
+    "unlock": "Unlock",
+    "lock": "Lock",
+    "wrong": "Wrong passphrase",
+    "hint": "※ This page is for administrators only"
+  },
+  "detail": {
+    "conditions": "Conditions",
+    "remark": "Note"
+  },
+  "admin": {
+    "title": "Admin",
+    "credentials": "GitHub settings",
+    "credentialsHelp": "Use a fine-grained PAT (target repo only, Contents: Read and write). The token is stored in your browser's localStorage and never sent anywhere else.",
+    "save": "Save",
+    "fetch": "Fetch from GitHub",
+    "push": "Push to GitHub",
+    "export": "Export JSON",
+    "resetLocal": "Discard local changes",
+    "addSong": "Add song",
+    "editSong": "Edit song",
+    "update": "Update",
+    "add": "Add",
+    "cancel": "Cancel",
+    "list": "Song list",
+    "localOverrideNotice": "You have unsaved local changes (not pushed to GitHub)",
+    "confirmDelete": "Delete \"{title}\"?",
+    "confirmResetLocal": "This will discard local changes and restore original data. Continue?",
+    "profile": {
+      "title": "Profile",
+      "help": "Shown as a card on the top page's left. Icon is cropped to a 256×256 square automatically.",
+      "chooseImage": "Choose image",
+      "removeImage": "Remove",
+      "imageHint": "JPG/PNG/WEBP (center-cropped to square on save)",
+      "displayName": "Display name",
+      "tagline": "Tagline",
+      "taglinePh": "e.g. Singer ♡",
+      "urlPh": "https://..."
+    },
+    "field": {
+      "owner": "GitHub username",
+      "repo": "Repository",
+      "branch": "Branch",
+      "path": "Songs file path",
+      "profilePath": "Profile file path",
+      "token": "Personal Access Token",
+      "title": "Title",
+      "artist": "Artist",
+      "language": "Language",
+      "tags": "Tags",
+      "tagsPh": "Comma separated (e.g. J-POP, Ballad)",
+      "conditions": "Request conditions",
+      "remark": "Note",
+      "addedAt": "Added on"
+    },
+    "status": {
+      "savedLocal": "Saved locally",
+      "fetched": "Fetched from GitHub",
+      "pushed": "Pushed to GitHub ✦",
+      "required": "Title and artist are required",
+      "resetLocal": "Local changes reset"
+    }
+  }
+}

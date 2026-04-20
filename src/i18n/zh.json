@@ -1,0 +1,111 @@
+{
+  "app": { "title": "🍫Riru璃露的歌单" },
+  "nav": { "admin": "管理", "home": "首页" },
+  "home": {
+    "tagline": "随时欢迎点歌 ♡",
+    "searchPlaceholder": "按歌名或歌手搜索…",
+    "popularTags": "热门标签",
+    "loading": "加载中…",
+    "empty": "没有符合条件的歌曲",
+    "footer": "Made with ♡"
+  },
+  "filter": {
+    "language": "语言",
+    "tags": "标签",
+    "all": "全部",
+    "reset": "重置"
+  },
+  "language": {
+    "ja": "日文",
+    "en": "英文",
+    "zh": "中文",
+    "ko": "韩文",
+    "other": "其他"
+  },
+  "condition": {
+    "karaoke-only": "仅限卡拉OK",
+    "practice-needed": "需要练习",
+    "paid-only": "仅限付费场",
+    "members-only": "仅限会员",
+    "with-guitar": "吉他弹唱",
+    "short-version": "短版"
+  },
+  "count": {
+    "total": "共 {n} 首",
+    "filtered": "{shown} / {n} 首"
+  },
+  "random": {
+    "pick": "随机点歌",
+    "spinning": "选择中…"
+  },
+  "view": {
+    "grid": "卡片",
+    "list": "列表"
+  },
+  "gate": {
+    "title": "管理面板",
+    "subtitle": "请输入暗号",
+    "placeholder": "暗号",
+    "unlock": "解锁",
+    "lock": "锁定",
+    "wrong": "暗号错误",
+    "hint": "※ 本页面仅限管理员使用"
+  },
+  "detail": {
+    "conditions": "点歌条件",
+    "remark": "备注"
+  },
+  "admin": {
+    "title": "管理面板",
+    "credentials": "GitHub 连接设置",
+    "credentialsHelp": "请使用 fine-grained PAT（仅限目标仓库，权限 Contents: Read and write）。Token 只保存在您浏览器的 localStorage，不会发送到外部。",
+    "save": "保存",
+    "fetch": "从 GitHub 获取",
+    "push": "推送到 GitHub",
+    "export": "导出 JSON",
+    "resetLocal": "放弃本地修改",
+    "addSong": "添加歌曲",
+    "editSong": "编辑歌曲",
+    "update": "更新",
+    "add": "添加",
+    "cancel": "取消",
+    "list": "歌曲列表",
+    "localOverrideNotice": "有未保存的本地修改（尚未推送到 GitHub）",
+    "confirmDelete": "确定要删除「{title}」吗？",
+    "confirmResetLocal": "将放弃本地修改并恢复原始数据，继续？",
+    "profile": {
+      "title": "个人信息",
+      "help": "显示在首页左侧的个人卡片内容。图片会自动裁剪成 256×256 正方形。",
+      "chooseImage": "选择图片",
+      "removeImage": "删除",
+      "imageHint": "支持 JPG/PNG/WEBP（保存时自动中心裁剪为方形）",
+      "displayName": "显示名",
+      "tagline": "一句话",
+      "taglinePh": "例：歌手 ♡",
+      "urlPh": "https://..."
+    },
+    "field": {
+      "owner": "GitHub 用户名",
+      "repo": "仓库名",
+      "branch": "分支",
+      "path": "歌曲文件路径",
+      "profilePath": "个人信息文件路径",
+      "token": "Personal Access Token",
+      "title": "歌名",
+      "artist": "歌手",
+      "language": "语言",
+      "tags": "标签",
+      "tagsPh": "逗号分隔（如 J-POP, 抒情）",
+      "conditions": "点歌条件",
+      "remark": "备注",
+      "addedAt": "登记日"
+    },
+    "status": {
+      "savedLocal": "已保存到本地",
+      "fetched": "已从 GitHub 获取",
+      "pushed": "已推送到 GitHub ✦",
+      "required": "歌名和歌手为必填",
+      "resetLocal": "本地修改已重置"
+    }
+  }
+}
