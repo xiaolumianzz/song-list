@@ -26,14 +26,16 @@ const { t } = useI18n()
   </div>
 
   <div v-else class="flex flex-col gap-2">
-    <!-- 見出し行：SongRow の grid-template-columns と同じ構造 -->
-    <div class="row-header px-4 text-[11px] font-display font-medium uppercase tracking-wide text-ink/50">
-      <span>{{ t('list.title') }}</span>
-      <span>{{ t('list.artist') }}</span>
-      <span>{{ t('list.language') }}</span>
-      <span>SC</span>
-      <span>{{ t('list.tags') }}</span>
-      <span class="justify-self-end" aria-hidden="true">♡</span>
+    <!-- 見出し行：SongRow の grid-template-columns と同じ構造
+         ・border-transparent で行と同じ 1px ぶんを確保（左右のズレ防止）
+         ・ピル列は pl-2 で行のピル内テキストと開始位置を揃える -->
+    <div class="row-header border border-transparent px-4 pb-1 text-[11px] font-display font-medium uppercase tracking-wide text-ink/50">
+      <span class="truncate">{{ t('list.title') }}</span>
+      <span class="truncate">{{ t('list.artist') }}</span>
+      <span class="pl-2">{{ t('list.language') }}</span>
+      <span class="pl-2">SC</span>
+      <span class="truncate pl-2">{{ t('list.tags') }}</span>
+      <span class="w-7 justify-self-end text-center normal-case" aria-hidden="true">♡</span>
     </div>
 
     <SongRow
