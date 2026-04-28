@@ -124,7 +124,8 @@
       "fetched": "已从 GitHub 获取",
       "pushed": "已推送到 GitHub ✦",
       "required": "歌名和歌手为必填",
-      "resetLocal": "本地修改已重置"
+      "resetLocal": "本地修改已重置",
+      "repoNoAccess": "无法访问仓库。请检查 PAT 的所属账号、目标仓库和 Contents 权限设置。"
     }
   }
 }

@@ -13,7 +13,17 @@ export function useGithub() {
 
   function client() {
     if (!auth.token) throw new Error('GitHub token is not set')
-    return new Octokit({ auth: auth.token })
+    return new Octokit({
+      auth: auth.token,
+      request: {
+        // ブラウザ HTTP キャッシュをバイパス。
+        // GitHub の API レスポンスは Cache-Control: private, max-age=60 のため、
+        // 直前に push して sha が変わった直後でも 60 秒間は古い sha が返ってきて
+        // しまい、次の push で「does not match」エラーになる事象を防ぐ。
+        fetch: (input: RequestInfo | URL, init?: RequestInit) =>
+          fetch(input, { ...(init ?? {}), cache: 'no-store' }),
+      },
+    })
   }
 
   async function fetchJson<T>(path: string): Promise<{ data: T; sha: string }> {
@@ -79,6 +89,16 @@ export function useGithub() {
     return file.sha
   }
 
+  /**
+   * リポジトリ自体にアクセスできるかを確認する。
+   * 404 のとき「ファイルが存在しないだけ」と「PAT 権限でリポジトリが見えない」を
+   * 切り分けるのに使う。
+   */
+  async function checkRepoAccess() {
+    const oct = client()
+    await oct.repos.get({ owner: auth.repo.owner, repo: auth.repo.repo })
+  }
+
   // 既存API（互換のため残す・内部で汎用関数を呼ぶ）
   function fetchSongs() {
     return fetchJson<SongData>(auth.repo.path)
@@ -102,6 +122,7 @@ export function useGithub() {
     pushProfile,
     pushBinary,
     fetchFileSha,
+    checkRepoAccess,
   }
 }
 

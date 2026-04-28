@@ -124,7 +124,8 @@
       "fetched": "Fetched from GitHub",
       "pushed": "Pushed to GitHub ✦",
       "required": "Title and artist are required",
-      "resetLocal": "Local changes reset"
+      "resetLocal": "Local changes reset",
+      "repoNoAccess": "Cannot access the repository. Check your PAT's owner account, target repository, and Contents permission."
     }
   }
 }

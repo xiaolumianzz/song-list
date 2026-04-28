@@ -124,7 +124,8 @@
       "fetched": "GitHubから取得しました",
       "pushed": "GitHubへ保存しました ✦",
       "required": "曲名とアーティストは必須です",
-      "resetLocal": "ローカル変更をリセットしました"
+      "resetLocal": "ローカル変更をリセットしました",
+      "repoNoAccess": "リポジトリにアクセスできません。PATの発行アカウント・対象リポジトリ・Contents権限を確認してください。"
     }
   }
 }

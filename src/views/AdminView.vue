@@ -46,6 +46,41 @@ function saveCreds() {
   status.value = t('admin.status.savedLocal')
 }
 
+function isHttpError(e: unknown, status: number): boolean {
+  return (
+    typeof e === 'object' &&
+    e !== null &&
+    'status' in e &&
+    (e as { status?: unknown }).status === status
+  )
+}
+
+/**
+ * push の直前に GitHub から最新の sha を取り直して返す。
+ * - 取得成功 → その sha（既存ファイル更新）
+ * - 404 だがリポジトリ自体は見える → undefined（新規ファイル作成扱い）
+ * - 404 でリポジトリも見えない → PAT 権限エラーとして throw
+ */
+async function resolveCurrentSha(
+  fetcher: () => Promise<{ sha: string }>,
+): Promise<string | undefined> {
+  try {
+    const { sha: gotSha } = await fetcher()
+    return gotSha
+  } catch (e) {
+    if (!isHttpError(e, 404)) throw e
+    try {
+      await gh.checkRepoAccess()
+    } catch (repoErr) {
+      if (isHttpError(repoErr, 404)) {
+        throw new Error(t('admin.status.repoNoAccess'))
+      }
+      throw repoErr
+    }
+    return undefined
+  }
+}
+
 async function fetchFromGithub() {
   busy.value = true
   status.value = ''
@@ -65,20 +100,12 @@ async function pushToGithub() {
   busy.value = true
   status.value = ''
   try {
-    // 既存ファイルを更新するには sha が必要。未取得なら先に取得
-    if (sha.value === undefined) {
-      try {
-        const { sha: gotSha } = await gh.fetchSongs()
-        sha.value = gotSha
-      } catch {
-        // ファイルが存在しない新規作成ケース → sha は不要
-      }
-    }
+    // push 直前に必ず最新 sha を取り直す（キャッシュ・他端末更新による不整合を防ぐ）
+    const currentSha = await resolveCurrentSha(() => gh.fetchSongs())
     songsStore.data.meta.updatedAt = new Date().toISOString()
-    await gh.pushSongs(songsStore.data, `chore(songs): update via admin ui`, sha.value)
+    await gh.pushSongs(songsStore.data, `chore(songs): update via admin ui`, currentSha)
     status.value = t('admin.status.pushed')
     songsStore.clearLocal()
-    // push 後は新しい sha を取り直す
     const { sha: gotSha } = await gh.fetchSongs()
     sha.value = gotSha
   } catch (e) {
@@ -225,17 +252,9 @@ async function pushProfileToGithub() {
   profileBusy.value = true
   profileStatus.value = ''
   try {
-    // 既存ファイルを更新するには sha が必要。未取得なら先に取得
-    if (profileSha.value === undefined) {
-      try {
-        const { sha: gotSha } = await gh.fetchProfile()
-        profileSha.value = gotSha
-      } catch {
-        // ファイルが存在しない新規作成ケース → sha は不要
-      }
-    }
+    const currentSha = await resolveCurrentSha(() => gh.fetchProfile())
     profile.value.meta.updatedAt = new Date().toISOString()
-    await gh.pushProfile(profile.value, 'chore(profile): update via admin ui', profileSha.value)
+    await gh.pushProfile(profile.value, 'chore(profile): update via admin ui', currentSha)
 
     // OGP のサムネに使うため、アイコンを別ファイル public/profile-icon.png として push
     await pushIconBinaryIfDataUri().catch((e) => {
