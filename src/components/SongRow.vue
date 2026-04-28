@@ -103,7 +103,7 @@ function toggleLike(e: Event) {
     4.5rem                /* 言語 */
     5.5rem                /* SC */
     minmax(0, 2fr)        /* タグ */
-    2rem;                 /* いいね（右端） */
+    3.5rem;               /* いいね（右端） */
   column-gap: 0.75rem;
   align-items: center;
 }

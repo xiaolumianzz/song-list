@@ -35,7 +35,7 @@ const { t } = useI18n()
       <span class="pl-2">{{ t('list.language') }}</span>
       <span class="pl-2">SC</span>
       <span class="truncate pl-2">{{ t('list.tags') }}</span>
-      <span class="w-7 justify-self-end text-center normal-case" aria-hidden="true">♡</span>
+      <span class="justify-self-end">{{ t('list.like') }}</span>
     </div>
 
     <SongRow
@@ -57,7 +57,7 @@ const { t } = useI18n()
     4.5rem
     5.5rem
     minmax(0, 2fr)
-    2rem;
+    3.5rem;
   column-gap: 0.75rem;
   align-items: center;
 }

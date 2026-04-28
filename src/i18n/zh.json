@@ -46,7 +46,8 @@
     "title": "歌名",
     "artist": "歌手",
     "language": "语言",
-    "tags": "标签"
+    "tags": "标签",
+    "like": "喜欢"
   },
   "gate": {
     "title": "管理面板",

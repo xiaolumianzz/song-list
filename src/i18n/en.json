@@ -46,7 +46,8 @@
     "title": "Title",
     "artist": "Artist",
     "language": "Lang",
-    "tags": "Tags"
+    "tags": "Tags",
+    "like": "Like"
   },
   "gate": {
     "title": "Admin",
