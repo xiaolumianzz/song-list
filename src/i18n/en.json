@@ -64,6 +64,11 @@
     "copyTitle": "Copy title",
     "copied": "Copied!"
   },
+  "like": {
+    "add": "Like",
+    "remove": "Unlike",
+    "liked": "Liked"
+  },
   "admin": {
     "title": "Admin",
     "credentials": "GitHub settings",

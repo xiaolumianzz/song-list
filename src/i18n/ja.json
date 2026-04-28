@@ -64,6 +64,11 @@
     "copyTitle": "曲名をコピー",
     "copied": "コピーしたよ！"
   },
+  "like": {
+    "add": "いいね",
+    "remove": "いいねを外す",
+    "liked": "いいね済"
+  },
   "admin": {
     "title": "管理画面",
     "credentials": "GitHub 接続設定",

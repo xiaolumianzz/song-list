@@ -64,6 +64,11 @@
     "copyTitle": "复制歌名",
     "copied": "已复制！"
   },
+  "like": {
+    "add": "喜欢",
+    "remove": "取消喜欢",
+    "liked": "已喜欢"
+  },
   "admin": {
     "title": "管理面板",
     "credentials": "GitHub 连接设置",

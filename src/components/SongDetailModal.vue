@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useLikesStore } from '@/stores/likes'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 
-defineProps<{ song: Song | null }>()
+const props = defineProps<{ song: Song | null }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 const { t } = useI18n()
+const likes = useLikesStore()
+const liked = computed(() => (props.song ? likes.isLiked(props.song.id) : false))
+
+function toggleLike() {
+  if (props.song) likes.toggle(props.song.id)
+}
 
 const copied = ref(false)
 let copyTimer: number | null = null
@@ -72,6 +79,20 @@ onBeforeUnmount(() => {
 
           <div class="flex items-start gap-2 pr-10">
             <h2 class="font-display text-2xl text-ink">{{ song.title }}</h2>
+            <button
+              type="button"
+              class="like-btn mt-1 inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-1 text-[11px] shadow-soft transition"
+              :class="liked
+                ? 'border-sakura bg-sakura text-white hover:bg-rose'
+                : 'border-sakura/60 bg-white text-rose hover:bg-sakura hover:text-white'"
+              :aria-label="liked ? t('like.remove') : t('like.add')"
+              :title="liked ? t('like.remove') : t('like.add')"
+              :aria-pressed="liked"
+              @click="toggleLike"
+            >
+              <span aria-hidden="true" class="text-sm leading-none">{{ liked ? '♥' : '♡' }}</span>
+              <span>{{ liked ? t('like.liked') : t('like.add') }}</span>
+            </button>
             <button
               type="button"
               class="mt-1 inline-flex shrink-0 items-center gap-1 rounded-full border border-sakura/60 bg-white px-2 py-1 text-[11px] text-rose shadow-soft transition hover:bg-sakura hover:text-white"
@@ -146,5 +167,11 @@ onBeforeUnmount(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.like-btn {
+  transform-origin: center;
+}
+.like-btn:active {
+  transform: scale(0.92);
 }
 </style>
