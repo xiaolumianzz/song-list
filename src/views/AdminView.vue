@@ -35,13 +35,28 @@ const repoProfilePath = ref(auth.repo.profilePath || 'public/profile.json')
 const fileInputRef = ref<HTMLInputElement | null>(null)
 
 function saveCreds() {
-  auth.setToken(tokenInput.value)
+  // コピペ時の前後空白・改行を除去（先頭スペース混入で 404 になる事故防止）
+  const cleanedToken = tokenInput.value.trim()
+  const cleanedOwner = repoOwner.value.trim()
+  const cleanedRepo = repoName.value.trim()
+  const cleanedBranch = repoBranch.value.trim()
+  const cleanedPath = repoPath.value.trim()
+  const cleanedProfilePath = repoProfilePath.value.trim()
+  // フォーム表示も整形済みの値に揃える
+  tokenInput.value = cleanedToken
+  repoOwner.value = cleanedOwner
+  repoName.value = cleanedRepo
+  repoBranch.value = cleanedBranch
+  repoPath.value = cleanedPath
+  repoProfilePath.value = cleanedProfilePath
+
+  auth.setToken(cleanedToken)
   auth.setRepo({
-    owner: repoOwner.value,
-    repo: repoName.value,
-    branch: repoBranch.value,
-    path: repoPath.value,
-    profilePath: repoProfilePath.value,
+    owner: cleanedOwner,
+    repo: cleanedRepo,
+    branch: cleanedBranch,
+    path: cleanedPath,
+    profilePath: cleanedProfilePath,
   })
   status.value = t('admin.status.savedLocal')
 }
