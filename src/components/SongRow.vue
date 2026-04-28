@@ -34,25 +34,10 @@ function toggleLike(e: Event) {
     @click="open"
     @keydown="onKeydown"
   >
-    <!-- 曲名 + いいねボタン -->
-    <div class="flex min-w-0 items-center gap-2">
-      <button
-        type="button"
-        class="like-btn grid h-7 w-7 shrink-0 place-items-center rounded-full text-base transition"
-        :class="liked
-          ? 'bg-sakura text-white shadow-soft'
-          : 'bg-white/60 text-sakura opacity-50 hover:bg-blush hover:opacity-100 group-hover:opacity-100'"
-        :aria-label="liked ? t('like.remove') : t('like.add')"
-        :title="liked ? t('like.remove') : t('like.add')"
-        :aria-pressed="liked"
-        @click="toggleLike"
-      >
-        <span aria-hidden="true">{{ liked ? '♥' : '♡' }}</span>
-      </button>
-      <span class="min-w-0 truncate font-display text-base font-medium text-ink">
-        {{ song.title }}
-      </span>
-    </div>
+    <!-- 曲名 -->
+    <span class="min-w-0 truncate font-display text-base font-medium text-ink">
+      {{ song.title }}
+    </span>
 
     <!-- アーティスト -->
     <span class="min-w-0 truncate text-sm text-ink/75">
@@ -90,6 +75,21 @@ function toggleLike(e: Event) {
         ♪ {{ t('condition.' + c) }}
       </span>
     </div>
+
+    <!-- いいねボタン（右端） -->
+    <button
+      type="button"
+      class="like-btn grid h-7 w-7 shrink-0 place-items-center justify-self-end rounded-full text-base transition"
+      :class="liked
+        ? 'bg-sakura text-white shadow-soft'
+        : 'bg-white/60 text-sakura opacity-50 hover:bg-blush hover:opacity-100 group-hover:opacity-100'"
+      :aria-label="liked ? t('like.remove') : t('like.add')"
+      :title="liked ? t('like.remove') : t('like.add')"
+      :aria-pressed="liked"
+      @click="toggleLike"
+    >
+      <span aria-hidden="true">{{ liked ? '♥' : '♡' }}</span>
+    </button>
   </div>
 </template>
 
@@ -98,11 +98,12 @@ function toggleLike(e: Event) {
 .row-grid {
   display: grid;
   grid-template-columns:
-    minmax(0, 2fr)        /* 曲名（先頭にいいねボタン込み） */
+    minmax(0, 2fr)        /* 曲名 */
     minmax(0, 1.3fr)      /* アーティスト */
     4.5rem                /* 言語 */
     5.5rem                /* SC */
-    minmax(0, 2fr);       /* タグ */
+    minmax(0, 2fr)        /* タグ */
+    2rem;                 /* いいね（右端） */
   column-gap: 0.75rem;
   align-items: center;
 }

@@ -33,6 +33,7 @@ const { t } = useI18n()
       <span>{{ t('list.language') }}</span>
       <span>SC</span>
       <span>{{ t('list.tags') }}</span>
+      <span class="justify-self-end" aria-hidden="true">♡</span>
     </div>
 
     <SongRow
@@ -53,7 +54,8 @@ const { t } = useI18n()
     minmax(0, 1.3fr)
     4.5rem
     5.5rem
-    minmax(0, 2fr);
+    minmax(0, 2fr)
+    2rem;
   column-gap: 0.75rem;
   align-items: center;
 }
