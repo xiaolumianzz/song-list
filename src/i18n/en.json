@@ -47,7 +47,8 @@
     "artist": "Artist",
     "language": "Lang",
     "tags": "Tags",
-    "like": "Like"
+    "like": "Like",
+    "sc": "Tip"
   },
   "gate": {
     "title": "Admin",

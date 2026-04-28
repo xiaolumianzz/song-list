@@ -47,7 +47,8 @@
     "artist": "歌手",
     "language": "语言",
     "tags": "标签",
-    "like": "喜欢"
+    "like": "喜欢",
+    "sc": "付费"
   },
   "gate": {
     "title": "管理面板",

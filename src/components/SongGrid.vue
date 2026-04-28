@@ -33,7 +33,7 @@ const { t } = useI18n()
       <span class="truncate">{{ t('list.title') }}</span>
       <span class="truncate">{{ t('list.artist') }}</span>
       <span class="pl-2">{{ t('list.language') }}</span>
-      <span class="pl-2">SC</span>
+      <span class="pl-2">{{ t('list.sc') }}</span>
       <span class="truncate pl-2">{{ t('list.tags') }}</span>
       <span class="justify-self-end">{{ t('list.like') }}</span>
     </div>

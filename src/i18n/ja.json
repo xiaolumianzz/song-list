@@ -47,7 +47,8 @@
     "artist": "アーティスト",
     "language": "言語",
     "tags": "タグ",
-    "like": "いいね"
+    "like": "いいね",
+    "sc": "応援"
   },
   "gate": {
     "title": "管理画面",
