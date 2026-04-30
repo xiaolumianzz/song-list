@@ -11,16 +11,12 @@ const props = defineProps<{
 const { t } = useI18n()
 const idx = ref(0)
 const iframeFailed = ref(false)
-// クリック再生：ユーザーが再生ボタンを押した動画の URL のセット
-// （iframe を即時ロードするとモーダルを開いた瞬間に重くなるため遅延ロード）
-const playedUrls = ref<Set<string>>(new Set())
 
 watch(
   () => props.videos,
   (next) => {
     if (idx.value >= next.length) idx.value = 0
     iframeFailed.value = false
-    playedUrls.value = new Set()
   },
 )
 
@@ -31,10 +27,7 @@ watch(idx, () => {
 const validVideos = computed(() => props.videos.filter((v) => v.url && v.url.trim()))
 const current = computed(() => validVideos.value[idx.value])
 const parsed = computed(() => (current.value ? parseVideoEmbed(current.value.url) : null))
-const isPlayed = computed(() => !!current.value && playedUrls.value.has(current.value.url))
-const showIframe = computed(
-  () => !!parsed.value?.embedUrl && !iframeFailed.value && isPlayed.value,
-)
+const showIframe = computed(() => !!parsed.value?.embedUrl && !iframeFailed.value)
 const aspectClass = computed(() =>
   parsed.value?.aspect === '9:16' ? 'aspect-[9/16] max-h-[60vh]' : 'aspect-video',
 )
@@ -47,11 +40,6 @@ function prev() {
 }
 function next() {
   idx.value = (idx.value + 1) % validVideos.value.length
-}
-function play() {
-  if (current.value) {
-    playedUrls.value = new Set([...playedUrls.value, current.value.url])
-  }
 }
 </script>
 
@@ -80,18 +68,7 @@ function play() {
           sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           @error="iframeFailed = true"
         />
-        <!-- 未再生：プラットフォーム表示 + ▶ ボタン（iframe をまだロードしない） -->
-        <button
-          v-else-if="parsed.embedUrl && !iframeFailed"
-          type="button"
-          class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-blush/40 to-cotton/40 text-center text-sm text-ink/80 transition hover:from-blush/55 hover:to-cotton/55"
-          @click="play"
-        >
-          <span class="grid h-14 w-14 place-items-center rounded-full bg-white/80 text-2xl shadow-pop">▶</span>
-          <span class="font-display text-base">{{ platformLabel(parsed.platform) }}</span>
-          <span v-if="current!.label" class="text-xs text-ink/70">{{ current!.label }}</span>
-        </button>
-        <!-- 埋め込み非対応 / iframe 失敗：外部リンクのみ -->
+        <!-- 埋め込み非対応 / iframe 失敗：外部リンクにフォールバック -->
         <div
           v-else
           class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-blush/40 to-cotton/40 p-4 text-center text-sm text-ink/80"
