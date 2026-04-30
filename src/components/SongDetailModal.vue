@@ -7,6 +7,7 @@ import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
+import VideoPlayer from './VideoPlayer.vue'
 
 const props = defineProps<{ song: Song | null }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
@@ -59,11 +60,12 @@ onBeforeUnmount(() => {
     <Transition name="fade">
       <div
         v-if="song"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 px-4 backdrop-blur-sm"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 px-4 py-6 backdrop-blur-sm"
         @click.self="emit('close')"
       >
         <div
-          class="relative w-full max-w-md animate-popin rounded-3xl bg-milk p-6 shadow-pop"
+          class="relative max-h-full w-full max-w-lg animate-popin overflow-y-auto rounded-3xl bg-milk p-6 shadow-pop"
+          :class="(song.videos && song.videos.length) ? 'sm:max-w-xl' : ''"
         >
           <button
             class="absolute right-3 top-3 rounded-full bg-blush px-2.5 py-1 text-sm text-ink hover:bg-sakura hover:text-white"
@@ -136,6 +138,25 @@ onBeforeUnmount(() => {
             </button>
           </div>
           <p class="mt-1 text-base text-ink/80">{{ song.artist }}</p>
+
+          <!-- 動画埋め込み（複数あれば左右矢印で切替） -->
+          <div v-if="song.videos && song.videos.length" class="mt-4">
+            <VideoPlayer :videos="song.videos" />
+          </div>
+
+          <!-- ギターコード参照ボタン（chordUrl が設定されている曲のみ） -->
+          <div v-if="song.chordUrl" class="mt-4">
+            <a
+              :href="song.chordUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 rounded-full bg-sakura px-3 py-1.5 text-sm text-white shadow-soft hover:bg-rose"
+            >
+              <span aria-hidden="true">🎸</span>
+              <span>{{ t('detail.chord') }}</span>
+              <span class="text-xs opacity-80" aria-hidden="true">↗</span>
+            </a>
+          </div>
 
           <div v-if="song.tags.length" class="mt-4 flex flex-wrap gap-1.5">
             <span

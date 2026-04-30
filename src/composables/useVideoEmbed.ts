@@ -1,0 +1,107 @@
+export type VideoPlatform = 'youtube' | 'bilibili' | 'tiktok' | 'douyin' | 'other'
+export type VideoAspect = '16:9' | '9:16'
+
+export interface ParsedVideo {
+  platform: VideoPlatform
+  aspect: VideoAspect
+  /** iframe で使える URL。other や短縮 URL では undefined になることがある（外部リンクフォールバック）。 */
+  embedUrl?: string
+  originalUrl: string
+}
+
+const RE_YT_WATCH = /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/i
+const RE_BILI_BV = /bilibili\.com\/video\/(BV[\w]+)/i
+const RE_BILI_AV = /bilibili\.com\/video\/av(\d+)/i
+const RE_TIKTOK = /tiktok\.com\/@[^/]+\/video\/(\d+)/i
+const RE_DOUYIN = /douyin\.com\/video\/(\d+)/i
+
+const SHORT_LINK_HOSTS = ['b23.tv', 'vm.tiktok.com', 'v.douyin.com', 't.tiktok.com']
+
+function isShortLink(url: string): boolean {
+  try {
+    const u = new URL(url)
+    return SHORT_LINK_HOSTS.some((h) => u.hostname.endsWith(h))
+  } catch {
+    return false
+  }
+}
+
+export function parseVideoEmbed(url: string): ParsedVideo {
+  const trimmed = (url ?? '').trim()
+  if (!trimmed) {
+    return { platform: 'other', aspect: '16:9', originalUrl: trimmed }
+  }
+
+  // 短縮URLはリダイレクト先を取得できないので外部リンク扱い
+  if (isShortLink(trimmed)) {
+    return { platform: 'other', aspect: '16:9', originalUrl: trimmed }
+  }
+
+  const yt = trimmed.match(RE_YT_WATCH)
+  if (yt) {
+    return {
+      platform: 'youtube',
+      aspect: '16:9',
+      embedUrl: `https://www.youtube-nocookie.com/embed/${yt[1]}`,
+      originalUrl: trimmed,
+    }
+  }
+
+  const bv = trimmed.match(RE_BILI_BV)
+  if (bv) {
+    return {
+      platform: 'bilibili',
+      aspect: '16:9',
+      embedUrl: `https://player.bilibili.com/player.html?bvid=${bv[1]}&high_quality=1`,
+      originalUrl: trimmed,
+    }
+  }
+  const av = trimmed.match(RE_BILI_AV)
+  if (av) {
+    return {
+      platform: 'bilibili',
+      aspect: '16:9',
+      embedUrl: `https://player.bilibili.com/player.html?aid=${av[1]}&high_quality=1`,
+      originalUrl: trimmed,
+    }
+  }
+
+  const tt = trimmed.match(RE_TIKTOK)
+  if (tt) {
+    return {
+      platform: 'tiktok',
+      aspect: '9:16',
+      embedUrl: `https://www.tiktok.com/embed/v2/${tt[1]}`,
+      originalUrl: trimmed,
+    }
+  }
+
+  const dy = trimmed.match(RE_DOUYIN)
+  if (dy) {
+    // Douyin 公式の埋め込み API は不安定なので一旦 embed URL は付けず外部リンク扱いにする。
+    // （iframe 表示を試みても CSP/X-Frame-Options で弾かれるケースが多い）
+    return {
+      platform: 'douyin',
+      aspect: '9:16',
+      originalUrl: trimmed,
+    }
+  }
+
+  return { platform: 'other', aspect: '16:9', originalUrl: trimmed }
+}
+
+/** プラットフォーム名の表示用ラベル。 */
+export function platformLabel(p: VideoPlatform): string {
+  switch (p) {
+    case 'youtube':
+      return 'YouTube'
+    case 'bilibili':
+      return 'BiliBili'
+    case 'tiktok':
+      return 'TikTok'
+    case 'douyin':
+      return '抖音'
+    default:
+      return ''
+  }
+}

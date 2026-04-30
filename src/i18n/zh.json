@@ -77,7 +77,12 @@
     "remark": "备注",
     "copy": "复制",
     "copyTitle": "复制歌名",
-    "copied": "已复制！"
+    "copied": "已复制！",
+    "chord": "查看吉他和弦",
+    "openOriginal": "打开原视频",
+    "embedUnavailable": "此处无法播放，请前往原页面观看",
+    "prevVideo": "上一个",
+    "nextVideo": "下一个"
   },
   "like": {
     "add": "喜欢",
@@ -136,7 +141,17 @@
       "addedAt": "登记日",
       "sc": "SC（Super Chat 金额）",
       "scPh": "例：50、100、500（留空则不设置）",
-      "scHelp": "根据金额自动分配等级颜色（50、100、150、300、500 为分界）"
+      "scHelp": "根据金额自动分配等级颜色（50、100、150、300、500 为分界）",
+      "titleReading": "歌名（读法）",
+      "artistReading": "歌手（读法）",
+      "readingPh": "假名读法（可选）",
+      "videos": "翻唱视频链接",
+      "videoUrlPh": "YouTube / BiliBili / TikTok / 抖音 链接",
+      "videoLabelPh": "标签（可选）如：卡拉OK版",
+      "addVideo": "添加视频",
+      "removeVideo": "删除",
+      "chordUrl": "吉他和弦链接",
+      "chordUrlPh": "和弦谱网站 URL（可选）"
     },
     "status": {
       "savedLocal": "已保存到本地",

@@ -145,7 +145,21 @@ function emptySong(): Song {
     remark: '',
     addedAt: new Date().toISOString().slice(0, 10),
     sc: 0,
+    titleReading: '',
+    artistReading: '',
+    videos: [],
+    chordUrl: '',
   }
+}
+
+function addVideoRow() {
+  if (!draft.value.videos) draft.value.videos = []
+  draft.value.videos.push({ url: '', label: '' })
+}
+
+function removeVideoRow(i: number) {
+  if (!draft.value.videos) return
+  draft.value.videos.splice(i, 1)
 }
 
 const tagsInput = ref('')
@@ -171,6 +185,19 @@ function commitDraft() {
   // sc を数値化 + 0 以下や NaN は undefined に正規化（= バッジ非表示）
   const scNum = Number(draft.value.sc)
   draft.value.sc = Number.isFinite(scNum) && scNum > 0 ? scNum : undefined
+  // 読み仮名・コードURL は空なら undefined（出力 JSON に空文字を残さない）
+  draft.value.titleReading = draft.value.titleReading?.trim() || undefined
+  draft.value.artistReading = draft.value.artistReading?.trim() || undefined
+  draft.value.chordUrl = draft.value.chordUrl?.trim() || undefined
+  // 動画リンクは url 空欄行を除外、全部空なら undefined
+  if (draft.value.videos) {
+    const cleaned = draft.value.videos
+      .map((v) => ({ url: v.url.trim(), label: v.label?.trim() || undefined }))
+      .filter((v) => v.url)
+    draft.value.videos = cleaned.length ? cleaned : undefined
+  }
+  // 編集タイムスタンプを更新
+  draft.value.updatedAt = new Date().toISOString()
   if (!draft.value.id) draft.value.id = crypto.randomUUID()
   songsStore.upsertSong({ ...draft.value })
   songsStore.saveLocal()
@@ -181,7 +208,15 @@ function commitDraft() {
 }
 
 function edit(song: Song) {
-  draft.value = { ...song, tags: [...song.tags], conditions: [...song.conditions] }
+  draft.value = {
+    ...song,
+    tags: [...song.tags],
+    conditions: [...song.conditions],
+    titleReading: song.titleReading ?? '',
+    artistReading: song.artistReading ?? '',
+    chordUrl: song.chordUrl ?? '',
+    videos: song.videos ? song.videos.map((v) => ({ ...v })) : [],
+  }
   tagsInput.value = song.tags.join(', ')
   editingId.value = song.id
 }
@@ -577,6 +612,22 @@ function snsLabel(k: SnsKey): string {
           <input v-model="draft.artist" class="rounded-xl border border-blush bg-milk px-3 py-2" />
         </label>
         <label class="flex flex-col gap-1 text-sm">
+          <span class="text-ink/70">{{ t('admin.field.titleReading') }}</span>
+          <input
+            v-model="draft.titleReading"
+            class="rounded-xl border border-blush bg-milk px-3 py-2"
+            :placeholder="t('admin.field.readingPh')"
+          />
+        </label>
+        <label class="flex flex-col gap-1 text-sm">
+          <span class="text-ink/70">{{ t('admin.field.artistReading') }}</span>
+          <input
+            v-model="draft.artistReading"
+            class="rounded-xl border border-blush bg-milk px-3 py-2"
+            :placeholder="t('admin.field.readingPh')"
+          />
+        </label>
+        <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.language') }}</span>
           <select v-model="draft.language" class="rounded-xl border border-blush bg-milk px-3 py-2">
             <option v-for="l in LANGUAGE_ORDER" :key="l" :value="l">{{ t('language.' + l) }}</option>
@@ -620,6 +671,52 @@ function snsLabel(k: SnsKey): string {
         <label class="flex flex-col gap-1 text-sm sm:col-span-2">
           <span class="text-ink/70">{{ t('admin.field.remark') }}</span>
           <textarea v-model="draft.remark" rows="3" class="rounded-xl border border-blush bg-milk px-3 py-2"></textarea>
+        </label>
+
+        <!-- 動画リンク（任意・複数登録可） -->
+        <div class="flex flex-col gap-2 text-sm sm:col-span-2">
+          <span class="text-ink/70">{{ t('admin.field.videos') }}</span>
+          <div
+            v-for="(v, i) in (draft.videos ?? [])"
+            :key="i"
+            class="flex flex-wrap items-center gap-2"
+          >
+            <input
+              v-model="v.url"
+              class="min-w-0 flex-1 rounded-xl border border-blush bg-milk px-3 py-2 text-sm"
+              :placeholder="t('admin.field.videoUrlPh')"
+            />
+            <input
+              v-model="v.label"
+              class="w-40 shrink-0 rounded-xl border border-blush bg-milk px-3 py-2 text-sm"
+              :placeholder="t('admin.field.videoLabelPh')"
+            />
+            <button
+              type="button"
+              class="rounded-full border border-rose/60 px-2 py-1 text-xs text-rose hover:bg-rose hover:text-white"
+              :aria-label="t('admin.field.removeVideo')"
+              @click="removeVideoRow(i)"
+            >
+              −
+            </button>
+          </div>
+          <button
+            type="button"
+            class="self-start rounded-full bg-cotton px-3 py-1 text-xs text-ink hover:bg-blush"
+            @click="addVideoRow"
+          >
+            + {{ t('admin.field.addVideo') }}
+          </button>
+        </div>
+
+        <!-- ギターコードURL -->
+        <label class="flex flex-col gap-1 text-sm sm:col-span-2">
+          <span class="text-ink/70">{{ t('admin.field.chordUrl') }}</span>
+          <input
+            v-model="draft.chordUrl"
+            class="rounded-xl border border-blush bg-milk px-3 py-2"
+            :placeholder="t('admin.field.chordUrlPh')"
+          />
         </label>
       </div>
       <div class="mt-4 flex gap-2">

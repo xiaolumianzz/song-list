@@ -77,7 +77,12 @@
     "remark": "Note",
     "copy": "Copy",
     "copyTitle": "Copy title",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "chord": "View chords",
+    "openOriginal": "Open original",
+    "embedUnavailable": "Embed not available — open the original page",
+    "prevVideo": "Previous video",
+    "nextVideo": "Next video"
   },
   "like": {
     "add": "Like",
@@ -136,7 +141,17 @@
       "addedAt": "Added on",
       "sc": "SC (Super Chat amount)",
       "scPh": "e.g. 50, 100, 500 (leave empty for none)",
-      "scHelp": "Tier color auto-assigned by amount (tiers at 50, 100, 150, 300, 500)"
+      "scHelp": "Tier color auto-assigned by amount (tiers at 50, 100, 150, 300, 500)",
+      "titleReading": "Title (reading)",
+      "artistReading": "Artist (reading)",
+      "readingPh": "Hiragana (optional)",
+      "videos": "Cover video links",
+      "videoUrlPh": "YouTube / BiliBili / TikTok / Douyin URL",
+      "videoLabelPh": "Label (optional) e.g. Karaoke ver.",
+      "addVideo": "Add video",
+      "removeVideo": "Remove",
+      "chordUrl": "Guitar chord URL",
+      "chordUrlPh": "Chord chart site URL (optional)"
     },
     "status": {
       "savedLocal": "Saved locally",

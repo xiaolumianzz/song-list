@@ -77,7 +77,12 @@
     "remark": "メモ",
     "copy": "コピー",
     "copyTitle": "曲名をコピー",
-    "copied": "コピーしたよ！"
+    "copied": "コピーしたよ！",
+    "chord": "コード進行を見る",
+    "openOriginal": "元の動画を開く",
+    "embedUnavailable": "ここでの再生はできません。元の動画ページで見てね",
+    "prevVideo": "前の動画",
+    "nextVideo": "次の動画"
   },
   "like": {
     "add": "いいね",
@@ -136,7 +141,17 @@
       "addedAt": "登録日",
       "sc": "SC（スーパーチャット金額）",
       "scPh": "例: 50, 100, 500（空欄でSCなし）",
-      "scHelp": "金額に応じて自動でティア色が付きます（50・100・150・300・500 が境界）"
+      "scHelp": "金額に応じて自動でティア色が付きます（50・100・150・300・500 が境界）",
+      "titleReading": "曲名（よみ）",
+      "artistReading": "アーティスト（よみ）",
+      "readingPh": "ひらがなで（任意）",
+      "videos": "歌ってみた動画リンク",
+      "videoUrlPh": "YouTube / BiliBili / TikTok / 抖音 の URL",
+      "videoLabelPh": "ラベル（任意）例: カラオケver.",
+      "addVideo": "動画を追加",
+      "removeVideo": "削除",
+      "chordUrl": "ギターコードURL",
+      "chordUrlPh": "コード譜サイトの URL（任意）"
     },
     "status": {
       "savedLocal": "ローカルに保存しました",
