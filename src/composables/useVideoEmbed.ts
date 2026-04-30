@@ -15,15 +15,28 @@ const RE_BILI_AV = /bilibili\.com\/video\/av(\d+)/i
 const RE_TIKTOK = /tiktok\.com\/@[^/]+\/video\/(\d+)/i
 const RE_DOUYIN = /douyin\.com\/video\/(\d+)/i
 
-const SHORT_LINK_HOSTS = ['b23.tv', 'vm.tiktok.com', 'v.douyin.com', 't.tiktok.com']
+/**
+ * 短縮 URL のホスト → プラットフォーム判定。
+ * 短縮 URL はリダイレクト先（実 video ID）をクライアントから取れないので
+ * iframe embed は不可。プラットフォームだけ識別して外部リンクボタンに繋ぐ。
+ */
+const SHORT_LINK_PLATFORM: Record<string, VideoPlatform> = {
+  'b23.tv': 'bilibili',
+  'vm.tiktok.com': 'tiktok',
+  't.tiktok.com': 'tiktok',
+  'v.douyin.com': 'douyin',
+}
 
-function isShortLink(url: string): boolean {
+function shortLinkPlatform(url: string): VideoPlatform | null {
   try {
     const u = new URL(url)
-    return SHORT_LINK_HOSTS.some((h) => u.hostname.endsWith(h))
+    for (const host in SHORT_LINK_PLATFORM) {
+      if (u.hostname.endsWith(host)) return SHORT_LINK_PLATFORM[host]
+    }
   } catch {
-    return false
+    // ignore
   }
+  return null
 }
 
 export function parseVideoEmbed(url: string): ParsedVideo {
@@ -32,9 +45,12 @@ export function parseVideoEmbed(url: string): ParsedVideo {
     return { platform: 'other', aspect: '16:9', originalUrl: trimmed }
   }
 
-  // 短縮URLはリダイレクト先を取得できないので外部リンク扱い
-  if (isShortLink(trimmed)) {
-    return { platform: 'other', aspect: '16:9', originalUrl: trimmed }
+  // 短縮URLはリダイレクト先を取得できないので embed 不可だが、プラットフォームは識別する
+  const shortPlatform = shortLinkPlatform(trimmed)
+  if (shortPlatform) {
+    const aspect: VideoAspect =
+      shortPlatform === 'tiktok' || shortPlatform === 'douyin' ? '9:16' : '16:9'
+    return { platform: shortPlatform, aspect, originalUrl: trimmed }
   }
 
   const yt = trimmed.match(RE_YT_WATCH)
