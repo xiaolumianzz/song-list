@@ -52,7 +52,8 @@ export function parseVideoEmbed(url: string): ParsedVideo {
     return {
       platform: 'bilibili',
       aspect: '16:9',
-      embedUrl: `https://player.bilibili.com/player.html?bvid=${bv[1]}&high_quality=1`,
+      // autoplay=0 でモーダルを開いた瞬間の自動再生を抑止
+      embedUrl: `https://player.bilibili.com/player.html?bvid=${bv[1]}&high_quality=1&autoplay=0`,
       originalUrl: trimmed,
     }
   }
@@ -61,7 +62,7 @@ export function parseVideoEmbed(url: string): ParsedVideo {
     return {
       platform: 'bilibili',
       aspect: '16:9',
-      embedUrl: `https://player.bilibili.com/player.html?aid=${av[1]}&high_quality=1`,
+      embedUrl: `https://player.bilibili.com/player.html?aid=${av[1]}&high_quality=1&autoplay=0`,
       originalUrl: trimmed,
     }
   }
