@@ -1,9 +1,40 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-04-30T13:55:12.238Z"
+    "updatedAt": "2026-04-30T14:47:47.666Z"
   },
   "songs": [
+    {
+      "id": "2f35662a-482f-4147-b20d-3c05cc5e2760",
+      "title": "星座になれたら",
+      "artist": "結束バンド",
+      "language": "ja",
+      "tags": [
+        "J-POP",
+        "ラップ",
+        "アニソン"
+      ],
+      "conditions": [
+        "members-only"
+      ],
+      "remark": "+4key",
+      "addedAt": "2026-04-30",
+      "titleReading": "せいざになれたら",
+      "artistReading": "けっそくばんど",
+      "videos": [
+        {
+          "url": "https://youtu.be/Rkti7UFJ_Ks?si=LOUA_2sUSinv5BB5"
+        },
+        {
+          "url": "https://www.bilibili.com/video/BV1CL2WBpEWx/?spm_id_from=333.1387.upload.video_card.click"
+        },
+        {
+          "url": "https://v.douyin.com/TEcglypMkbQ/"
+        }
+      ],
+      "chordUrl": "https://www.ufret.jp/song.php?data=130534",
+      "updatedAt": "2026-04-30T14:24:08.807Z"
+    },
     {
       "id": "ab122862-5f0e-48a2-be14-15366533ccaf",
       "title": "花に亡霊",
@@ -56,7 +87,7 @@
       "language": "ja",
       "tags": [
         "J-POP",
-        "アップテンポ"
+        "ラップ"
       ],
       "conditions": [
         "practice-needed"
@@ -71,7 +102,7 @@
       "artist": "高橋洋子",
       "language": "ja",
       "tags": [
-        "アニメ"
+        "アニソン"
       ],
       "conditions": [],
       "remark": "",
@@ -126,7 +157,7 @@
       "artist": "買辣椒也用券",
       "language": "zh",
       "tags": [
-        "华语"
+        "中国曲"
       ],
       "conditions": [],
       "remark": "",
@@ -138,7 +169,7 @@
       "artist": "周杰倫 (Jay Chou)",
       "language": "zh",
       "tags": [
-        "华语",
+        "中国曲",
         "バラード"
       ],
       "conditions": [],
@@ -163,8 +194,8 @@
       "artist": "LiSA",
       "language": "ja",
       "tags": [
-        "アニメ",
-        "アップテンポ"
+        "アニソン",
+        "ラップ"
       ],
       "conditions": [
         "practice-needed"
@@ -176,38 +207,43 @@
   "tagDict": {
     "J-POP": {
       "ja": "J-POP",
-      "en": "",
-      "zh": ""
+      "en": "J-POP",
+      "zh": "日语歌"
     },
     "バラード": {
       "ja": "バラード",
-      "en": "",
-      "zh": ""
-    },
-    "アップテンポ": {
-      "ja": "アップテンポ",
-      "en": "",
-      "zh": ""
-    },
-    "アニメ": {
-      "ja": "アニメ",
-      "en": "",
-      "zh": ""
+      "en": "Ballad",
+      "zh": "抒情歌"
     },
     "ディズニー": {
       "ja": "ディズニー",
-      "en": "",
-      "zh": ""
+      "en": "Disney",
+      "zh": "迪士尼"
     },
     "洋楽": {
       "ja": "洋楽",
       "en": "",
-      "zh": ""
+      "zh": "英文歌"
     },
-    "华语": {
-      "ja": "华语",
-      "en": "",
-      "zh": ""
+    "中国曲": {
+      "ja": "中国曲",
+      "en": "C-POP",
+      "zh": "中文歌"
+    },
+    "アニソン": {
+      "ja": "アニソン",
+      "en": "anime",
+      "zh": "动漫曲"
+    },
+    "ラップ": {
+      "ja": "ラップ",
+      "en": "RAP",
+      "zh": "RAP"
+    },
+    "ボカロ": {
+      "ja": "ボカロ",
+      "en": "VOCALOID",
+      "zh": "VOCALOID"
     }
   }
 }
