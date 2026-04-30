@@ -1,9 +1,38 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-04-28T12:13:34.929Z"
+    "updatedAt": "2026-04-30T13:55:12.238Z"
   },
   "songs": [
+    {
+      "id": "ab122862-5f0e-48a2-be14-15366533ccaf",
+      "title": "花に亡霊",
+      "artist": "ヨルシカ",
+      "language": "ja",
+      "tags": [
+        "J-POP",
+        "バラード"
+      ],
+      "conditions": [
+        "practice-needed",
+        "with-guitar"
+      ],
+      "remark": "映画「泣きたい私は猫をかぶる」の主題歌",
+      "addedAt": "2026-04-30",
+      "sc": 500,
+      "titleReading": "はなにぼうれい",
+      "artistReading": "よるしか",
+      "videos": [
+        {
+          "url": "https://youtu.be/ZVHw5BylTVk?si=EBc9rKDu7U7GKlA9"
+        },
+        {
+          "url": "https://www.bilibili.com/video/BV1J54y1z7hT/?spm_id_from=333.1387.upload.video_card.click"
+        }
+      ],
+      "chordUrl": "https://www.ufret.jp/song.php?data=61044",
+      "updatedAt": "2026-04-30T13:54:48.831Z"
+    },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000001",
       "title": "ドライフラワー",
@@ -16,7 +45,9 @@
       "conditions": [],
       "remark": "しっとり歌いたいときに。",
       "addedAt": "2026-01-10",
-      "sc": 50
+      "sc": 50,
+      "chordUrl": "https://www.ufret.jp/song.php?data=72495",
+      "updatedAt": "2026-04-30T13:42:42.122Z"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000002",
@@ -141,5 +172,42 @@
       "remark": "鬼滅の刃OP。",
       "addedAt": "2026-03-12"
     }
-  ]
+  ],
+  "tagDict": {
+    "J-POP": {
+      "ja": "J-POP",
+      "en": "",
+      "zh": ""
+    },
+    "バラード": {
+      "ja": "バラード",
+      "en": "",
+      "zh": ""
+    },
+    "アップテンポ": {
+      "ja": "アップテンポ",
+      "en": "",
+      "zh": ""
+    },
+    "アニメ": {
+      "ja": "アニメ",
+      "en": "",
+      "zh": ""
+    },
+    "ディズニー": {
+      "ja": "ディズニー",
+      "en": "",
+      "zh": ""
+    },
+    "洋楽": {
+      "ja": "洋楽",
+      "en": "",
+      "zh": ""
+    },
+    "华语": {
+      "ja": "华语",
+      "en": "",
+      "zh": ""
+    }
+  }
 }
