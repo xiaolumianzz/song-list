@@ -14,76 +14,90 @@ const platforms = computed(() => videoPlatforms(props.videos))
   <!-- 動画が無くても空 span を残してグリッドの列ズレを防ぐ -->
   <span class="flex items-center gap-1">
     <!-- YouTube -->
-    <svg
+    <span
       v-if="platforms.includes('youtube')"
-      viewBox="0 0 24 16"
-      class="platform-mark"
+      class="video-mark"
       :title="platformLabel('youtube')"
       :aria-label="platformLabel('youtube')"
     >
-      <title>{{ platformLabel('youtube') }}</title>
-      <rect width="24" height="16" rx="4" fill="rgba(150,145,142,0.42)" />
-      <path d="M10 4.5 L16 8 L10 11.5 Z" fill="rgba(255,255,255,0.85)" />
-    </svg>
+      <svg viewBox="0 0 24 24" class="mark-icon">
+        <path
+          fill="currentColor"
+          d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"
+        />
+      </svg>
+    </span>
 
     <!-- BiliBili -->
-    <svg
+    <span
       v-if="platforms.includes('bilibili')"
-      viewBox="0 0 24 18"
-      class="platform-mark"
+      class="video-mark"
       :title="platformLabel('bilibili')"
       :aria-label="platformLabel('bilibili')"
     >
-      <title>{{ platformLabel('bilibili') }}</title>
-      <line x1="6" y1="3" x2="9" y2="6.5" stroke="rgba(150,145,142,0.42)" stroke-width="2" stroke-linecap="round" />
-      <line x1="18" y1="3" x2="15" y2="6.5" stroke="rgba(150,145,142,0.42)" stroke-width="2" stroke-linecap="round" />
-      <rect x="2" y="6" width="20" height="11" rx="3" fill="rgba(150,145,142,0.42)" />
-      <ellipse cx="8.5" cy="11.5" rx="1.4" ry="1.8" fill="rgba(255,255,255,0.85)" />
-      <ellipse cx="15.5" cy="11.5" rx="1.4" ry="1.8" fill="rgba(255,255,255,0.85)" />
-    </svg>
+      <svg viewBox="0 0 24 24" class="mark-icon">
+        <path
+          fill="currentColor"
+          d="M17.8 3.3 16.4 4.7 14.1 2.4h-4.2L7.6 4.7 6.2 3.3 4.8 4.7 6.2 6.1H4a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3v-9a3 3 0 0 0-3-3h-2.2l1.4-1.4-1.4-1.4ZM4 8.1h16c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-9c0-.55.45-1 1-1Z"
+        />
+        <circle cx="8" cy="13" r="1.5" fill="currentColor" />
+        <circle cx="16" cy="13" r="1.5" fill="currentColor" />
+      </svg>
+    </span>
 
     <!-- TikTok -->
-    <svg
+    <span
       v-if="platforms.includes('tiktok')"
-      viewBox="0 0 16 16"
-      class="platform-mark"
+      class="video-mark"
       :title="platformLabel('tiktok')"
       :aria-label="platformLabel('tiktok')"
     >
-      <title>{{ platformLabel('tiktok') }}</title>
-      <rect width="16" height="16" rx="3" fill="rgba(150,145,142,0.42)" />
-      <path
-        d="M10.2 2.6 v6.7 a2.7 2.7 0 1 1 -2.7 -2.7 v-1.4 a4.1 4.1 0 0 0 4.1 4.1"
-        fill="rgba(255,255,255,0.85)"
-      />
-    </svg>
+      <svg viewBox="0 0 24 24" class="mark-icon">
+        <path
+          fill="currentColor"
+          d="M19.3 7.2a5.5 5.5 0 0 1-3.6-1.3 5.6 5.6 0 0 1-1.8-2.7V3h-3v12.4a2.8 2.8 0 1 1-2-2.7V9.5a5.8 5.8 0 0 0-.9-.1 5.9 5.9 0 1 0 5.9 5.9V9.6a8.5 8.5 0 0 0 5.4 1.9V8.3c0-.4 0-.8-.1-1.1Z"
+        />
+      </svg>
+    </span>
 
-    <!-- Douyin（抖音）：TikTok と区別するため抖音は note の頭に小さなドット付き -->
-    <svg
+    <!-- Douyin（抖音）：TikTok と区別するため右上に小ドット -->
+    <span
       v-if="platforms.includes('douyin')"
-      viewBox="0 0 16 16"
-      class="platform-mark"
+      class="video-mark"
       :title="platformLabel('douyin')"
       :aria-label="platformLabel('douyin')"
     >
-      <title>{{ platformLabel('douyin') }}</title>
-      <rect width="16" height="16" rx="3" fill="rgba(150,145,142,0.42)" />
-      <path
-        d="M10.2 2.6 v6.7 a2.7 2.7 0 1 1 -2.7 -2.7 v-1.4 a4.1 4.1 0 0 0 4.1 4.1"
-        fill="rgba(255,255,255,0.85)"
-      />
-      <circle cx="13.2" cy="3.4" r="0.9" fill="rgba(255,255,255,0.85)" />
-    </svg>
+      <svg viewBox="0 0 24 24" class="mark-icon">
+        <path
+          fill="currentColor"
+          d="M19.3 7.2a5.5 5.5 0 0 1-3.6-1.3 5.6 5.6 0 0 1-1.8-2.7V3h-3v12.4a2.8 2.8 0 1 1-2-2.7V9.5a5.8 5.8 0 0 0-.9-.1 5.9 5.9 0 1 0 5.9 5.9V9.6a8.5 8.5 0 0 0 5.4 1.9V8.3c0-.4 0-.8-.1-1.1Z"
+        />
+        <circle cx="20" cy="5" r="1.4" fill="currentColor" />
+      </svg>
+    </span>
   </span>
 </template>
 
 <style scoped>
-.platform-mark {
-  height: 1.05rem;
-  width: auto;
+/* ProfileCard の SNS ボタンと同じガラス調デザイン。色は薄灰色のまま。 */
+.video-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  color: rgba(150, 145, 142, 0.55);
   flex-shrink: 0;
-  border-radius: 0.25rem;
-  /* 透明度を上げているのでドロップシャドウは控えめに */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.04));
+}
+.mark-icon {
+  width: 16px;
+  height: 16px;
 }
 </style>
