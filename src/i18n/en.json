@@ -71,6 +71,10 @@
     "remove": "Unlike",
     "liked": "Liked"
   },
+  "badge": {
+    "new": "NEW",
+    "newTitle": "Added in the last {days} days"
+  },
   "admin": {
     "title": "Admin",
     "credentials": "GitHub settings",
@@ -98,7 +102,9 @@
       "displayName": "Display name",
       "tagline": "Tagline",
       "taglinePh": "e.g. Singer ♡",
-      "urlPh": "https://..."
+      "urlPh": "https://...",
+      "newBadgeDays": "NEW badge duration (days)",
+      "newBadgeDaysHelp": "Songs added within this many days show a 'NEW' badge (default 14, range 1–365)"
     },
     "field": {
       "owner": "GitHub username",

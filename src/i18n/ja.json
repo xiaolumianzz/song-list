@@ -71,6 +71,10 @@
     "remove": "いいねを外す",
     "liked": "いいね済"
   },
+  "badge": {
+    "new": "NEW",
+    "newTitle": "{days}日以内に追加された曲"
+  },
   "admin": {
     "title": "管理画面",
     "credentials": "GitHub 接続設定",
@@ -98,7 +102,9 @@
       "displayName": "表示名",
       "tagline": "ひとこと",
       "taglinePh": "例: 歌ってる人 ♡",
-      "urlPh": "https://..."
+      "urlPh": "https://...",
+      "newBadgeDays": "新着バッジ表示日数",
+      "newBadgeDaysHelp": "登録日からこの日数以内の曲に「NEW」バッジを表示します（デフォルト14日、1〜365）"
     },
     "field": {
       "owner": "GitHubユーザー名",

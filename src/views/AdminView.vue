@@ -7,7 +7,7 @@ import { useProfileStore } from '@/stores/profile'
 import { useAuthStore } from '@/stores/auth'
 import { useGithub } from '@/composables/useGithub'
 import { CONDITION_KEYS, LANGUAGE_ORDER, type Language, type Song } from '@/types/song'
-import { SNS_KEYS, type SnsKey } from '@/types/profile'
+import { NEW_BADGE_DEFAULT_DAYS, SNS_KEYS, type SnsKey } from '@/types/profile'
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import PasswordGate from '@/components/PasswordGate.vue'
 import ScBadge from '@/components/ScBadge.vue'
@@ -513,6 +513,18 @@ function snsLabel(k: SnsKey): string {
               class="rounded-xl border border-blush bg-milk px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sakura"
               :placeholder="t('admin.profile.urlPh')"
             />
+          </label>
+          <label class="flex flex-col gap-1 text-sm sm:col-span-2">
+            <span class="text-ink/70">{{ t('admin.profile.newBadgeDays') }}</span>
+            <input
+              v-model.number="profile.newBadgeDays"
+              type="number"
+              min="1"
+              max="365"
+              class="rounded-xl border border-blush bg-milk px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sakura"
+              :placeholder="String(NEW_BADGE_DEFAULT_DAYS)"
+            />
+            <span class="text-[10px] text-ink/50">{{ t('admin.profile.newBadgeDaysHelp') }}</span>
           </label>
         </div>
       </div>

@@ -2,6 +2,8 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LANGUAGE_ORDER } from '@/types/song'
+import { useSongsStore } from '@/stores/songs'
+import { tagDisplay } from '@/composables/useTagDict'
 
 interface TagStat {
   tag: string
@@ -35,7 +37,8 @@ const emit = defineEmits<{
   (e: 'reset'): void
 }>()
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const songsStore = useSongsStore()
 
 const orderedLangs = computed(() =>
   LANGUAGE_ORDER.filter((l) => props.languages.includes(l)),
@@ -93,7 +96,7 @@ function tagStyle(scale: number) {
         :style="{ ...tagStyle(t.scale), animationDelay: `${t.count * 0.3}s` }"
         @click="emit('toggle-tag', t.tag)"
       >
-        #{{ t.tag }}
+        #{{ tagDisplay(t.tag, locale, songsStore.tagDict) }}
       </button>
       <button
         v-if="selectedTags.length || language !== 'all'"

@@ -2,13 +2,17 @@
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLikesStore } from '@/stores/likes'
+import { useSongsStore } from '@/stores/songs'
+import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
+import NewBadge from './NewBadge.vue'
 
 const props = defineProps<{ song: Song | null }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const likes = useLikesStore()
+const songsStore = useSongsStore()
 const liked = computed(() => (props.song ? likes.isLiked(props.song.id) : false))
 
 function toggleLike() {
@@ -74,6 +78,7 @@ onBeforeUnmount(() => {
               {{ t('language.' + song.language) }}
             </span>
             <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="md" />
+            <NewBadge :added-at="song.addedAt" size="md" />
             <span class="text-[11px] text-ash">{{ song.addedAt }}</span>
           </div>
 
@@ -134,11 +139,11 @@ onBeforeUnmount(() => {
 
           <div v-if="song.tags.length" class="mt-4 flex flex-wrap gap-1.5">
             <span
-              v-for="t in song.tags"
-              :key="t"
+              v-for="tag in song.tags"
+              :key="tag"
               class="rounded-full bg-cotton px-3 py-0.5 text-xs text-ink"
             >
-              #{{ t }}
+              #{{ tagDisplay(tag, locale, songsStore.tagDict) }}
             </span>
           </div>
 

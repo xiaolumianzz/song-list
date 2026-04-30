@@ -71,6 +71,10 @@
     "remove": "取消喜欢",
     "liked": "已喜欢"
   },
+  "badge": {
+    "new": "NEW",
+    "newTitle": "{days} 天以内添加的歌曲"
+  },
   "admin": {
     "title": "管理面板",
     "credentials": "GitHub 连接设置",
@@ -98,7 +102,9 @@
       "displayName": "显示名",
       "tagline": "一句话",
       "taglinePh": "例：歌手 ♡",
-      "urlPh": "https://..."
+      "urlPh": "https://...",
+      "newBadgeDays": "新着徽章显示天数",
+      "newBadgeDaysHelp": "登记日起这么多天以内的歌曲会显示「NEW」徽章（默认 14 天，范围 1〜365）"
     },
     "field": {
       "owner": "GitHub 用户名",

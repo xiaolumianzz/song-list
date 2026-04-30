@@ -2,13 +2,17 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLikesStore } from '@/stores/likes'
+import { useSongsStore } from '@/stores/songs'
+import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
+import NewBadge from './NewBadge.vue'
 
 const props = defineProps<{ song: Song }>()
 const emit = defineEmits<{ (e: 'open', song: Song): void }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const likes = useLikesStore()
+const songsStore = useSongsStore()
 const liked = computed(() => likes.isLiked(props.song.id))
 
 function open() {
@@ -34,9 +38,12 @@ function toggleLike(e: Event) {
     @click="open"
     @keydown="onKeydown"
   >
-    <!-- 曲名 -->
-    <span class="min-w-0 truncate font-display text-base font-medium text-ink">
-      {{ song.title }}
+    <!-- 曲名 + 新着バッジ -->
+    <span class="flex min-w-0 items-center gap-1.5">
+      <NewBadge :added-at="song.addedAt" size="sm" />
+      <span class="min-w-0 truncate font-display text-base font-medium text-ink">
+        {{ song.title }}
+      </span>
     </span>
 
     <!-- アーティスト -->
@@ -64,7 +71,7 @@ function toggleLike(e: Event) {
         :key="tag"
         class="rounded-full bg-cotton px-2 py-0.5 text-[11px] text-ink/80"
       >
-        #{{ tag }}
+        #{{ tagDisplay(tag, locale, songsStore.tagDict) }}
       </span>
       <span v-if="song.tags.length > 3" class="text-[11px] text-ash">…</span>
       <span
