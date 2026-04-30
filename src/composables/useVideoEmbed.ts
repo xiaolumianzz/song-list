@@ -106,3 +106,24 @@ export function platformLabel(p: VideoPlatform): string {
       return ''
   }
 }
+
+/**
+ * 与えられた動画リンク群からユニークなプラットフォームを抽出する。
+ * 出現順を保持しつつ重複を排除。`other` は判別不能なので結果に含めない。
+ */
+import type { VideoLink } from '@/types/song'
+export function videoPlatforms(videos?: VideoLink[]): VideoPlatform[] {
+  if (!videos || !videos.length) return []
+  const seen = new Set<VideoPlatform>()
+  const out: VideoPlatform[] = []
+  for (const v of videos) {
+    if (!v?.url?.trim()) continue
+    const p = parseVideoEmbed(v.url).platform
+    if (p === 'other') continue
+    if (!seen.has(p)) {
+      seen.add(p)
+      out.push(p)
+    }
+  }
+  return out
+}

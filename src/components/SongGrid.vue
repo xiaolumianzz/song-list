@@ -34,6 +34,7 @@ const { t } = useI18n()
       <span class="pl-2">{{ t('list.language') }}</span>
       <span class="pl-2">{{ t('list.sc') }}</span>
       <span class="truncate pl-2">{{ t('list.tags') }}</span>
+      <span class="justify-self-end">{{ t('list.video') }}</span>
       <span class="justify-self-end">{{ t('list.like') }}</span>
     </div>
 
@@ -55,6 +56,7 @@ const { t } = useI18n()
     4.5rem
     9rem
     minmax(0, 2fr)
+    4.5rem
     3.5rem;
   column-gap: 0.75rem;
   align-items: center;

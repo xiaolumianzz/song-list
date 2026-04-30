@@ -61,7 +61,8 @@
     "language": "Lang",
     "tags": "Tags",
     "like": "Like",
-    "sc": "Tip"
+    "sc": "Tip",
+    "video": "Video"
   },
   "gate": {
     "title": "Admin",

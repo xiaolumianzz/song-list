@@ -8,6 +8,7 @@ import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
 import MembersBadge from './MembersBadge.vue'
+import VideoPlatformMarks from './VideoPlatformMarks.vue'
 
 const props = defineProps<{ song: Song }>()
 const emit = defineEmits<{ (e: 'open', song: Song): void }>()
@@ -81,6 +82,9 @@ function toggleLike(e: Event) {
       <span v-if="song.tags.length > 3" class="text-[11px] text-ash">…</span>
     </div>
 
+    <!-- 動画プラットフォームマーク（いいねの左） -->
+    <VideoPlatformMarks :videos="song.videos" class="justify-self-end" />
+
     <!-- いいねボタン（右端） -->
     <button
       type="button"
@@ -108,6 +112,7 @@ function toggleLike(e: Event) {
     4.5rem                /* 言語 */
     9rem                  /* SC + メンバー限定バッジ */
     minmax(0, 2fr)        /* タグ */
+    4.5rem                /* 動画プラットフォームマーク */
     3.5rem;               /* いいね（右端） */
   column-gap: 0.75rem;
   align-items: center;
