@@ -79,25 +79,16 @@ const platforms = computed(() => videoPlatforms(props.videos))
 </template>
 
 <style scoped>
-/* ProfileCard の SNS ボタンと同じガラス調デザイン。色は薄灰色のまま。 */
+/* 丸い枠は無し。アイコン SVG だけを薄灰色で並べる。 */
 .video-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.2),
-    0 1px 3px rgba(0, 0, 0, 0.05);
   color: rgba(150, 145, 142, 0.55);
   flex-shrink: 0;
 }
 .mark-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 </style>
