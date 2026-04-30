@@ -68,21 +68,20 @@ function src(kind: Decor['kind']) {
         animationDelay: t.delay + 's',
       }"
     />
-    <!-- 下から昇る浮遊装飾は静止配置のみ。
-         translateY(-120vh) を回すと全画面の合成が継続して走り、
-         スクロール時にもっさりする原因になっていたため。 -->
+    <!-- 下から昇る浮遊装飾 -->
     <img
       v-for="(f, i) in floaties"
       :key="'f' + i"
       :src="src(f.kind)"
       alt=""
-      class="float-img absolute"
+      class="float-img absolute bottom-[-40px] animate-rise"
       :style="{
         left: f.left,
-        bottom: 10 + (i * 12) + '%',
         width: f.size + 'px',
         height: f.size + 'px',
-        opacity: 0.55,
+        animationDelay: f.delay + 's',
+        '--rise-duration': f.duration + 's',
+        '--drift': f.drift + 'px',
       }"
     />
   </div>
@@ -90,7 +89,8 @@ function src(kind: Decor['kind']) {
 
 <style scoped>
 @media (prefers-reduced-motion: reduce) {
-  .twinkle-img {
+  .twinkle-img,
+  .float-img {
     animation: none !important;
   }
 }
