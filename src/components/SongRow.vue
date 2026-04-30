@@ -60,9 +60,9 @@ function toggleLike(e: Event) {
     </span>
 
     <!-- SC + メンバー限定バッジ -->
-    <span class="flex min-w-0 items-center gap-1 justify-self-start">
-      <MembersBadge :conditions="song.conditions" compact />
+    <span class="flex min-w-0 flex-wrap items-center gap-1 justify-self-start">
       <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="sm" />
+      <MembersBadge :conditions="song.conditions" size="sm" />
       <span
         v-if="!(song.sc && song.sc > 0) && !song.conditions?.includes('members-only')"
         class="text-xs text-ink/30"
@@ -106,7 +106,7 @@ function toggleLike(e: Event) {
     minmax(0, 2fr)        /* 曲名 */
     minmax(0, 1.3fr)      /* アーティスト */
     4.5rem                /* 言語 */
-    5.5rem                /* SC */
+    9rem                  /* SC + メンバー限定バッジ */
     minmax(0, 2fr)        /* タグ */
     3.5rem;               /* いいね（右端） */
   column-gap: 0.75rem;

@@ -53,7 +53,7 @@ const { t } = useI18n()
     minmax(0, 2fr)
     minmax(0, 1.3fr)
     4.5rem
-    5.5rem
+    9rem
     minmax(0, 2fr)
     3.5rem;
   column-gap: 0.75rem;
