@@ -169,6 +169,7 @@ function onLayeredLoaded(ok: boolean) {
       :src="characterUrl"
       alt=""
       class="character-overlay"
+      decoding="async"
     />
 
     <!-- ピンク半透明ベール（可読性確保） -->
