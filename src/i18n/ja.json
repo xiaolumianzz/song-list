@@ -108,6 +108,7 @@
     "add": "追加",
     "cancel": "キャンセル",
     "list": "曲リスト",
+    "dragHint": "⋮⋮ をドラッグして曲の並び順を変えられます",
     "localOverrideNotice": "ローカルに未保存の変更があります（GitHubへは未反映）",
     "confirmDelete": "「{title}」を削除しますか？",
     "confirmResetLocal": "ローカルの変更を破棄して初期データに戻します。よろしいですか？",

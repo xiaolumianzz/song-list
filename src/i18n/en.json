@@ -108,6 +108,7 @@
     "add": "Add",
     "cancel": "Cancel",
     "list": "Song list",
+    "dragHint": "Drag ⋮⋮ to reorder songs",
     "localOverrideNotice": "You have unsaved local changes (not pushed to GitHub)",
     "confirmDelete": "Delete \"{title}\"?",
     "confirmResetLocal": "This will discard local changes and restore original data. Continue?",

@@ -14,6 +14,7 @@ import ScBadge from '@/components/ScBadge.vue'
 import TagEditor from '@/components/TagEditor.vue'
 import Autocomplete, { type Suggestion } from '@/components/Autocomplete.vue'
 import { tagDisplay } from '@/composables/useTagDict'
+import draggable from 'vuedraggable'
 
 const { t, locale } = useI18n()
 const songsStore = useSongsStore()
@@ -244,6 +245,11 @@ function editById(id: string) {
     // 編集セクションへスクロールしたいところだが、scrollIntoView は要素への参照が必要。
     // 一旦簡単に top に戻す（タグエディタのモーダルを閉じた直後のフォーカス改善は将来）。
   }
+}
+
+function onSongReorder() {
+  // vuedraggable は v-model で配列を直接 mutate するので、ここでは saveLocal を呼ぶだけ
+  songsStore.saveLocal()
 }
 
 function remove(song: Song) {
@@ -767,38 +773,67 @@ function snsLabel(k: SnsKey): string {
     </section>
 
     <section class="rounded-3xl bg-white/80 p-5 shadow-soft">
-      <h2 class="mb-3 font-display text-lg text-ink">{{ t('admin.list') }} ({{ songs.length }})</h2>
+      <h2 class="mb-2 font-display text-lg text-ink">{{ t('admin.list') }} ({{ songs.length }})</h2>
+      <p class="mb-3 text-[11px] text-ink/60">{{ t('admin.dragHint') }}</p>
       <div class="scrollbar-soft max-h-[520px] overflow-y-auto">
-        <table class="w-full text-sm">
-          <thead class="sticky top-0 bg-white/90">
-            <tr class="text-left text-ink/60">
-              <th class="px-2 py-2">{{ t('admin.field.title') }}</th>
-              <th class="px-2 py-2">{{ t('admin.field.artist') }}</th>
-              <th class="px-2 py-2">{{ t('admin.field.language') }}</th>
-              <th class="px-2 py-2">SC</th>
-              <th class="px-2 py-2">{{ t('admin.field.tags') }}</th>
-              <th class="px-2 py-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="s in songs" :key="s.id" class="border-t border-blush/40">
-              <td class="px-2 py-2 font-display">{{ s.title }}</td>
-              <td class="px-2 py-2 text-ink/80">{{ s.artist }}</td>
-              <td class="px-2 py-2 text-xs">{{ t('language.' + s.language) }}</td>
-              <td class="px-2 py-2">
+        <!-- ヘッダ行（ドラッグ対象外） -->
+        <div class="admin-row-header sticky top-0 z-10 bg-white/95 px-2 py-2 text-left text-xs text-ink/60">
+          <span></span>
+          <span>{{ t('admin.field.title') }}</span>
+          <span>{{ t('admin.field.artist') }}</span>
+          <span>{{ t('admin.field.language') }}</span>
+          <span>SC</span>
+          <span>{{ t('admin.field.tags') }}</span>
+          <span></span>
+        </div>
+        <draggable
+          v-model="songsStore.data.songs"
+          item-key="id"
+          handle=".drag-handle"
+          ghost-class="opacity-50"
+          @change="onSongReorder"
+        >
+          <template #item="{ element: s }: { element: Song }">
+            <div class="admin-row border-t border-blush/40 px-2 py-2 text-sm hover:bg-blush/20">
+              <span
+                class="drag-handle cursor-grab select-none text-ink/40 hover:text-ink/70"
+                :title="t('admin.dragHint')"
+              >⋮⋮</span>
+              <span class="truncate font-display">{{ s.title }}</span>
+              <span class="truncate text-ink/80">{{ s.artist }}</span>
+              <span class="text-xs">{{ t('language.' + s.language) }}</span>
+              <span>
                 <ScBadge v-if="s.sc && s.sc > 0" :amount="s.sc" size="sm" />
                 <span v-else class="text-xs text-ink/30">—</span>
-              </td>
-              <td class="px-2 py-2 text-xs text-ink/70">{{ s.tags.join(', ') }}</td>
-              <td class="px-2 py-2 text-right">
+              </span>
+              <span class="truncate text-xs text-ink/70">{{ s.tags.join(', ') }}</span>
+              <span class="text-right">
                 <button class="rounded-full bg-blush px-2 py-0.5 text-xs hover:bg-sakura hover:text-white" @click="edit(s)">✎</button>
                 <button class="ml-1 rounded-full border border-rose/60 px-2 py-0.5 text-xs text-rose hover:bg-rose hover:text-white" @click="remove(s)">🗑</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </span>
+            </div>
+          </template>
+        </draggable>
       </div>
     </section>
   </main>
   </PasswordGate>
 </template>
+
+<style scoped>
+/* 曲リスト行：ヘッダ行と body 行で共通の grid 列幅 */
+.admin-row,
+.admin-row-header {
+  display: grid;
+  grid-template-columns:
+    1.5rem            /* drag handle */
+    minmax(0, 2fr)    /* title */
+    minmax(0, 1.4fr)  /* artist */
+    4rem              /* language */
+    5rem              /* SC */
+    minmax(0, 2fr)    /* tags */
+    5rem;             /* operations */
+  column-gap: 0.5rem;
+  align-items: center;
+}
+</style>

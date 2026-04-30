@@ -108,6 +108,7 @@
     "add": "添加",
     "cancel": "取消",
     "list": "歌曲列表",
+    "dragHint": "拖动 ⋮⋮ 即可调整歌曲顺序",
     "localOverrideNotice": "有未保存的本地修改（尚未推送到 GitHub）",
     "confirmDelete": "确定要删除「{title}」吗？",
     "confirmResetLocal": "将放弃本地修改并恢复原始数据，继续？",
