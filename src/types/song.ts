@@ -56,12 +56,8 @@ export const EMPTY_SONG_DATA: SongData = {
 
 export const LANGUAGE_ORDER: Language[] = ['ja', 'en', 'zh', 'ko', 'other']
 
-export const CONDITION_KEYS = [
-  'karaoke-only',
-  'practice-needed',
-  'paid-only',
-  'members-only',
-  'with-guitar',
-  'short-version',
-] as const
+// 「リクエスト条件」は使わなくなったため、メンバー限定のみ残す。
+// 既存データに別の条件文字列が入っていても Song.conditions は string[] のままなので、
+// silent に保持される（admin の編集UIには出てこないが消されもしない）。
+export const CONDITION_KEYS = ['members-only'] as const
 export type ConditionKey = (typeof CONDITION_KEYS)[number]

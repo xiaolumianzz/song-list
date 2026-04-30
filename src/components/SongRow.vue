@@ -7,6 +7,7 @@ import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
+import MembersBadge from './MembersBadge.vue'
 
 const props = defineProps<{ song: Song }>()
 const emit = defineEmits<{ (e: 'open', song: Song): void }>()
@@ -58,13 +59,17 @@ function toggleLike(e: Event) {
       {{ t('language.' + song.language) }}
     </span>
 
-    <!-- SC -->
-    <span class="justify-self-start">
+    <!-- SC + メンバー限定バッジ -->
+    <span class="flex min-w-0 items-center gap-1 justify-self-start">
+      <MembersBadge :conditions="song.conditions" compact />
       <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="sm" />
-      <span v-else class="text-xs text-ink/30">—</span>
+      <span
+        v-if="!(song.sc && song.sc > 0) && !song.conditions?.includes('members-only')"
+        class="text-xs text-ink/30"
+      >—</span>
     </span>
 
-    <!-- タグ + 条件 -->
+    <!-- タグ -->
     <div class="flex min-w-0 flex-wrap items-center gap-1">
       <span
         v-for="tag in song.tags.slice(0, 3)"
@@ -74,13 +79,6 @@ function toggleLike(e: Event) {
         #{{ tagDisplay(tag, locale, songsStore.tagDict) }}
       </span>
       <span v-if="song.tags.length > 3" class="text-[11px] text-ash">…</span>
-      <span
-        v-for="c in song.conditions.slice(0, 1)"
-        :key="c"
-        class="rounded-full border border-sakura/60 bg-white px-2 py-0.5 text-[11px] text-rose"
-      >
-        ♪ {{ t('condition.' + c) }}
-      </span>
     </div>
 
     <!-- いいねボタン（右端） -->

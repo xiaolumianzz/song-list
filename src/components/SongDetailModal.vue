@@ -7,6 +7,7 @@ import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
+import MembersBadge from './MembersBadge.vue'
 import VideoPlayer from './VideoPlayer.vue'
 
 const props = defineProps<{ song: Song | null }>()
@@ -80,6 +81,7 @@ onBeforeUnmount(() => {
               {{ t('language.' + song.language) }}
             </span>
             <ScBadge v-if="song.sc && song.sc > 0" :amount="song.sc" size="md" />
+            <MembersBadge :conditions="song.conditions" size="md" />
             <NewBadge :added-at="song.addedAt" size="md" />
             <span class="text-[11px] text-ash">{{ song.addedAt }}</span>
           </div>
@@ -166,13 +168,6 @@ onBeforeUnmount(() => {
             >
               #{{ tagDisplay(tag, locale, songsStore.tagDict) }}
             </span>
-          </div>
-
-          <div v-if="song.conditions.length" class="mt-4">
-            <p class="font-display text-sm text-ink/70">{{ t('detail.conditions') }}</p>
-            <ul class="mt-1 list-disc pl-5 text-sm text-ink">
-              <li v-for="c in song.conditions" :key="c">{{ t('condition.' + c) }}</li>
-            </ul>
           </div>
 
           <div v-if="song.remark" class="mt-4 rounded-2xl bg-white/80 p-3">

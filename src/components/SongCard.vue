@@ -7,6 +7,7 @@ import { tagDisplay } from '@/composables/useTagDict'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
+import MembersBadge from './MembersBadge.vue'
 
 const props = defineProps<{ song: Song }>()
 const emit = defineEmits<{ (e: 'open', song: Song): void }>()
@@ -39,13 +40,15 @@ function toggleLike(e: Event) {
     @click="open"
     @keydown="onKeydown"
   >
-    <!-- 右上：SC バッジ（フローティング） -->
-    <ScBadge
-      v-if="song.sc && song.sc > 0"
-      :amount="song.sc"
-      class="absolute -top-2 right-3"
-      size="sm"
-    />
+    <!-- 右上：SC バッジ + メンバー限定バッジ（横並びでフローティング） -->
+    <div class="absolute -top-2 right-3 flex items-center gap-1">
+      <MembersBadge :conditions="song.conditions" size="sm" />
+      <ScBadge
+        v-if="song.sc && song.sc > 0"
+        :amount="song.sc"
+        size="sm"
+      />
+    </div>
     <!-- 左上：新着バッジ（フローティング） -->
     <NewBadge :added-at="song.addedAt" class="absolute -top-2 left-3" size="sm" />
 
@@ -78,15 +81,6 @@ function toggleLike(e: Event) {
         class="rounded-full bg-cotton px-2 py-0.5 text-[11px] text-ink/80"
       >
         #{{ tagDisplay(tag, locale, songsStore.tagDict) }}
-      </span>
-    </div>
-    <div v-if="song.conditions.length" class="flex flex-wrap gap-1.5 pt-1">
-      <span
-        v-for="c in song.conditions"
-        :key="c"
-        class="rounded-full border border-sakura/60 bg-white px-2 py-0.5 text-[11px] text-rose"
-      >
-        ♪ {{ t('condition.' + c) }}
       </span>
     </div>
   </div>
