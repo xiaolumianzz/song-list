@@ -79,7 +79,7 @@ function tagStyle(scale: number) {
       <span class="font-display text-sm text-ink/70">{{ t('filter.language') }}</span>
       <button
         class="rounded-full px-3 py-1 text-xs font-medium transition"
-        :class="language === 'all' ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25'"
+        :class="language === 'all' ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'"
         @click="pickLang('all')"
       >
         {{ t('filter.all') }}
@@ -88,7 +88,7 @@ function tagStyle(scale: number) {
         v-for="l in orderedLangs"
         :key="l"
         class="rounded-full px-3 py-1 text-xs font-medium transition"
-        :class="language === l ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25'"
+        :class="language === l ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'"
         @click="pickLang(l)"
       >
         {{ t('language.' + l) }}
@@ -99,7 +99,7 @@ function tagStyle(scale: number) {
       <span class="font-display text-sm text-ink/70">{{ t('filter.artist') }}</span>
       <select
         :value="artist"
-        class="max-w-full rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
+        class="max-w-full rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
         @change="pickArtist"
       >
         <option value="all">{{ t('filter.allArtists') }}</option>
@@ -118,7 +118,7 @@ function tagStyle(scale: number) {
         :class="
           selectedTags.includes(t.tag)
             ? 'bg-rose text-white shadow-pop'
-            : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25'
+            : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'
         "
         :style="{ ...tagStyle(t.scale), animationDelay: `${t.count * 0.3}s` }"
         @click="emit('toggle-tag', t.tag)"

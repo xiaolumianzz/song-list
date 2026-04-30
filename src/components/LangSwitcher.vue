@@ -21,7 +21,7 @@ function onChange(e: Event) {
     <select
       :value="locale"
       @change="onChange"
-      class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 shadow-glass-chip backdrop-blur-[2px] focus:outline-none focus:ring-2 focus:ring-sakura"
+      class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 shadow-glass-chip focus:outline-none focus:ring-2 focus:ring-sakura"
     >
       <option v-for="o in options" :key="o.value" :value="o.value">{{ o.label }}</option>
     </select>

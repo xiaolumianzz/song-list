@@ -30,7 +30,7 @@ function toggleReverse() {
     <span class="text-xs text-ink/60">{{ t('sort.label') }}</span>
     <select
       :value="sortKey"
-      class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
+      class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
       @change="onChange"
     >
       <option v-for="k in SORT_KEYS" :key="k" :value="k">
@@ -39,7 +39,7 @@ function toggleReverse() {
     </select>
     <button
       type="button"
-      class="grid h-7 w-7 place-items-center rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 text-sm shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25"
+      class="grid h-7 w-7 place-items-center rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 text-sm shadow-glass-chip hover:from-white/65 hover:to-white/25"
       :class="sortReverse ? 'text-rose' : 'text-ink/70'"
       :aria-label="sortReverse ? t('sort.desc') : t('sort.asc')"
       :title="sortReverse ? t('sort.desc') : t('sort.asc')"

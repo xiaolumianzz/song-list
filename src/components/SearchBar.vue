@@ -10,7 +10,7 @@ const model = defineModel<string>({ required: true })
       v-model="model"
       type="search"
       :placeholder="t('home.searchPlaceholder')"
-      class="w-full rounded-full border border-white/80 bg-gradient-to-b from-white/40 to-white/10 px-12 py-3 font-display text-lg text-ink shadow-glass backdrop-blur-[2px] placeholder:text-ash/70 focus:from-white/60 focus:border-sakura focus:outline-none focus:ring-4 focus:ring-sakura/30"
+      class="w-full rounded-full border border-white/80 bg-gradient-to-b from-white/40 to-white/10 px-12 py-3 font-display text-lg text-ink shadow-glass placeholder:text-ash/70 focus:from-white/60 focus:border-sakura focus:outline-none focus:ring-4 focus:ring-sakura/30"
     />
     <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-xl" aria-hidden="true">🔍</span>
     <button

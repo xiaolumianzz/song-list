@@ -34,7 +34,7 @@ function toggleLike(e: Event) {
   <div
     role="button"
     tabindex="0"
-    class="row-grid group cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-br from-white/35 via-white/12 to-white/5 px-4 py-2.5 text-left shadow-glass backdrop-blur-[2px] transition hover:-translate-x-0.5 hover:from-white/50 hover:to-white/15 hover:shadow-pop focus:outline-none focus-visible:ring-2 focus-visible:ring-sakura/60"
+    class="row-grid group cursor-pointer rounded-2xl border border-white/80 bg-gradient-to-br from-white/35 via-white/12 to-white/5 px-4 py-2.5 text-left shadow-glass transition hover:-translate-x-0.5 hover:from-white/50 hover:to-white/15 hover:shadow-pop focus:outline-none focus-visible:ring-2 focus-visible:ring-sakura/60"
     @click="open"
     @keydown="onKeydown"
   >
@@ -113,6 +113,9 @@ function toggleLike(e: Event) {
     3.5rem;               /* いいね（右端） */
   column-gap: 0.75rem;
   align-items: center;
+  /* 画面外の行は描画をスキップしてスクロール時の負荷軽減 */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 52px;
 }
 .like-btn {
   transform-origin: center;

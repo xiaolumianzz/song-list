@@ -43,7 +43,7 @@ function onPicked(song: Song) {
         <LangSwitcher />
         <router-link
           to="/admin"
-          class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink/80 shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25"
+          class="rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink/80 shadow-glass-chip hover:from-white/65 hover:to-white/25"
         >
           {{ t('nav.admin') }}
         </router-link>
@@ -60,7 +60,7 @@ function onPicked(song: Song) {
       <!-- 中央カラムは女の子の露出用（デスクトップのみ空ける） -->
       <div class="hidden lg:block" aria-hidden="true"></div>
       <section
-        class="space-y-4 rounded-3xl border border-white/70 bg-gradient-to-br from-white/25 via-white/8 to-white/3 p-5 shadow-glass-lg backdrop-blur-[2px]"
+        class="space-y-4 rounded-3xl border border-white/70 bg-gradient-to-br from-white/25 via-white/8 to-white/3 p-5 shadow-glass-lg"
       >
         <div class="flex flex-wrap items-center gap-3">
           <SongCount :total="songs.length" :visible="filtered.length" />

@@ -16,10 +16,11 @@ function rand(a: number, b: number) {
   return a + Math.random() * (b - a)
 }
 
+// 装飾アニメーションの数を絞ってスクロール時の GPU 負荷を軽減
 const floaties = computed<Decor[]>(() => {
   const kinds: Decor['kind'][] = ['sparkle', 'heart', 'bubble', 'note']
   const items: Decor[] = []
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 6; i++) {
     items.push({
       kind: kinds[Math.floor(Math.random() * kinds.length)],
       left: `${rand(2, 96)}%`,
@@ -34,7 +35,7 @@ const floaties = computed<Decor[]>(() => {
 
 const twinkles = computed(() => {
   const out: { top: string; left: string; size: number; delay: number }[] = []
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < 10; i++) {
     out.push({
       top: `${rand(4, 90)}%`,
       left: `${rand(3, 97)}%`,

@@ -35,7 +35,7 @@ function toggleLike(e: Event) {
   <div
     role="button"
     tabindex="0"
-    class="group relative flex h-full cursor-pointer flex-col gap-2 rounded-3xl border border-white/80 bg-gradient-to-br from-white/35 via-white/15 to-white/5 p-4 text-left shadow-glass backdrop-blur-[2px] transition hover:-translate-y-1 hover:from-white/50 hover:to-white/15 hover:shadow-pop focus:outline-none focus-visible:ring-2 focus-visible:ring-sakura/60"
+    class="song-card-root group relative flex h-full cursor-pointer flex-col gap-2 rounded-3xl border border-white/80 bg-gradient-to-br from-white/35 via-white/15 to-white/5 p-4 text-left shadow-glass transition hover:-translate-y-1 hover:from-white/50 hover:to-white/15 hover:shadow-pop focus:outline-none focus-visible:ring-2 focus-visible:ring-sakura/60"
     @click="open"
     @keydown="onKeydown"
   >
@@ -93,6 +93,12 @@ function toggleLike(e: Event) {
 </template>
 
 <style scoped>
+/* 画面外のカードは描画をスキップしてスクロール時の GPU 負荷を減らす。
+   contain-intrinsic-size はカード一個ぶんの目安サイズ（描画スキップ時の高さ予約）。 */
+.song-card-root {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 220px;
+}
 .like-btn {
   transform-origin: center;
 }

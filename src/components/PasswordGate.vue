@@ -61,7 +61,7 @@ defineExpose({ logout })
     class="mx-auto flex min-h-screen max-w-md items-center justify-center px-4"
   >
     <form
-      class="w-full rounded-3xl border border-white/70 bg-gradient-to-br from-white/35 via-white/12 to-white/5 p-8 shadow-glass backdrop-blur-[2px]"
+      class="w-full rounded-3xl border border-white/70 bg-gradient-to-br from-white/35 via-white/12 to-white/5 p-8 shadow-glass"
       @submit.prevent="submit"
     >
       <h1 class="mb-2 text-center font-display text-2xl font-bold text-ink">
@@ -76,7 +76,7 @@ defineExpose({ logout })
         autocomplete="current-password"
         autofocus
         :placeholder="t('gate.placeholder')"
-        class="w-full rounded-full border border-white/80 bg-gradient-to-b from-white/60 to-white/20 px-5 py-3 text-center font-display text-base text-ink shadow-glass-chip backdrop-blur-[2px] placeholder:text-ash/60 focus:border-sakura focus:outline-none focus:ring-4 focus:ring-sakura/30"
+        class="w-full rounded-full border border-white/80 bg-gradient-to-b from-white/60 to-white/20 px-5 py-3 text-center font-display text-base text-ink shadow-glass-chip placeholder:text-ash/60 focus:border-sakura focus:outline-none focus:ring-4 focus:ring-sakura/30"
       />
       <p
         v-if="error"

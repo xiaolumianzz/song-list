@@ -8,7 +8,7 @@ const { data: profile } = storeToRefs(profileStore)
 
 <template>
   <section
-    class="rounded-3xl border border-white/70 bg-gradient-to-br from-white/35 via-white/12 to-white/5 p-5 shadow-glass backdrop-blur-[2px]"
+    class="rounded-3xl border border-white/70 bg-gradient-to-br from-white/35 via-white/12 to-white/5 p-5 shadow-glass"
   >
     <!-- アイコン -->
     <div class="flex justify-center">
