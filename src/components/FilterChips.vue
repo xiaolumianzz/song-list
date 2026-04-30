@@ -11,12 +11,19 @@ interface TagStat {
   scale: number
 }
 
+interface ArtistStat {
+  artist: string
+  count: number
+}
+
 const props = withDefaults(
   defineProps<{
     languages: string[]
     language: string
     tagStats: TagStat[]
     selectedTags: string[]
+    artistStats: ArtistStat[]
+    artist: string
     tagLimit?: number
   }>(),
   { tagLimit: 6 },
@@ -33,9 +40,15 @@ const visibleTagStats = computed(() => {
 })
 const emit = defineEmits<{
   (e: 'update:language', v: string): void
+  (e: 'update:artist', v: string): void
   (e: 'toggle-tag', v: string): void
   (e: 'reset'): void
 }>()
+
+function pickArtist(e: Event) {
+  const target = e.target as HTMLSelectElement
+  emit('update:artist', target.value)
+}
 
 const { t, locale } = useI18n()
 const songsStore = useSongsStore()
@@ -82,6 +95,20 @@ function tagStyle(scale: number) {
       </button>
     </div>
 
+    <div v-if="artistStats.length" class="flex flex-wrap items-center gap-2">
+      <span class="font-display text-sm text-ink/70">{{ t('filter.artist') }}</span>
+      <select
+        :value="artist"
+        class="max-w-full rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip backdrop-blur-[2px] hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
+        @change="pickArtist"
+      >
+        <option value="all">{{ t('filter.allArtists') }}</option>
+        <option v-for="a in artistStats" :key="a.artist" :value="a.artist">
+          {{ a.artist }}（{{ a.count }}）
+        </option>
+      </select>
+    </div>
+
     <div v-if="visibleTagStats.length" class="flex flex-wrap items-center gap-2">
       <span class="font-display text-sm text-ink/70">{{ t('filter.tags') }}</span>
       <button
@@ -99,7 +126,7 @@ function tagStyle(scale: number) {
         #{{ tagDisplay(t.tag, locale, songsStore.tagDict) }}
       </button>
       <button
-        v-if="selectedTags.length || language !== 'all'"
+        v-if="selectedTags.length || language !== 'all' || artist !== 'all'"
         class="ml-auto rounded-full border border-ash/50 bg-transparent px-3 py-1 text-xs text-ink/70 hover:bg-white"
         @click="emit('reset')"
       >

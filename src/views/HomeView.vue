@@ -16,12 +16,13 @@ import SongCount from '@/components/SongCount.vue'
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import ViewToggle from '@/components/ViewToggle.vue'
 import ProfileCard from '@/components/ProfileCard.vue'
+import SortMenu from '@/components/SortMenu.vue'
 
 const { t } = useI18n()
 const store = useSongsStore()
-const { songs, tagStats, allLanguages, loading, error } = storeToRefs(store)
+const { songs, tagStats, artistStats, allLanguages, loading, error } = storeToRefs(store)
 
-const { state, filtered, toggleTag, reset } = useFilter(() => songs.value)
+const { state, filtered, sorted, toggleTag, reset } = useFilter(() => songs.value)
 const viewMode = useViewMode()
 const selected = ref<Song | null>(null)
 
@@ -71,7 +72,10 @@ function onPicked(song: Song) {
           :language="state.language"
           :tag-stats="tagStats"
           :selected-tags="state.tags"
+          :artist-stats="artistStats"
+          :artist="state.artist"
           @update:language="(v) => (state.language = v)"
+          @update:artist="(v) => (state.artist = v)"
           @toggle-tag="toggleTag"
           @reset="reset"
         />
@@ -80,7 +84,13 @@ function onPicked(song: Song) {
 
     <!-- 下段：曲リスト（全幅） -->
     <section>
-      <div class="mb-3 flex justify-end">
+      <div class="mb-3 flex flex-wrap items-center justify-end gap-3">
+        <SortMenu
+          :sort-key="state.sortKey"
+          :sort-reverse="state.sortReverse"
+          @update:sort-key="(v) => (state.sortKey = v)"
+          @update:sort-reverse="(v) => (state.sortReverse = v)"
+        />
         <ViewToggle :mode="viewMode" @update:mode="viewMode = $event" />
       </div>
       <div v-if="loading" class="py-10 text-center font-handwritten text-ink/60">
@@ -93,12 +103,12 @@ function onPicked(song: Song) {
         ⚠ {{ error }}
       </div>
       <div
-        v-else-if="!filtered.length"
+        v-else-if="!sorted.length"
         class="rounded-2xl bg-white/80 p-10 text-center font-handwritten text-ink/60"
       >
         ♡ {{ t('home.empty') }}
       </div>
-      <SongGrid v-else :songs="filtered" :mode="viewMode" @open="selected = $event" />
+      <SongGrid v-else :songs="sorted" :mode="viewMode" @open="selected = $event" />
     </section>
 
     <footer class="mt-10 text-center">

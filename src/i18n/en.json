@@ -12,8 +12,21 @@
   "filter": {
     "language": "Language",
     "tags": "Tags",
+    "artist": "Artist",
+    "allArtists": "All",
     "all": "All",
     "reset": "Reset"
+  },
+  "sort": {
+    "label": "Sort",
+    "default": "Default",
+    "added": "Added",
+    "updated": "Updated",
+    "title": "Title (A→Z)",
+    "artist": "Artist (A→Z)",
+    "language": "Language",
+    "asc": "Ascending",
+    "desc": "Descending"
   },
   "language": {
     "ja": "Japanese",

@@ -12,8 +12,21 @@
   "filter": {
     "language": "言語",
     "tags": "タグ",
+    "artist": "アーティスト",
+    "allArtists": "ぜんぶ",
     "all": "ぜんぶ",
     "reset": "リセット"
+  },
+  "sort": {
+    "label": "並び順",
+    "default": "デフォルト",
+    "added": "追加順",
+    "updated": "更新順",
+    "title": "あいうえお順",
+    "artist": "アーティスト順",
+    "language": "言語順",
+    "asc": "昇順",
+    "desc": "降順"
   },
   "language": {
     "ja": "日本語",
