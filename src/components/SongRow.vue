@@ -82,8 +82,8 @@ function toggleLike(e: Event) {
       <span v-if="song.tags.length > 3" class="text-[11px] text-ash">…</span>
     </div>
 
-    <!-- 動画プラットフォームマーク（いいねの左） -->
-    <VideoPlatformMarks :videos="song.videos" class="justify-self-end" />
+    <!-- 動画プラットフォームマーク（いいねの左、左揃えで 3 スロット固定位置） -->
+    <VideoPlatformMarks :videos="song.videos" class="justify-self-start" />
 
     <!-- いいねボタン（右端） -->
     <button
