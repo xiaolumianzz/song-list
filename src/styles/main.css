@@ -36,3 +36,17 @@ body {
   background-repeat: repeat-x;
   height: 16px;
 }
+
+/* アクセシビリティ対応：OS の「視差効果を減らす」設定を尊重して
+   全アニメーション・トランジションを停止する。
+   省電力モードや低スペック端末で挙動が軽くなる副次効果もある。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -53,13 +53,13 @@ function src(kind: Decor['kind']) {
 
 <template>
   <div class="pointer-events-none fixed inset-0 -z-[5] overflow-hidden">
-    <!-- ピカピカするキラキラ -->
+    <!-- ピカピカするキラキラ（opacity/scale のみで GPU 合成軽い） -->
     <img
       v-for="(t, i) in twinkles"
       :key="'t' + i"
       :src="src('sparkle')"
       alt=""
-      class="absolute animate-twinkle"
+      class="twinkle-img absolute animate-twinkle"
       :style="{
         top: t.top,
         left: t.left,
@@ -68,21 +68,30 @@ function src(kind: Decor['kind']) {
         animationDelay: t.delay + 's',
       }"
     />
-    <!-- 下から昇る浮遊装飾 -->
+    <!-- 下から昇る浮遊装飾は静止配置のみ。
+         translateY(-120vh) を回すと全画面の合成が継続して走り、
+         スクロール時にもっさりする原因になっていたため。 -->
     <img
       v-for="(f, i) in floaties"
       :key="'f' + i"
       :src="src(f.kind)"
       alt=""
-      class="absolute bottom-[-40px] animate-rise"
+      class="float-img absolute"
       :style="{
         left: f.left,
+        bottom: 10 + (i * 12) + '%',
         width: f.size + 'px',
         height: f.size + 'px',
-        animationDelay: f.delay + 's',
-        '--rise-duration': f.duration + 's',
-        '--drift': f.drift + 'px',
+        opacity: 0.55,
       }"
     />
   </div>
 </template>
+
+<style scoped>
+@media (prefers-reduced-motion: reduce) {
+  .twinkle-img {
+    animation: none !important;
+  }
+}
+</style>

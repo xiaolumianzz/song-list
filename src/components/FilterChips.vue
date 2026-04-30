@@ -114,13 +114,13 @@ function tagStyle(scale: number) {
       <button
         v-for="t in visibleTagStats"
         :key="t.tag"
-        class="animate-sway rounded-full font-display font-medium transition"
+        class="rounded-full font-display font-medium transition"
         :class="
           selectedTags.includes(t.tag)
             ? 'bg-rose text-white shadow-pop'
             : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'
         "
-        :style="{ ...tagStyle(t.scale), animationDelay: `${t.count * 0.3}s` }"
+        :style="tagStyle(t.scale)"
         @click="emit('toggle-tag', t.tag)"
       >
         #{{ tagDisplay(t.tag, locale, songsStore.tagDict) }}

@@ -20,7 +20,6 @@ const { t } = useI18n()
       v-for="s in songs"
       :key="s.id"
       :song="s"
-      class="animate-popin"
       @open="$emit('open', $event)"
     />
   </div>
@@ -42,7 +41,6 @@ const { t } = useI18n()
       v-for="s in songs"
       :key="s.id"
       :song="s"
-      class="animate-popin"
       @open="$emit('open', $event)"
     />
   </div>

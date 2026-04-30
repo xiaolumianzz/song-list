@@ -178,35 +178,12 @@ function onLayeredLoaded(ok: boolean) {
 </template>
 
 <style scoped>
-/* スライムソファのふにゃふにゃ */
-.slime {
-  transform-origin: 0 160px;
-  animation: slime-squish 4.2s ease-in-out infinite;
-}
-@keyframes slime-squish {
-  0%, 100% { transform: scale(1, 1); }
-  50% { transform: scale(1.02, 0.96); }
-}
+/* 背景固定要素は常時アニメせず静止させる。
+   position: fixed の上で transform/opacity を回し続けると
+   スクロール時に GPU 合成が走り続けてもっさりするため。
+   元のふんわり感は SparkleLayer のキラキラだけでまかなう。 */
 
-/* 音符の浮遊 */
-.note-a {
-  animation: note-float 3.6s ease-in-out infinite;
-}
-.note-b {
-  animation: note-float-b 4.2s ease-in-out infinite;
-  animation-delay: 0.8s;
-}
-@keyframes note-float {
-  0%   { transform: translate(780px, 320px); opacity: 0.9; }
-  100% { transform: translate(790px, 240px); opacity: 0; }
-}
-@keyframes note-float-b {
-  0%   { transform: translate(830px, 280px); opacity: 0.9; }
-  100% { transform: translate(820px, 210px); opacity: 0; }
-}
-
-/* キャラクター画像を中央ソファ位置に配置。揺れアニメ付き。
-   character.png は透過PNG、顔から足先まで縦長、スクリーンで高さ 60vh 程度を想定 */
+/* キャラクター画像を中央ソファ位置に配置 */
 .character-overlay {
   position: absolute;
   left: 50%;
@@ -215,12 +192,14 @@ function onLayeredLoaded(ok: boolean) {
   height: 92vh;
   max-height: 920px;
   pointer-events: none;
-  transform-origin: bottom center;
-  animation: character-sway 5.5s ease-in-out infinite;
   filter: drop-shadow(0 14px 28px rgba(163, 135, 212, 0.4));
 }
-@keyframes character-sway {
-  0%, 100% { transform: translateX(-50%) rotate(-1.5deg); }
-  50%      { transform: translateX(-50%) rotate(1.5deg); }
+
+/* 音符の位置だけ固定で表示（アニメは廃止） */
+.note-a {
+  transform: translate(780px, 320px);
+}
+.note-b {
+  transform: translate(830px, 280px);
 }
 </style>
