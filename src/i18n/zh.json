@@ -160,6 +160,35 @@
       "required": "歌名和歌手为必填",
       "resetLocal": "本地修改已重置",
       "repoNoAccess": "无法访问仓库。请检查 PAT 的所属账号、目标仓库和 Contents 权限设置。"
+    },
+    "tagEditor": {
+      "title": "标签编辑",
+      "help": "可以为标签登记 3 种语言。日文必填，英文和中文为空时显示时使用日文。",
+      "fieldJa": "日文",
+      "fieldEn": "英文",
+      "fieldZh": "中文",
+      "fieldJaPh": "例：抒情",
+      "fieldEnPh": "例：Ballad（可选）",
+      "fieldZhPh": "例：抒情（可选）",
+      "add": "添加",
+      "save": "保存",
+      "cancel": "取消",
+      "edit": "编辑",
+      "delete": "删除",
+      "list": "已登记标签",
+      "count": "使用歌曲数",
+      "usedIn": "{n} 首",
+      "viewSongs": "查看带此标签的歌曲",
+      "jaRequired": "日文为必填",
+      "savedNew": "已添加新标签",
+      "savedExisting": "已覆盖现有标签的翻译",
+      "savedTranslations": "已更新翻译",
+      "savedRename": "已重命名标签并应用到所有歌曲",
+      "removed": "已删除「{tag}」",
+      "confirmDelete": "确定删除「{tag}」吗？带有此标签的所有歌曲也会被移除该标签。",
+      "confirmRename": "将「{from}」改为「{to}」。带有此标签的所有歌曲都会更新，继续？",
+      "confirmMerge": "「{to}」已存在。是否将「{from}」合并到「{to}」？使用「{from}」的歌曲将被替换为「{to}」。",
+      "localeHint": "当前语言预览"
     }
   }
 }

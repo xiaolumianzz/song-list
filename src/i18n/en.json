@@ -160,6 +160,35 @@
       "required": "Title and artist are required",
       "resetLocal": "Local changes reset",
       "repoNoAccess": "Cannot access the repository. Check your PAT's owner account, target repository, and Contents permission."
+    },
+    "tagEditor": {
+      "title": "Tag editor",
+      "help": "Tags can be registered in 3 languages. Japanese is required; if English/Chinese are blank, Japanese is shown as fallback.",
+      "fieldJa": "Japanese",
+      "fieldEn": "English",
+      "fieldZh": "Chinese",
+      "fieldJaPh": "e.g. Ballad",
+      "fieldEnPh": "e.g. Ballad (optional)",
+      "fieldZhPh": "e.g. 抒情 (optional)",
+      "add": "Add",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "list": "Registered tags",
+      "count": "Songs",
+      "usedIn": "{n} songs",
+      "viewSongs": "Show songs with this tag",
+      "jaRequired": "Japanese is required",
+      "savedNew": "New tag added",
+      "savedExisting": "Translations overwritten on existing tag",
+      "savedTranslations": "Translations updated",
+      "savedRename": "Tag renamed and applied to all songs",
+      "removed": "Removed \"{tag}\"",
+      "confirmDelete": "Delete \"{tag}\"? It will also be removed from all songs using it.",
+      "confirmRename": "Rename \"{from}\" → \"{to}\". All songs using this tag will be updated. Continue?",
+      "confirmMerge": "\"{to}\" already exists. Merge \"{from}\" into it? Songs using \"{from}\" will be re-tagged to \"{to}\".",
+      "localeHint": "Preview in current language"
     }
   }
 }

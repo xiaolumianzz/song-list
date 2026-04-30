@@ -160,6 +160,35 @@
       "required": "曲名とアーティストは必須です",
       "resetLocal": "ローカル変更をリセットしました",
       "repoNoAccess": "リポジトリにアクセスできません。PATの発行アカウント・対象リポジトリ・Contents権限を確認してください。"
+    },
+    "tagEditor": {
+      "title": "タグ編集",
+      "help": "タグを 3 言語で登録できます。日本語が必須、英語・中国語は空欄なら表示時に日本語が使われます。",
+      "fieldJa": "日本語",
+      "fieldEn": "英語",
+      "fieldZh": "中国語",
+      "fieldJaPh": "例: バラード",
+      "fieldEnPh": "例: Ballad（任意）",
+      "fieldZhPh": "例: 抒情（任意）",
+      "add": "追加",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "edit": "編集",
+      "delete": "削除",
+      "list": "登録済みタグ",
+      "count": "使用曲数",
+      "usedIn": "{n}曲",
+      "viewSongs": "このタグの曲一覧を見る",
+      "jaRequired": "日本語は必須です",
+      "savedNew": "新規タグを追加しました",
+      "savedExisting": "既存タグの翻訳を上書きしました",
+      "savedTranslations": "翻訳を更新しました",
+      "savedRename": "タグ名を変更し、全曲に反映しました",
+      "removed": "「{tag}」を削除しました",
+      "confirmDelete": "「{tag}」を削除しますか？このタグが付いている全曲からも除去されます。",
+      "confirmRename": "「{from}」を「{to}」に変更します。このタグが付いている全曲が更新されます。よろしいですか？",
+      "confirmMerge": "「{to}」は既存タグです。「{from}」をこちらに統合（マージ）しますか？「{from}」を使っていた曲は「{to}」に置き換わります。",
+      "localeHint": "現在の言語表示プレビュー"
     }
   }
 }

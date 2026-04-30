@@ -11,6 +11,7 @@ import { NEW_BADGE_DEFAULT_DAYS, SNS_KEYS, type SnsKey } from '@/types/profile'
 import LangSwitcher from '@/components/LangSwitcher.vue'
 import PasswordGate from '@/components/PasswordGate.vue'
 import ScBadge from '@/components/ScBadge.vue'
+import TagEditor from '@/components/TagEditor.vue'
 
 const { t } = useI18n()
 const songsStore = useSongsStore()
@@ -219,6 +220,15 @@ function edit(song: Song) {
   }
   tagsInput.value = song.tags.join(', ')
   editingId.value = song.id
+}
+
+function editById(id: string) {
+  const target = songsStore.songs.find((s) => s.id === id)
+  if (target) {
+    edit(target)
+    // 編集セクションへスクロールしたいところだが、scrollIntoView は要素への参照が必要。
+    // 一旦簡単に top に戻す（タグエディタのモーダルを閉じた直後のフォーカス改善は将来）。
+  }
 }
 
 function remove(song: Song) {
@@ -597,6 +607,9 @@ function snsLabel(k: SnsKey): string {
       </p>
       <p v-if="profileStatus" class="mt-2 text-sm text-ink/80">{{ profileStatus }}</p>
     </section>
+
+    <!-- タグ編集（多言語） -->
+    <TagEditor @edit-song="editById" />
 
     <section class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft">
       <h2 class="mb-3 font-display text-lg text-ink">
