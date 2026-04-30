@@ -731,7 +731,7 @@ function snsLabel(k: SnsKey): string {
             />
             <input
               v-model="v.label"
-              class="w-40 shrink-0 rounded-xl border border-blush bg-milk px-3 py-2 text-sm"
+              class="w-44 shrink-0 rounded-xl border border-blush bg-milk px-3 py-2 text-sm sm:w-64"
               :placeholder="t('admin.field.videoLabelPh')"
             />
             <button
