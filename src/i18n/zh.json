@@ -136,6 +136,7 @@
       "language": "语言",
       "tags": "标签",
       "tagsPh": "逗号分隔（如 J-POP, 抒情）",
+      "tagsHint": "↓键选择候选并按 Enter，或用逗号添加下一个标签",
       "conditions": "点歌条件",
       "remark": "备注",
       "addedAt": "登记日",

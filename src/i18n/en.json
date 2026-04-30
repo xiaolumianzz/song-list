@@ -136,6 +136,7 @@
       "language": "Language",
       "tags": "Tags",
       "tagsPh": "Comma separated (e.g. J-POP, Ballad)",
+      "tagsHint": "Use ↓ keys to pick a suggestion + Enter, or comma to add next tag",
       "conditions": "Request conditions",
       "remark": "Note",
       "addedAt": "Added on",

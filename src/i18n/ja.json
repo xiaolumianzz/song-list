@@ -136,6 +136,7 @@
       "language": "言語",
       "tags": "タグ",
       "tagsPh": "カンマ区切り（例: J-POP, バラード）",
+      "tagsHint": "↓キーで候補を選んで Enter、または , で次のタグへ",
       "conditions": "リクエスト条件",
       "remark": "メモ・備考",
       "addedAt": "登録日",

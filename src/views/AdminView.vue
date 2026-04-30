@@ -12,9 +12,24 @@ import LangSwitcher from '@/components/LangSwitcher.vue'
 import PasswordGate from '@/components/PasswordGate.vue'
 import ScBadge from '@/components/ScBadge.vue'
 import TagEditor from '@/components/TagEditor.vue'
+import Autocomplete, { type Suggestion } from '@/components/Autocomplete.vue'
+import { tagDisplay } from '@/composables/useTagDict'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const songsStore = useSongsStore()
+
+// アーティストサジェスト：登録済みアーティストを使用曲数の多い順
+const artistSuggestions = computed<Suggestion[]>(() =>
+  songsStore.artistStats.map((a) => ({ value: a.artist, count: a.count })),
+)
+// タグサジェスト：辞書のキー（日本語）を value に、現在のロケール表示を display に
+const tagSuggestions = computed<Suggestion[]>(() =>
+  songsStore.tagStats.map((t) => ({
+    value: t.tag,
+    display: tagDisplay(t.tag, locale.value, songsStore.tagDict),
+    count: t.count,
+  })),
+)
 const profileStore = useProfileStore()
 const auth = useAuthStore()
 const gh = useGithub()
@@ -622,7 +637,10 @@ function snsLabel(k: SnsKey): string {
         </label>
         <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.artist') }} *</span>
-          <input v-model="draft.artist" class="rounded-xl border border-blush bg-milk px-3 py-2" />
+          <Autocomplete
+            v-model="draft.artist"
+            :suggestions="artistSuggestions"
+          />
         </label>
         <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.titleReading') }}</span>
@@ -664,7 +682,13 @@ function snsLabel(k: SnsKey): string {
         </label>
         <label class="flex flex-col gap-1 text-sm sm:col-span-2">
           <span class="text-ink/70">{{ t('admin.field.tags') }}</span>
-          <input v-model="tagsInput" :placeholder="t('admin.field.tagsPh')" class="rounded-xl border border-blush bg-milk px-3 py-2" />
+          <Autocomplete
+            v-model="tagsInput"
+            multi
+            :suggestions="tagSuggestions"
+            :placeholder="t('admin.field.tagsPh')"
+          />
+          <span class="text-[10px] text-ink/50">{{ t('admin.field.tagsHint') }}</span>
         </label>
         <div class="flex flex-col gap-2 text-sm sm:col-span-2">
           <span class="text-ink/70">{{ t('admin.field.conditions') }}</span>
