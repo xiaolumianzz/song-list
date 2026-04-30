@@ -102,16 +102,6 @@ function onLayeredLoaded(ok: boolean) {
         <circle cx="0" cy="130" r="30" fill="#fff3a8" opacity="0.35" />
       </g>
 
-      <!-- 観葉植物 -->
-      <g transform="translate(1060 360)">
-        <path d="M-55 195 L55 195 L47 295 L-47 295 Z" fill="#cb9977" />
-        <rect x="-60" y="185" width="120" height="14" rx="3" fill="#a67852" />
-        <g fill="#a8c992" stroke="#7b9a68" stroke-width="2" stroke-linejoin="round">
-          <path d="M0 190 C-45 140 -70 60 -40 -10 C0 -30 30 22 22 80 C58 30 92 58 72 130 C56 170 30 196 0 190 Z" />
-          <path d="M22 178 C62 128 86 70 68 14 C96 18 98 86 62 164 Z" opacity="0.85" />
-        </g>
-      </g>
-
       <!-- 壁の小さな音符 -->
       <g fill="#f48fa0" opacity="0.55">
         <circle cx="380" cy="200" r="4" /><rect x="382" y="150" width="1.5" height="50" />
