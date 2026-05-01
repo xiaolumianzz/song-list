@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useSongsStore } from '@/stores/songs'
@@ -18,6 +18,34 @@ import draggable from 'vuedraggable'
 
 const { t, locale } = useI18n()
 const songsStore = useSongsStore()
+
+// ─── タブ ───
+type AdminTab = 'songs' | 'tags' | 'profile' | 'connection'
+const TAB_STORAGE_KEY = 'song-list:admin-tab'
+const tab = ref<AdminTab>('songs')
+const savedTab = (() => {
+  try {
+    return localStorage.getItem(TAB_STORAGE_KEY)
+  } catch {
+    return null
+  }
+})()
+if (savedTab && ['songs', 'tags', 'profile', 'connection'].includes(savedTab)) {
+  tab.value = savedTab as AdminTab
+}
+watch(tab, (v) => {
+  try {
+    localStorage.setItem(TAB_STORAGE_KEY, v)
+  } catch {
+    // ignore
+  }
+})
+const tabs: Array<{ key: AdminTab; icon: string }> = [
+  { key: 'songs', icon: '🎵' },
+  { key: 'tags', icon: '🏷️' },
+  { key: 'profile', icon: '👤' },
+  { key: 'connection', icon: '🔌' },
+]
 
 // アーティストサジェスト：登録済みアーティストを使用曲数の多い順
 const artistSuggestions = computed<Suggestion[]>(() =>
@@ -305,10 +333,8 @@ function clearIcon() {
   profile.value.iconUrl = ''
 }
 
-function saveProfileLocal() {
-  profileStore.saveLocal()
-  profileStatus.value = t('admin.status.savedLocal')
-}
+// プロフィールの「下書き保存」ボタンは廃止（公開ボタンだけで運用）。
+// 必要なら profileStore.saveLocal() を直接呼べる。
 
 function resetProfileLocal() {
   if (!confirm(t('admin.confirmResetLocal'))) return
@@ -432,7 +458,80 @@ function snsLabel(k: SnsKey): string {
       </div>
     </header>
 
-    <section class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft">
+    <!-- タブナビゲーション -->
+    <nav class="mb-6 flex flex-wrap gap-1.5">
+      <button
+        v-for="tabDef in tabs"
+        :key="tabDef.key"
+        type="button"
+        class="rounded-full px-4 py-1.5 text-sm font-medium transition"
+        :class="tab === tabDef.key
+          ? 'bg-sakura text-white shadow-pop'
+          : 'border border-white/80 bg-white/60 text-ink/75 hover:bg-blush/40'"
+        @click="tab = tabDef.key"
+      >
+        {{ tabDef.icon }} {{ t('admin.tabs.' + tabDef.key) }}
+      </button>
+    </nav>
+
+    <!-- 「曲」「タグ」タブ共通：songs.json データの公開アクションバー -->
+    <section
+      v-show="tab === 'songs' || tab === 'tags'"
+      class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft"
+    >
+      <div class="mb-3 flex flex-wrap items-baseline gap-2">
+        <h2 class="font-display text-lg text-ink">{{ t('admin.songsActionsTitle') }}</h2>
+        <div
+          v-if="useLocalOverride"
+          class="inline-flex items-center gap-1.5 rounded-full bg-blush/40 px-3 py-1 text-xs font-medium text-rose"
+        >
+          <span aria-hidden="true">⚠</span>
+          <span>{{ t('admin.localOverrideNotice') }}</span>
+        </div>
+      </div>
+      <p class="mb-3 text-xs text-ink/70">{{ t('admin.songsActionsHelp') }}</p>
+      <div class="flex flex-wrap items-center gap-2">
+        <button
+          class="rounded-full border border-sakura bg-white/70 px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
+          :disabled="!auth.isConfigured || busy"
+          :title="t('admin.fetchHint')"
+          @click="fetchFromGithub"
+        >
+          🔄 {{ t('admin.fetch') }}
+        </button>
+        <button
+          class="rounded-full bg-gradient-to-r from-rose to-sakura px-5 py-2 text-sm font-bold text-white shadow-pop transition hover:from-sakura hover:to-rose disabled:opacity-60"
+          :disabled="!auth.isConfigured || busy"
+          :title="t('admin.pushHint')"
+          @click="pushToGithub"
+        >
+          ✦ {{ t('admin.push') }}
+        </button>
+        <div class="ml-auto flex items-center gap-1.5">
+          <button
+            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/65 hover:bg-white hover:text-ink"
+            :title="t('admin.exportHint')"
+            @click="exportJson"
+          >
+            📥 {{ t('admin.export') }}
+          </button>
+          <button
+            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/55 hover:border-rose/40 hover:text-rose"
+            :title="t('admin.resetLocalHint')"
+            @click="resetLocal"
+          >
+            🗑 {{ t('admin.resetLocal') }}
+          </button>
+        </div>
+      </div>
+      <p v-if="status" class="mt-2 text-sm text-ink/80">{{ status }}</p>
+    </section>
+
+    <!-- ─── 接続設定タブ ─── -->
+    <section
+      v-show="tab === 'connection'"
+      class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft"
+    >
       <h2 class="mb-3 font-display text-lg text-ink">{{ t('admin.credentials') }}</h2>
       <p class="mb-4 text-xs text-ink/70">
         {{ t('admin.credentialsHelp') }}
@@ -470,67 +569,23 @@ function snsLabel(k: SnsKey): string {
         </label>
       </div>
       <div class="mt-4 flex flex-wrap items-center gap-2">
-        <!-- 接続設定の保存（このフォーム自体の保存） -->
         <button
           class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white shadow-soft hover:bg-rose"
-          :title="t('admin.saveSettings')"
+          :title="t('admin.saveSettingsHint')"
           @click="saveCreds"
         >
           💾 {{ t('admin.saveSettings') }}
         </button>
-
-        <span class="mx-1 hidden h-5 w-px bg-ash/30 sm:inline-block" aria-hidden="true"></span>
-
-        <!-- サイトから読み込む（取り込み） -->
-        <button
-          class="rounded-full border border-sakura bg-white/70 px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
-          :disabled="!auth.isConfigured || busy"
-          :title="t('admin.fetchHint')"
-          @click="fetchFromGithub"
-        >
-          🔄 {{ t('admin.fetch') }}
-        </button>
-
-        <!-- サイトに公開（最重要：強調） -->
-        <button
-          class="rounded-full bg-gradient-to-r from-rose to-sakura px-5 py-2 text-sm font-bold text-white shadow-pop transition hover:from-sakura hover:to-rose disabled:opacity-60"
-          :disabled="!auth.isConfigured || busy"
-          :title="t('admin.pushHint')"
-          @click="pushToGithub"
-        >
-          ✦ {{ t('admin.push') }}
-        </button>
-
-        <!-- 控えめなセカンダリアクション群（右寄せ） -->
-        <div class="ml-auto flex items-center gap-1.5">
-          <button
-            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/65 hover:bg-white hover:text-ink"
-            :title="t('admin.exportHint')"
-            @click="exportJson"
-          >
-            📥 {{ t('admin.export') }}
-          </button>
-          <button
-            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/55 hover:border-rose/40 hover:text-rose"
-            :title="t('admin.resetLocalHint')"
-            @click="resetLocal"
-          >
-            🗑 {{ t('admin.resetLocal') }}
-          </button>
-        </div>
+        <span class="text-[11px] text-ink/55">{{ t('admin.saveSettingsHint') }}</span>
       </div>
-      <div
-        v-if="useLocalOverride"
-        class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blush/40 px-3 py-1 text-xs font-medium text-rose"
-      >
-        <span aria-hidden="true">⚠</span>
-        <span>{{ t('admin.localOverrideNotice') }}</span>
-      </div>
-      <p v-if="status" class="mt-2 text-sm text-ink/80">{{ status }}</p>
+      <p v-if="status && tab === 'connection'" class="mt-2 text-sm text-ink/80">{{ status }}</p>
     </section>
 
-    <!-- プロフィール編集 -->
-    <section class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft">
+    <!-- ─── プロフィールタブ ─── -->
+    <section
+      v-show="tab === 'profile'"
+      class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft"
+    >
       <h2 class="mb-3 font-display text-lg text-ink">👤 {{ t('admin.profile.title') }}</h2>
       <p class="mb-4 text-xs text-ink/70">{{ t('admin.profile.help') }}</p>
 
@@ -621,18 +676,8 @@ function snsLabel(k: SnsKey): string {
         </div>
       </div>
 
-      <div class="mt-5 flex flex-wrap items-center gap-2">
-        <!-- プロフィールを下書きに保存 -->
-        <button
-          class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white shadow-soft hover:bg-rose"
-          :title="t('admin.saveProfile')"
-          @click="saveProfileLocal"
-        >
-          💾 {{ t('admin.saveProfile') }}
-        </button>
-
-        <span class="mx-1 hidden h-5 w-px bg-ash/30 sm:inline-block" aria-hidden="true"></span>
-
+      <p class="mt-4 text-xs text-ink/65">{{ t('admin.profileActionsHelp') }}</p>
+      <div class="mt-3 flex flex-wrap items-center gap-2">
         <!-- サイトから読み込む -->
         <button
           class="rounded-full border border-sakura bg-white/70 px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
@@ -672,9 +717,13 @@ function snsLabel(k: SnsKey): string {
       <p v-if="profileStatus" class="mt-2 text-sm text-ink/80">{{ profileStatus }}</p>
     </section>
 
-    <!-- タグ編集（多言語） -->
-    <TagEditor @edit-song="editById" />
+    <!-- ─── タグタブ ─── -->
+    <div v-show="tab === 'tags'">
+      <TagEditor @edit-song="editById" />
+    </div>
 
+    <!-- ─── 曲タブ：フォーム + リスト ─── -->
+    <div v-show="tab === 'songs'">
     <section class="mb-6 rounded-3xl bg-white/80 p-5 shadow-soft">
       <h2 class="mb-3 font-display text-lg text-ink">
         {{ editingId ? t('admin.editSong') : t('admin.addSong') }}
@@ -870,6 +919,7 @@ function snsLabel(k: SnsKey): string {
         </draggable>
       </div>
     </section>
+    </div>
   </main>
   </PasswordGate>
 </template>
