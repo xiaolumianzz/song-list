@@ -45,10 +45,10 @@ export function parseVideoEmbed(url: string): ParsedVideo {
   }
 
   // 短縮URLはリダイレクト先を取得できないので embed 不可だが、プラットフォームは識別する
+  // 動画枠は他のプラットフォームと統一して 16:9 で表示する。
   const shortPlatform = shortLinkPlatform(trimmed)
   if (shortPlatform) {
-    const aspect: VideoAspect = shortPlatform === 'douyin' ? '9:16' : '16:9'
-    return { platform: shortPlatform, aspect, originalUrl: trimmed }
+    return { platform: shortPlatform, aspect: '16:9', originalUrl: trimmed }
   }
 
   const yt = trimmed.match(RE_YT_WATCH)
@@ -85,9 +85,10 @@ export function parseVideoEmbed(url: string): ParsedVideo {
   if (dy) {
     // Douyin は公式に外部 iframe 埋め込みをサポートしていないため embed URL は付けない。
     // VideoPlayer 側で動画エリア全体を「Douyin で見る」ボタンに置き換える。
+    // 動画枠は他のプラットフォームと統一して 16:9 横長で表示する。
     return {
       platform: 'douyin',
-      aspect: '9:16',
+      aspect: '16:9',
       originalUrl: trimmed,
     }
   }
