@@ -50,16 +50,17 @@ function pickArtist(e: Event) {
   emit('update:artist', target.value)
 }
 
+function pickLangFromSelect(e: Event) {
+  const target = e.target as HTMLSelectElement
+  emit('update:language', target.value)
+}
+
 const { t, locale } = useI18n()
 const songsStore = useSongsStore()
 
 const orderedLangs = computed(() =>
   LANGUAGE_ORDER.filter((l) => props.languages.includes(l)),
 )
-
-function pickLang(v: string) {
-  emit('update:language', v)
-}
 
 // scale 0..1 を RandomPicker ボタン並みの大きさ ~ 現行の小チップの大きさに線形補間
 function tagStyle(scale: number) {
@@ -77,22 +78,16 @@ function tagStyle(scale: number) {
   <div class="space-y-3">
     <div class="flex flex-wrap items-center gap-2">
       <span class="font-display text-sm text-ink/70">{{ t('filter.language') }}</span>
-      <button
-        class="rounded-full px-3 py-1 text-xs font-medium transition"
-        :class="language === 'all' ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'"
-        @click="pickLang('all')"
+      <select
+        :value="language"
+        class="max-w-full rounded-full border border-white/80 bg-gradient-to-b from-white/50 to-white/15 px-3 py-1 text-xs text-ink shadow-glass-chip hover:from-white/65 hover:to-white/25 focus:border-sakura focus:outline-none focus:ring-2 focus:ring-sakura/40"
+        @change="pickLangFromSelect"
       >
-        {{ t('filter.all') }}
-      </button>
-      <button
-        v-for="l in orderedLangs"
-        :key="l"
-        class="rounded-full px-3 py-1 text-xs font-medium transition"
-        :class="language === l ? 'bg-sakura text-white shadow-pop' : 'bg-gradient-to-b from-white/50 to-white/15 text-ink border border-white/80 shadow-glass-chip hover:from-white/65 hover:to-white/25'"
-        @click="pickLang(l)"
-      >
-        {{ t('language.' + l) }}
-      </button>
+        <option value="all">{{ t('filter.all') }}</option>
+        <option v-for="l in orderedLangs" :key="l" :value="l">
+          {{ t('language.' + l) }}
+        </option>
+      </select>
     </div>
 
     <div v-if="artistStats.length" class="flex flex-wrap items-center gap-2">

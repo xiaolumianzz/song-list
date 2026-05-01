@@ -33,6 +33,16 @@
     "en": "English",
     "zh": "Chinese",
     "ko": "Korean",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "it": "Italian",
+    "pt": "Portuguese",
+    "ru": "Russian",
+    "th": "Thai",
+    "vi": "Vietnamese",
+    "id": "Indonesian",
+    "instrumental": "Instrumental",
     "other": "Other"
   },
   "condition": {

@@ -1,4 +1,19 @@
-export type Language = 'ja' | 'en' | 'zh' | 'ko' | 'other'
+export type Language =
+  | 'ja'
+  | 'en'
+  | 'zh'
+  | 'ko'
+  | 'es'
+  | 'fr'
+  | 'de'
+  | 'it'
+  | 'pt'
+  | 'ru'
+  | 'th'
+  | 'vi'
+  | 'id'
+  | 'instrumental'
+  | 'other'
 
 export interface VideoLink {
   /** 元 URL（YouTube watch URL / BiliBili / Douyin など） */
@@ -57,7 +72,23 @@ export const EMPTY_SONG_DATA: SongData = {
   tagDict: {},
 }
 
-export const LANGUAGE_ORDER: Language[] = ['ja', 'en', 'zh', 'ko', 'other']
+export const LANGUAGE_ORDER: Language[] = [
+  'ja',
+  'en',
+  'zh',
+  'ko',
+  'es',
+  'fr',
+  'de',
+  'it',
+  'pt',
+  'ru',
+  'th',
+  'vi',
+  'id',
+  'instrumental',
+  'other',
+]
 
 // 「リクエスト条件」は使わなくなったため、メンバー限定のみ残す。
 // 既存データに別の条件文字列が入っていても Song.conditions は string[] のままなので、
