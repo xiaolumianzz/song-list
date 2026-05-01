@@ -28,11 +28,14 @@ const validVideos = computed(() => props.videos.filter((v) => v.url && v.url.tri
 const current = computed(() => validVideos.value[idx.value])
 const parsed = computed(() => (current.value ? parseVideoEmbed(current.value.url) : null))
 const showIframe = computed(() => !!parsed.value?.embedUrl && !iframeFailed.value)
+// 9:16 縦動画は高さ固定 + 縦横比から幅を自動計算（h:60vh, w=60vh*9/16=33.75vh）。
+// aspect-[9/16] + w-auto は親 div で width が auto = 親幅 になり高さが破綻するため、
+// 高さ・幅を明示的に指定する。
 const aspectClass = computed(() =>
-  parsed.value?.aspect === '9:16' ? 'aspect-[9/16] max-h-[60vh]' : 'aspect-video',
+  parsed.value?.aspect === '9:16' ? 'h-[60vh] w-[33.75vh]' : 'aspect-video',
 )
 const containerWidthClass = computed(() =>
-  parsed.value?.aspect === '9:16' ? 'mx-auto w-auto' : 'w-full',
+  parsed.value?.aspect === '9:16' ? 'mx-auto' : 'w-full',
 )
 
 const prevIdx = computed(() => {
