@@ -469,40 +469,63 @@ function snsLabel(k: SnsKey): string {
           />
         </label>
       </div>
-      <div class="mt-4 flex flex-wrap gap-2">
-        <button class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white hover:bg-rose" @click="saveCreds">
-          {{ t('admin.save') }}
-        </button>
+      <div class="mt-4 flex flex-wrap items-center gap-2">
+        <!-- 接続設定の保存（このフォーム自体の保存） -->
         <button
-          class="rounded-full border border-sakura px-4 py-1.5 text-sm text-rose hover:bg-blush"
+          class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white shadow-soft hover:bg-rose"
+          :title="t('admin.saveSettings')"
+          @click="saveCreds"
+        >
+          💾 {{ t('admin.saveSettings') }}
+        </button>
+
+        <span class="mx-1 hidden h-5 w-px bg-ash/30 sm:inline-block" aria-hidden="true"></span>
+
+        <!-- サイトから読み込む（取り込み） -->
+        <button
+          class="rounded-full border border-sakura bg-white/70 px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
           :disabled="!auth.isConfigured || busy"
+          :title="t('admin.fetchHint')"
           @click="fetchFromGithub"
         >
-          ↓ {{ t('admin.fetch') }}
+          🔄 {{ t('admin.fetch') }}
         </button>
+
+        <!-- サイトに公開（最重要：強調） -->
         <button
-          class="rounded-full bg-rose px-4 py-1.5 text-sm text-white hover:bg-sakura"
+          class="rounded-full bg-gradient-to-r from-rose to-sakura px-5 py-2 text-sm font-bold text-white shadow-pop transition hover:from-sakura hover:to-rose disabled:opacity-60"
           :disabled="!auth.isConfigured || busy"
+          :title="t('admin.pushHint')"
           @click="pushToGithub"
         >
-          ↑ {{ t('admin.push') }}
+          ✦ {{ t('admin.push') }}
         </button>
-        <button
-          class="rounded-full border border-ash/40 px-4 py-1.5 text-sm text-ink/70 hover:bg-white"
-          @click="exportJson"
-        >
-          📥 {{ t('admin.export') }}
-        </button>
-        <button
-          class="ml-auto rounded-full border border-ash/40 px-4 py-1.5 text-sm text-ink/70 hover:bg-white"
-          @click="resetLocal"
-        >
-          {{ t('admin.resetLocal') }}
-        </button>
+
+        <!-- 控えめなセカンダリアクション群（右寄せ） -->
+        <div class="ml-auto flex items-center gap-1.5">
+          <button
+            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/65 hover:bg-white hover:text-ink"
+            :title="t('admin.exportHint')"
+            @click="exportJson"
+          >
+            📥 {{ t('admin.export') }}
+          </button>
+          <button
+            class="rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/55 hover:border-rose/40 hover:text-rose"
+            :title="t('admin.resetLocalHint')"
+            @click="resetLocal"
+          >
+            🗑 {{ t('admin.resetLocal') }}
+          </button>
+        </div>
       </div>
-      <p v-if="useLocalOverride" class="mt-3 text-xs text-rose">
-        ✎ {{ t('admin.localOverrideNotice') }}
-      </p>
+      <div
+        v-if="useLocalOverride"
+        class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blush/40 px-3 py-1 text-xs font-medium text-rose"
+      >
+        <span aria-hidden="true">⚠</span>
+        <span>{{ t('admin.localOverrideNotice') }}</span>
+      </div>
       <p v-if="status" class="mt-2 text-sm text-ink/80">{{ status }}</p>
     </section>
 
@@ -598,37 +621,54 @@ function snsLabel(k: SnsKey): string {
         </div>
       </div>
 
-      <div class="mt-5 flex flex-wrap gap-2">
+      <div class="mt-5 flex flex-wrap items-center gap-2">
+        <!-- プロフィールを下書きに保存 -->
         <button
-          class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white hover:bg-rose"
+          class="rounded-full bg-sakura px-4 py-1.5 text-sm text-white shadow-soft hover:bg-rose"
+          :title="t('admin.saveProfile')"
           @click="saveProfileLocal"
         >
-          {{ t('admin.save') }}
+          💾 {{ t('admin.saveProfile') }}
         </button>
+
+        <span class="mx-1 hidden h-5 w-px bg-ash/30 sm:inline-block" aria-hidden="true"></span>
+
+        <!-- サイトから読み込む -->
         <button
-          class="rounded-full border border-sakura px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
+          class="rounded-full border border-sakura bg-white/70 px-4 py-1.5 text-sm text-rose hover:bg-blush disabled:opacity-60"
           :disabled="!auth.isConfigured || profileBusy"
+          :title="t('admin.fetchHint')"
           @click="fetchProfileFromGithub"
         >
-          ↓ {{ t('admin.fetch') }}
+          🔄 {{ t('admin.fetch') }}
         </button>
+
+        <!-- サイトに公開（最重要） -->
         <button
-          class="rounded-full bg-rose px-4 py-1.5 text-sm text-white hover:bg-sakura disabled:opacity-60"
+          class="rounded-full bg-gradient-to-r from-rose to-sakura px-5 py-2 text-sm font-bold text-white shadow-pop transition hover:from-sakura hover:to-rose disabled:opacity-60"
           :disabled="!auth.isConfigured || profileBusy"
+          :title="t('admin.pushHint')"
           @click="pushProfileToGithub"
         >
-          ↑ {{ t('admin.push') }}
+          ✦ {{ t('admin.push') }}
         </button>
+
+        <!-- 控えめなリセット（右寄せ） -->
         <button
-          class="ml-auto rounded-full border border-ash/40 px-4 py-1.5 text-sm text-ink/70 hover:bg-white"
+          class="ml-auto rounded-full border border-ash/40 bg-white/60 px-3 py-1 text-xs text-ink/55 hover:border-rose/40 hover:text-rose"
+          :title="t('admin.resetLocalHint')"
           @click="resetProfileLocal"
         >
-          {{ t('admin.resetLocal') }}
+          🗑 {{ t('admin.resetLocal') }}
         </button>
       </div>
-      <p v-if="profileLocalOverride" class="mt-3 text-xs text-rose">
-        ✎ {{ t('admin.localOverrideNotice') }}
-      </p>
+      <div
+        v-if="profileLocalOverride"
+        class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blush/40 px-3 py-1 text-xs font-medium text-rose"
+      >
+        <span aria-hidden="true">⚠</span>
+        <span>{{ t('admin.localOverrideNotice') }}</span>
+      </div>
       <p v-if="profileStatus" class="mt-2 text-sm text-ink/80">{{ profileStatus }}</p>
     </section>
 
