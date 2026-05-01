@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-04-30T14:49:05.361Z"
+    "updatedAt": "2026-05-01T16:11:40.194Z"
   },
   "songs": [
     {
@@ -11,7 +11,7 @@
       "language": "ja",
       "tags": [
         "J-POP",
-        "ラップ",
+        "アップテンポ",
         "アニソン"
       ],
       "conditions": [
@@ -87,7 +87,7 @@
       "language": "ja",
       "tags": [
         "J-POP",
-        "ラップ"
+        "アップテンポ"
       ],
       "conditions": [
         "practice-needed"
@@ -195,7 +195,7 @@
       "language": "ja",
       "tags": [
         "アニソン",
-        "ラップ"
+        "アップテンポ"
       ],
       "conditions": [
         "practice-needed"
@@ -235,15 +235,20 @@
       "en": "anime",
       "zh": "动漫曲"
     },
-    "ラップ": {
-      "ja": "ラップ",
-      "en": "RAP",
-      "zh": "RAP"
-    },
     "ボカロ": {
       "ja": "ボカロ",
       "en": "VOCALOID",
       "zh": "VOCALOID"
+    },
+    "アップテンポ": {
+      "ja": "アップテンポ",
+      "en": "",
+      "zh": ""
+    },
+    "ラップ": {
+      "ja": "ラップ",
+      "en": "",
+      "zh": ""
     }
   }
 }
