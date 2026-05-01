@@ -171,7 +171,7 @@ function emptySong(): Song {
 
 function addVideoRow() {
   if (!draft.value.videos) draft.value.videos = []
-  draft.value.videos.push({ url: '', label: '' })
+  draft.value.videos.push({ url: '', label: '', _id: crypto.randomUUID() })
 }
 
 function removeVideoRow(i: number) {
@@ -232,7 +232,10 @@ function edit(song: Song) {
     titleReading: song.titleReading ?? '',
     artistReading: song.artistReading ?? '',
     chordUrl: song.chordUrl ?? '',
-    videos: song.videos ? song.videos.map((v) => ({ ...v })) : [],
+    // 編集時に各動画行に並び替え用の一時 ID を割り当てる
+    videos: song.videos
+      ? song.videos.map((v) => ({ ...v, _id: crypto.randomUUID() }))
+      : [],
   }
   tagsInput.value = song.tags.join(', ')
   editingId.value = song.id
@@ -716,33 +719,44 @@ function snsLabel(k: SnsKey): string {
           <textarea v-model="draft.remark" rows="3" class="rounded-xl border border-blush bg-milk px-3 py-2"></textarea>
         </label>
 
-        <!-- 動画リンク（任意・複数登録可） -->
+        <!-- 動画リンク（任意・複数登録可、ドラッグで並び替え） -->
         <div class="flex flex-col gap-2 text-sm sm:col-span-2">
           <span class="text-ink/70">{{ t('admin.field.videos') }}</span>
-          <div
-            v-for="(v, i) in (draft.videos ?? [])"
-            :key="i"
-            class="flex flex-wrap items-center gap-2"
+          <draggable
+            v-if="draft.videos && draft.videos.length"
+            v-model="draft.videos"
+            item-key="_id"
+            handle=".video-drag-handle"
+            ghost-class="opacity-50"
+            class="flex flex-col gap-2"
           >
-            <input
-              v-model="v.url"
-              class="min-w-0 flex-1 rounded-xl border border-blush bg-milk px-3 py-2 text-sm"
-              :placeholder="t('admin.field.videoUrlPh')"
-            />
-            <input
-              v-model="v.label"
-              class="w-44 shrink-0 rounded-xl border border-blush bg-milk px-3 py-2 text-sm sm:w-64"
-              :placeholder="t('admin.field.videoLabelPh')"
-            />
-            <button
-              type="button"
-              class="rounded-full border border-rose/60 px-2 py-1 text-xs text-rose hover:bg-rose hover:text-white"
-              :aria-label="t('admin.field.removeVideo')"
-              @click="removeVideoRow(i)"
-            >
-              −
-            </button>
-          </div>
+            <template #item="{ element: v, index: i }: { element: import('@/types/song').VideoLink, index: number }">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="video-drag-handle cursor-grab select-none px-1 text-ink/40 hover:text-ink/70"
+                  :title="t('admin.dragHint')"
+                >⋮⋮</span>
+                <input
+                  v-model="v.url"
+                  class="min-w-0 flex-1 rounded-xl border border-blush bg-milk px-3 py-2 text-sm"
+                  :placeholder="t('admin.field.videoUrlPh')"
+                />
+                <input
+                  v-model="v.label"
+                  class="w-44 shrink-0 rounded-xl border border-blush bg-milk px-3 py-2 text-sm sm:w-64"
+                  :placeholder="t('admin.field.videoLabelPh')"
+                />
+                <button
+                  type="button"
+                  class="rounded-full border border-rose/60 px-2 py-1 text-xs text-rose hover:bg-rose hover:text-white"
+                  :aria-label="t('admin.field.removeVideo')"
+                  @click="removeVideoRow(i)"
+                >
+                  −
+                </button>
+              </div>
+            </template>
+          </draggable>
           <button
             type="button"
             class="self-start rounded-full bg-cotton px-3 py-1 text-xs text-ink hover:bg-blush"

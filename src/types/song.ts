@@ -1,10 +1,13 @@
 export type Language = 'ja' | 'en' | 'zh' | 'ko' | 'other'
 
 export interface VideoLink {
-  /** 元 URL（YouTube watch URL / BiliBili / TikTok / Douyin など） */
+  /** 元 URL（YouTube watch URL / BiliBili / Douyin など） */
   url: string
   /** 任意ラベル：「カラオケver.」「弾き語り」「2024配信版」など */
   label?: string
+  /** 管理画面の form 内でドラッグ並び替え用に発行する一時 ID。
+   *  commitDraft で剥がされるので JSON には保存されない（保存されても影響無し）。 */
+  _id?: string
 }
 
 export interface Song {
