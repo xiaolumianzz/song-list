@@ -81,6 +81,7 @@
     "copied": "已复制！",
     "chord": "查看吉他和弦",
     "openOriginal": "打开原视频",
+    "watchOn": "在 {platform} 观看",
     "embedUnavailable": "此处无法播放，请前往原页面观看",
     "prevVideo": "上一个",
     "nextVideo": "下一个"

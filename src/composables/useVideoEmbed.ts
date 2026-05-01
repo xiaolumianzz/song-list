@@ -1,10 +1,12 @@
-export type VideoPlatform = 'youtube' | 'bilibili' | 'tiktok' | 'douyin' | 'other'
+import type { VideoLink } from '@/types/song'
+
+export type VideoPlatform = 'youtube' | 'bilibili' | 'douyin' | 'other'
 export type VideoAspect = '16:9' | '9:16'
 
 export interface ParsedVideo {
   platform: VideoPlatform
   aspect: VideoAspect
-  /** iframe で使える URL。other や短縮 URL では undefined になることがある（外部リンクフォールバック）。 */
+  /** iframe で使える URL。other や Douyin、短縮 URL では undefined（外部リンクボタンへフォールバック）。 */
   embedUrl?: string
   originalUrl: string
 }
@@ -12,7 +14,6 @@ export interface ParsedVideo {
 const RE_YT_WATCH = /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/i
 const RE_BILI_BV = /bilibili\.com\/video\/(BV[\w]+)/i
 const RE_BILI_AV = /bilibili\.com\/video\/av(\d+)/i
-const RE_TIKTOK = /tiktok\.com\/@[^/]+\/video\/(\d+)/i
 const RE_DOUYIN = /douyin\.com\/video\/(\d+)/i
 
 /**
@@ -22,8 +23,6 @@ const RE_DOUYIN = /douyin\.com\/video\/(\d+)/i
  */
 const SHORT_LINK_PLATFORM: Record<string, VideoPlatform> = {
   'b23.tv': 'bilibili',
-  'vm.tiktok.com': 'tiktok',
-  't.tiktok.com': 'tiktok',
   'v.douyin.com': 'douyin',
 }
 
@@ -48,8 +47,7 @@ export function parseVideoEmbed(url: string): ParsedVideo {
   // 短縮URLはリダイレクト先を取得できないので embed 不可だが、プラットフォームは識別する
   const shortPlatform = shortLinkPlatform(trimmed)
   if (shortPlatform) {
-    const aspect: VideoAspect =
-      shortPlatform === 'tiktok' || shortPlatform === 'douyin' ? '9:16' : '16:9'
+    const aspect: VideoAspect = shortPlatform === 'douyin' ? '9:16' : '16:9'
     return { platform: shortPlatform, aspect, originalUrl: trimmed }
   }
 
@@ -83,20 +81,10 @@ export function parseVideoEmbed(url: string): ParsedVideo {
     }
   }
 
-  const tt = trimmed.match(RE_TIKTOK)
-  if (tt) {
-    return {
-      platform: 'tiktok',
-      aspect: '9:16',
-      embedUrl: `https://www.tiktok.com/embed/v2/${tt[1]}`,
-      originalUrl: trimmed,
-    }
-  }
-
   const dy = trimmed.match(RE_DOUYIN)
   if (dy) {
-    // Douyin 公式の埋め込み API は不安定なので一旦 embed URL は付けず外部リンク扱いにする。
-    // （iframe 表示を試みても CSP/X-Frame-Options で弾かれるケースが多い）
+    // Douyin は公式に外部 iframe 埋め込みをサポートしていないため embed URL は付けない。
+    // VideoPlayer 側で動画エリア全体を「Douyin で見る」ボタンに置き換える。
     return {
       platform: 'douyin',
       aspect: '9:16',
@@ -114,8 +102,6 @@ export function platformLabel(p: VideoPlatform): string {
       return 'YouTube'
     case 'bilibili':
       return 'BiliBili'
-    case 'tiktok':
-      return 'TikTok'
     case 'douyin':
       return '抖音'
     default:
@@ -127,7 +113,6 @@ export function platformLabel(p: VideoPlatform): string {
  * 与えられた動画リンク群からユニークなプラットフォームを抽出する。
  * 出現順を保持しつつ重複を排除。`other` は判別不能なので結果に含めない。
  */
-import type { VideoLink } from '@/types/song'
 export function videoPlatforms(videos?: VideoLink[]): VideoPlatform[] {
   if (!videos || !videos.length) return []
   const seen = new Set<VideoPlatform>()

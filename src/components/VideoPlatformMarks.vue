@@ -10,13 +10,12 @@ const props = defineProps<{
 const platforms = computed(() => videoPlatforms(props.videos))
 const hasYoutube = computed(() => platforms.value.includes('youtube'))
 const hasBilibili = computed(() => platforms.value.includes('bilibili'))
-const hasTiktok = computed(() => platforms.value.includes('tiktok'))
 const hasDouyin = computed(() => platforms.value.includes('douyin'))
 </script>
 
 <template>
-  <!-- 3 つの固定スロット。各スロットの位置は常に同じで、対応プラットフォームが
-       無いスロットは空のままにして他のマークの位置がズレないようにする。 -->
+  <!-- 3 つの固定スロット（YouTube / BiliBili / 抖音）。
+       対応プラットフォームが無いスロットは空のままにして他のマークの位置がズレないようにする。 -->
   <span class="flex items-center gap-1">
     <!-- スロット 1: YouTube -->
     <span class="mark-slot">
@@ -52,22 +51,10 @@ const hasDouyin = computed(() => platforms.value.includes('douyin'))
       </svg>
     </span>
 
-    <!-- スロット 3: TikTok / Douyin（兼用、TikTok 優先） -->
+    <!-- スロット 3: 抖音 (Douyin) -->
     <span class="mark-slot">
       <svg
-        v-if="hasTiktok"
-        viewBox="0 0 24 24"
-        class="mark-icon"
-        :title="platformLabel('tiktok')"
-        :aria-label="platformLabel('tiktok')"
-      >
-        <path
-          fill="currentColor"
-          d="M19.3 7.2a5.5 5.5 0 0 1-3.6-1.3 5.6 5.6 0 0 1-1.8-2.7V3h-3v12.4a2.8 2.8 0 1 1-2-2.7V9.5a5.8 5.8 0 0 0-.9-.1 5.9 5.9 0 1 0 5.9 5.9V9.6a8.5 8.5 0 0 0 5.4 1.9V8.3c0-.4 0-.8-.1-1.1Z"
-        />
-      </svg>
-      <svg
-        v-else-if="hasDouyin"
+        v-if="hasDouyin"
         viewBox="0 0 24 24"
         class="mark-icon"
         :title="platformLabel('douyin')"

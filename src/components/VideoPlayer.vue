@@ -90,21 +90,20 @@ function next() {
               sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
               @error="iframeFailed = true"
             />
-            <div
+            <!-- 埋め込み不可（Douyin / 短縮URL / その他）：エリア全体を外部リンクボタンに -->
+            <a
               v-else
-              class="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-blush/40 to-cotton/40 p-4 text-center text-sm text-ink/80"
+              :href="parsed.originalUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-blush/45 to-cotton/45 p-4 text-center text-ink transition hover:from-blush/65 hover:to-cotton/65"
             >
-              <span class="font-display text-lg">{{ currentPlatformLabel || '🔗' }}</span>
-              <p>{{ t('detail.embedUnavailable') }}</p>
-              <a
-                :href="parsed.originalUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="rounded-full bg-sakura px-3 py-1 text-xs text-white hover:bg-rose"
-              >
-                {{ t('detail.openOriginal') }} ↗
-              </a>
-            </div>
+              <span class="grid h-14 w-14 place-items-center rounded-full bg-white/85 text-2xl shadow-pop transition group-hover:scale-105">▶</span>
+              <span class="font-display text-base">
+                {{ t('detail.watchOn', { platform: currentPlatformLabel || t('detail.openOriginal') }) }}
+              </span>
+              <span class="text-xs text-ink/55">↗</span>
+            </a>
           </div>
         </Transition>
       </div>
