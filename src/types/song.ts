@@ -1,19 +1,6 @@
-export type Language =
-  | 'ja'
-  | 'en'
-  | 'zh'
-  | 'ko'
-  | 'es'
-  | 'fr'
-  | 'de'
-  | 'it'
-  | 'pt'
-  | 'ru'
-  | 'th'
-  | 'vi'
-  | 'id'
-  | 'instrumental'
-  | 'other'
+/** 予め用意された 5 種以外も自由入力可。
+ *  Song.language は最終的に好きな文字列を入れられる。 */
+export type Language = string
 
 export interface VideoLink {
   /** 元 URL（YouTube watch URL / BiliBili / Douyin など） */
@@ -72,23 +59,9 @@ export const EMPTY_SONG_DATA: SongData = {
   tagDict: {},
 }
 
-export const LANGUAGE_ORDER: Language[] = [
-  'ja',
-  'en',
-  'zh',
-  'ko',
-  'es',
-  'fr',
-  'de',
-  'it',
-  'pt',
-  'ru',
-  'th',
-  'vi',
-  'id',
-  'instrumental',
-  'other',
-]
+/** 予め i18n ラベルが用意されている言語コード。
+ *  これ以外も自由入力可で、その場合は入力された文字列がそのまま表示される。 */
+export const LANGUAGE_ORDER: Language[] = ['ja', 'en', 'zh', 'ko', 'other']
 
 // 「リクエスト条件」は使わなくなったため、メンバー限定のみ残す。
 // 既存データに別の条件文字列が入っていても Song.conditions は string[] のままなので、

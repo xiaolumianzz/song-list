@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useLikesStore } from '@/stores/likes'
 import { useSongsStore } from '@/stores/songs'
 import { tagDisplay } from '@/composables/useTagDict'
+import { useLanguageDisplay } from '@/composables/useLanguage'
 import type { Song } from '@/types/song'
 import ScBadge from './ScBadge.vue'
 import NewBadge from './NewBadge.vue'
@@ -15,6 +16,7 @@ const emit = defineEmits<{ (e: 'open', song: Song): void }>()
 const { t, locale } = useI18n()
 const likes = useLikesStore()
 const songsStore = useSongsStore()
+const langDisplay = useLanguageDisplay()
 const liked = computed(() => likes.isLiked(props.song.id))
 
 function open() {
@@ -57,7 +59,7 @@ function toggleLike(e: Event) {
     <span
       class="justify-self-start whitespace-nowrap rounded-full bg-blush/80 px-2 py-0.5 text-[10px] font-bold text-ink"
     >
-      {{ t('language.' + song.language) }}
+      {{ langDisplay(song.language) }}
     </span>
 
     <!-- SC + メンバー限定バッジ -->

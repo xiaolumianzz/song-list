@@ -758,9 +758,17 @@ function snsLabel(k: SnsKey): string {
         </label>
         <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.language') }}</span>
-          <select v-model="draft.language" class="rounded-xl border border-blush bg-milk px-3 py-2">
+          <input
+            v-model="draft.language"
+            list="language-suggestions"
+            class="rounded-xl border border-blush bg-milk px-3 py-2"
+            :placeholder="t('admin.field.languagePh')"
+          />
+          <!-- 予め i18n ラベルが用意されている言語コードを suggest -->
+          <datalist id="language-suggestions">
             <option v-for="l in LANGUAGE_ORDER" :key="l" :value="l">{{ t('language.' + l) }}</option>
-          </select>
+          </datalist>
+          <span class="text-[10px] text-ink/50">{{ t('admin.field.languageHint') }}</span>
         </label>
         <label class="flex flex-col gap-1 text-sm">
           <span class="text-ink/70">{{ t('admin.field.addedAt') }}</span>

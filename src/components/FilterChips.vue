@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { LANGUAGE_ORDER } from '@/types/song'
 import { useSongsStore } from '@/stores/songs'
 import { tagDisplay } from '@/composables/useTagDict'
+import { useLanguageDisplay } from '@/composables/useLanguage'
 
 interface TagStat {
   tag: string
@@ -57,10 +58,14 @@ function pickLangFromSelect(e: Event) {
 
 const { t, locale } = useI18n()
 const songsStore = useSongsStore()
+const langDisplay = useLanguageDisplay()
 
-const orderedLangs = computed(() =>
-  LANGUAGE_ORDER.filter((l) => props.languages.includes(l)),
-)
+const orderedLangs = computed(() => {
+  // 予め用意された言語をその順で先に並べ、後にカスタム入力された言語を続ける
+  const fromPredefined = LANGUAGE_ORDER.filter((l) => props.languages.includes(l))
+  const customs = props.languages.filter((l) => !(LANGUAGE_ORDER as readonly string[]).includes(l))
+  return [...fromPredefined, ...customs]
+})
 
 // scale 0..1 を RandomPicker ボタン並みの大きさ ~ 現行の小チップの大きさに線形補間
 function tagStyle(scale: number) {
@@ -85,7 +90,7 @@ function tagStyle(scale: number) {
       >
         <option value="all">{{ t('filter.all') }}</option>
         <option v-for="l in orderedLangs" :key="l" :value="l">
-          {{ t('language.' + l) }}
+          {{ langDisplay(l) }}
         </option>
       </select>
     </div>
