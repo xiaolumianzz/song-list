@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T13:24:24.351Z"
+    "updatedAt": "2026-05-06T13:24:47.383Z"
   },
   "songs": [
     {
@@ -43,33 +43,6 @@
       ],
       "remark": "英語版のみ。",
       "addedAt": "2026-02-05"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000006",
-      "title": "Photograph",
-      "artist": "Ed Sheeran",
-      "language": "en",
-      "tags": [
-        "洋楽",
-        "バラード"
-      ],
-      "conditions": [
-        "with-guitar"
-      ],
-      "remark": "弾き語り向け。",
-      "addedAt": "2026-02-10"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000007",
-      "title": "起风了",
-      "artist": "買辣椒也用券",
-      "language": "zh",
-      "tags": [
-        "中国曲"
-      ],
-      "conditions": [],
-      "remark": "",
-      "addedAt": "2026-02-14"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000008",
