@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-01T18:08:25.250Z"
+    "updatedAt": "2026-05-06T13:21:19.756Z"
   },
   "songs": [
     {
@@ -50,7 +50,6 @@
       ],
       "remark": "映画「泣きたい私は猫をかぶる」の主題歌",
       "addedAt": "2026-04-30",
-      "sc": 500,
       "titleReading": "はなにぼうれい",
       "artistReading": "よるしか",
       "videos": [
@@ -62,7 +61,7 @@
         }
       ],
       "chordUrl": "https://www.ufret.jp/song.php?data=61044",
-      "updatedAt": "2026-04-30T13:54:48.831Z"
+      "updatedAt": "2026-05-06T13:20:38.907Z"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000001",
@@ -76,25 +75,8 @@
       "conditions": [],
       "remark": "しっとり歌いたいときに。",
       "addedAt": "2026-01-10",
-      "sc": 50,
       "chordUrl": "https://www.ufret.jp/song.php?data=72495",
-      "updatedAt": "2026-04-30T13:42:42.122Z"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000002",
-      "title": "夜に駆ける",
-      "artist": "YOASOBI",
-      "language": "ja",
-      "tags": [
-        "J-POP",
-        "アップテンポ"
-      ],
-      "conditions": [
-        "practice-needed"
-      ],
-      "remark": "音域高め、たまに練習してから。",
-      "addedAt": "2026-01-12",
-      "sc": 300
+      "updatedAt": "2026-05-06T13:20:57.437Z"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000003",
@@ -135,33 +117,6 @@
       ],
       "remark": "英語版のみ。",
       "addedAt": "2026-02-05"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000006",
-      "title": "Photograph",
-      "artist": "Ed Sheeran",
-      "language": "en",
-      "tags": [
-        "洋楽",
-        "バラード"
-      ],
-      "conditions": [
-        "with-guitar"
-      ],
-      "remark": "弾き語り向け。",
-      "addedAt": "2026-02-10"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000007",
-      "title": "起风了",
-      "artist": "買辣椒也用券",
-      "language": "zh",
-      "tags": [
-        "中国曲"
-      ],
-      "conditions": [],
-      "remark": "",
-      "addedAt": "2026-02-14"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000008",
