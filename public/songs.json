@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T14:38:02.745Z"
+    "updatedAt": "2026-05-06T14:55:02.396Z"
   },
   "songs": [
     {
@@ -103,6 +103,21 @@
       "titleReading": "QING GE",
       "artistReading": "LIANG JING RU",
       "updatedAt": "2026-05-06T14:37:54.074Z"
+    },
+    {
+      "id": "b5d275c8-fa28-463e-8863-1e2f4cc33259",
+      "title": "海阔天空",
+      "artist": "BEYOND",
+      "language": "other",
+      "tags": [
+        "バラード"
+      ],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-05-06",
+      "titleReading": "HAIKUOTIANKONG",
+      "artistReading": "BEYOND",
+      "updatedAt": "2026-05-06T14:54:59.051Z"
     }
   ],
   "tagDict": {
