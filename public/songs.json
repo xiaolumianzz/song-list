@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T14:29:24.459Z"
+    "updatedAt": "2026-05-06T14:29:54.753Z"
   },
   "songs": [
     {
@@ -73,20 +73,15 @@
       "addedAt": "2026-03-12"
     },
     {
-      "id": "ba4d1607-b1d7-4799-a852-a7f6890bf755",
+      "id": "08864777-41c3-457f-9d3d-2702823e78f8",
       "title": "指纹",
       "artist": "胡歌",
-      "language": "zh",
-      "tags": [
-        "バラード",
-        "中国曲"
-      ],
+      "language": "ja",
+      "tags": [],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-05-06",
-      "titleReading": "ZHI WEN",
-      "artistReading": "HU GE",
-      "updatedAt": "2026-05-06T14:29:21.311Z"
+      "updatedAt": "2026-05-06T14:29:48.427Z"
     }
   ],
   "tagDict": {
