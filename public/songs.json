@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T13:25:20.035Z"
+    "updatedAt": "2026-05-06T13:25:49.739Z"
   },
   "songs": [
     {
@@ -56,18 +56,6 @@
       "conditions": [],
       "remark": "",
       "addedAt": "2026-02-20"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000009",
-      "title": "Pretender",
-      "artist": "Official髭男dism",
-      "language": "ja",
-      "tags": [
-        "J-POP"
-      ],
-      "conditions": [],
-      "remark": "",
-      "addedAt": "2026-03-01"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000010",
