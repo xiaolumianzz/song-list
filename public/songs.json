@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T14:29:54.753Z"
+    "updatedAt": "2026-05-06T14:38:02.745Z"
   },
   "songs": [
     {
@@ -76,12 +76,33 @@
       "id": "08864777-41c3-457f-9d3d-2702823e78f8",
       "title": "指纹",
       "artist": "胡歌",
-      "language": "ja",
-      "tags": [],
+      "language": "zh",
+      "tags": [
+        "バラード",
+        "中国曲"
+      ],
       "conditions": [],
       "remark": "",
       "addedAt": "2026-05-06",
-      "updatedAt": "2026-05-06T14:29:48.427Z"
+      "updatedAt": "2026-05-06T14:30:51.458Z",
+      "titleReading": "ZHI WEN",
+      "artistReading": "HU GE"
+    },
+    {
+      "id": "1074d683-55aa-4f40-8562-66d3ecad0185",
+      "title": "情歌",
+      "artist": "梁静茹",
+      "language": "zh",
+      "tags": [
+        "バラード",
+        "中国曲"
+      ],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-05-06",
+      "titleReading": "QING GE",
+      "artistReading": "LIANG JING RU",
+      "updatedAt": "2026-05-06T14:37:54.074Z"
     }
   ],
   "tagDict": {
