@@ -1,40 +1,9 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T13:24:05.236Z"
+    "updatedAt": "2026-05-06T13:24:24.351Z"
   },
   "songs": [
-    {
-      "id": "2f35662a-482f-4147-b20d-3c05cc5e2760",
-      "title": "星座になれたら",
-      "artist": "結束バンド",
-      "language": "ja",
-      "tags": [
-        "J-POP",
-        "アップテンポ",
-        "アニソン"
-      ],
-      "conditions": [
-        "members-only"
-      ],
-      "remark": "+4key",
-      "addedAt": "2026-04-30",
-      "titleReading": "せいざになれたら",
-      "artistReading": "けっそくばんど",
-      "videos": [
-        {
-          "url": "https://youtu.be/Rkti7UFJ_Ks?si=LOUA_2sUSinv5BB5"
-        },
-        {
-          "url": "https://www.bilibili.com/video/BV1CL2WBpEWx/?spm_id_from=333.1387.upload.video_card.click"
-        },
-        {
-          "url": "https://v.douyin.com/TEcglypMkbQ/"
-        }
-      ],
-      "chordUrl": "https://www.ufret.jp/song.php?data=130534",
-      "updatedAt": "2026-05-01T18:08:20.250Z"
-    },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000003",
       "title": "残酷な天使のテーゼ",
