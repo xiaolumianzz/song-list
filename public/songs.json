@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T13:21:34.449Z"
+    "updatedAt": "2026-05-06T13:22:29.826Z"
   },
   "songs": [
     {
@@ -34,49 +34,6 @@
       ],
       "chordUrl": "https://www.ufret.jp/song.php?data=130534",
       "updatedAt": "2026-05-01T18:08:20.250Z"
-    },
-    {
-      "id": "ab122862-5f0e-48a2-be14-15366533ccaf",
-      "title": "花に亡霊",
-      "artist": "ヨルシカ",
-      "language": "ja",
-      "tags": [
-        "J-POP",
-        "バラード"
-      ],
-      "conditions": [
-        "practice-needed",
-        "with-guitar"
-      ],
-      "remark": "映画「泣きたい私は猫をかぶる」の主題歌",
-      "addedAt": "2026-04-30",
-      "titleReading": "はなにぼうれい",
-      "artistReading": "よるしか",
-      "videos": [
-        {
-          "url": "https://youtu.be/ZVHw5BylTVk?si=EBc9rKDu7U7GKlA9"
-        },
-        {
-          "url": "https://www.bilibili.com/video/BV1J54y1z7hT/?spm_id_from=333.1387.upload.video_card.click"
-        }
-      ],
-      "chordUrl": "https://www.ufret.jp/song.php?data=61044",
-      "updatedAt": "2026-05-06T13:20:38.907Z"
-    },
-    {
-      "id": "a1e8f2d4-0001-4000-a000-000000000001",
-      "title": "ドライフラワー",
-      "artist": "優里",
-      "language": "ja",
-      "tags": [
-        "J-POP",
-        "バラード"
-      ],
-      "conditions": [],
-      "remark": "しっとり歌いたいときに。",
-      "addedAt": "2026-01-10",
-      "chordUrl": "https://www.ufret.jp/song.php?data=72495",
-      "updatedAt": "2026-05-06T13:20:57.437Z"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000003",
@@ -117,6 +74,33 @@
       ],
       "remark": "英語版のみ。",
       "addedAt": "2026-02-05"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000006",
+      "title": "Photograph",
+      "artist": "Ed Sheeran",
+      "language": "en",
+      "tags": [
+        "洋楽",
+        "バラード"
+      ],
+      "conditions": [
+        "with-guitar"
+      ],
+      "remark": "弾き語り向け。",
+      "addedAt": "2026-02-10"
+    },
+    {
+      "id": "a1e8f2d4-0001-4000-a000-000000000007",
+      "title": "起风了",
+      "artist": "買辣椒也用券",
+      "language": "zh",
+      "tags": [
+        "中国曲"
+      ],
+      "conditions": [],
+      "remark": "",
+      "addedAt": "2026-02-14"
     },
     {
       "id": "a1e8f2d4-0001-4000-a000-000000000008",
