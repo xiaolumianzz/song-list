@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-05-06T16:31:09.478Z"
+    "updatedAt": "2026-05-08T04:36:59.823Z"
   },
   "songs": [
     {
@@ -118,6 +118,22 @@
       "titleReading": "HAIKUOTIANKONG",
       "artistReading": "BEYOND",
       "updatedAt": "2026-05-06T14:54:59.051Z"
+    },
+    {
+      "id": "55414bed-5732-4d93-918a-0957526ca541",
+      "title": "晴天",
+      "artist": "周杰倫 (Jay Chou)",
+      "language": "zh",
+      "tags": [
+        "中国曲"
+      ],
+      "conditions": [],
+      "remark": "＋2",
+      "addedAt": "2026-05-08",
+      "titleReading": "QINGTIAN",
+      "artistReading": "ZHOUJIELUN",
+      "chordUrl": "https://www.91pu.com.tw/song/2015/0925/667.html",
+      "updatedAt": "2026-05-08T04:36:51.320Z"
     }
   ],
   "tagDict": {
